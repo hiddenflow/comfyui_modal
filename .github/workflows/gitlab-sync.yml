@@ -1,0 +1,25 @@
+name: Sync to GitLab
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout GitHub repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Add GitLab remote
+        run: |
+          git remote add gitlab https://oauth2:${GITLAB_TOKEN}@${GITLAB_REPO#https://}
+
+      - name: Push to GitLab
+        run: |
+          git push --mirror gitlab
