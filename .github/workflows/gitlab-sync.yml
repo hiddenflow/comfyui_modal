@@ -20,6 +20,10 @@ jobs:
         run: |
           git remote add gitlab https://oauth2:${{ secrets.GITLAB_TOKEN }}@${{ secrets.GITLAB_REPO }}
 
-      - name: Push to GitLab
+      - name: Push all branches
         run: |
-          git push --mirror gitlab
+          git push gitlab --all
+
+      - name: Push all tags
+        run: |
+          git push gitlab --tags
