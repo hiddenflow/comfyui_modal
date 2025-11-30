@@ -23,9 +23,9 @@ def git_clone_cmd(node_repo: str, recursive: bool = False, install_reqs: bool = 
     if install_reqs:
         cmd += f" && pip install -r {dest}/requirements.txt"
     return cmd
-
-def hf_download(subdir: str, filename: str, repo_id: str, subfolder: Optional[str] = None):
-    out = hf_hub_download(repo_id=repo_id, filename=filename, subfolder=subfolder, local_dir=TMP_DL)
+    
+def hf_download(repoid: id, filename: str, subdir: str, subfolder: Optional[str] = None, revision: Optional[str] = None):
+    out = hf_hub_download(repo_id=repo_id, filename=filename, subfolder=subfolder, local_dir=TMP_DL, revision=revision)
     target = os.path.join(MODELS_DIR, subdir)
     os.makedirs(target, exist_ok=True)
     shutil.move(out, os.path.join(target, filename))
@@ -40,6 +40,13 @@ image = (
         "pip install --upgrade pip",
         "pip install --no-cache-dir comfy-cli uv",
         "uv pip install --system --compile-bytecode huggingface_hub[hf_transfer]==0.28.1",
+        "pip install misaki[en]",
+        "pip install ninja",
+        "pip install psutil",
+        "pip install packaging",
+        "pip install wheel",
+        "pip install flash_attn==2.7.4.post1",
+        "pip install librosa",
         # Install ComfyUI to default location
         "comfy --skip-prompt install --nvidia"
     ])
@@ -58,17 +65,18 @@ for repo, flags in [
     ("nkchocoai/ComfyUI-SaveImageWithMetaData", {}),
     ("receyuki/comfyui-prompt-reader-node", {'recursive': True, 'install_reqs': True}),
     ("crystian/ComfyUI-Crystools", {'install_reqs': True}),
+    ("kijai/ComfyUI-WanVideoWrapper", {'install_reqs': True})
 ]:
     image = image.run_commands([git_clone_cmd(repo, **flags)])
 
 # Model download tasks (will be done at runtime)
 model_tasks = [
-    ("unet/FLUX", "flux1-dev-Q8_0.gguf", "city96/FLUX.1-dev-gguf", None),
-    ("clip/FLUX", "t5-v1_1-xxl-encoder-Q8_0.gguf", "city96/t5-v1_1-xxl-encoder-gguf", None),
-    ("clip/FLUX", "clip_l.safetensors", "comfyanonymous/flux_text_encoders", None),
-    ("checkpoints", "flux1-dev-fp8-all-in-one.safetensors", "camenduru/FLUX.1-dev", None),
-    ("loras", "mjV6.safetensors", "strangerzonehf/Flux-Midjourney-Mix2-LoRA", None),
-    ("vae/FLUX", "ae.safetensors", "ffxvs/vae-flux", None),
+    ("city96/FLUX.1-dev-gguf", "flux1-dev-Q8_0.gguf", "unet/FLUX", None, None),
+    ("city96/t5-v1_1-xxl-encoder-gguf", "t5-v1_1-xxl-encoder-Q8_0.gguf", "clip/FLUX", None, None),
+    ("comfyanonymous/flux_text_encoders", "clip_l.safetensors", "clip/FLUX", None, None),
+    ("camenduru/FLUX.1-dev", "flux1-dev-fp8-all-in-one.safetensors", "checkpoints", None, None),
+    ("strangerzonehf/Flux-Midjourney-Mix2-LoRA", "mjV6.safetensors", "loras", None, None),
+    ("ffxvs/vae-flux", "ae.safetensors", "vae/FLUX", None, None)
 ]
 
 extra_cmds = [
