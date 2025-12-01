@@ -70,14 +70,14 @@ for repo, flags in [
     image = image.run_commands([git_clone_cmd(repo, **flags)])
 
 # Model download tasks (will be done at runtime)
-model_tasks = [
-    ("city96/FLUX.1-dev-gguf", "flux1-dev-Q8_0.gguf", "unet/FLUX", None, None),
-    ("city96/t5-v1_1-xxl-encoder-gguf", "t5-v1_1-xxl-encoder-Q8_0.gguf", "clip/FLUX", None, None),
-    ("comfyanonymous/flux_text_encoders", "clip_l.safetensors", "clip/FLUX", None, None),
-    ("camenduru/FLUX.1-dev", "flux1-dev-fp8-all-in-one.safetensors", "checkpoints", None, None),
-    ("strangerzonehf/Flux-Midjourney-Mix2-LoRA", "mjV6.safetensors", "loras", None, None),
-    ("ffxvs/vae-flux", "ae.safetensors", "vae/FLUX", None, None)
-]
+# model_tasks = [
+#     ("city96/FLUX.1-dev-gguf", "flux1-dev-Q8_0.gguf", "unet/FLUX", None, None),
+#     ("city96/t5-v1_1-xxl-encoder-gguf", "t5-v1_1-xxl-encoder-Q8_0.gguf", "clip/FLUX", None, None),
+#     ("comfyanonymous/flux_text_encoders", "clip_l.safetensors", "clip/FLUX", None, None),
+#     ("camenduru/FLUX.1-dev", "flux1-dev-fp8-all-in-one.safetensors", "checkpoints", None, None),
+#     ("strangerzonehf/Flux-Midjourney-Mix2-LoRA", "mjV6.safetensors", "loras", None, None),
+#     ("ffxvs/vae-flux", "ae.safetensors", "vae/FLUX", None, None)
+# ]
 
 extra_cmds = [
     f"wget https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.2.4/RealESRGAN_x4plus_anime_6B.pth -P {MODELS_DIR}/upscale_models",
@@ -210,18 +210,18 @@ def ui():
         os.makedirs(d, exist_ok=True)
 
     # Download models at runtime (only if missing)
-    print("Checking and downloading missing models...")
-    for sub, fn, repo, subf in model_tasks:
-        target = os.path.join(MODELS_DIR, sub, fn)
-        if not os.path.exists(target):
-            print(f"Downloading {fn} to {target}...")
-            try:
-                hf_download(sub, fn, repo, subf)
-                print(f"Successfully downloaded {fn}")
-            except Exception as e:
-                print(f"Error downloading {fn}: {e}")
-        else:
-            print(f"Model {fn} already exists, skipping download")
+    # print("Checking and downloading missing models...")
+    # for sub, fn, repo, subf in model_tasks:
+    #     target = os.path.join(MODELS_DIR, sub, fn)
+    #     if not os.path.exists(target):
+    #         print(f"Downloading {fn} to {target}...")
+    #         try:
+    #             hf_download(sub, fn, repo, subf)
+    #             print(f"Successfully downloaded {fn}")
+    #         except Exception as e:
+    #             print(f"Error downloading {fn}: {e}")
+    #     else:
+    #         print(f"Model {fn} already exists, skipping download")
 
     # Run extra download commands
     print("Running additional downloads...")
