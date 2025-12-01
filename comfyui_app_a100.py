@@ -45,7 +45,7 @@ image = (
         "pip install psutil",
         "pip install packaging",
         "pip install wheel",
-        "pip install flash_attn==2.7.4.post1",
+        "pip install flash_attn",
         "pip install librosa",
         # Install ComfyUI to default location
         "comfy --skip-prompt install --nvidia"
