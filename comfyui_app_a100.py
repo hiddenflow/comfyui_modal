@@ -45,7 +45,8 @@ image = (
         "pip install psutil",
         "pip install packaging",
         "pip install wheel",
-        "pip install flash_attn",
+        "pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0",
+        "pip install flash_attn-2.8.3+cu12torch2.8cxx11abiTRUE-cp312-cp312-linux_x86_64.whl",
         "pip install librosa",
         # Install ComfyUI to default location
         "comfy --skip-prompt install --nvidia"
