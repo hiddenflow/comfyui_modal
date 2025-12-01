@@ -67,7 +67,8 @@ for repo, flags in [
     ("receyuki/comfyui-prompt-reader-node", {'recursive': True, 'install_reqs': True}),
     ("crystian/ComfyUI-Crystools", {'install_reqs': True}),
     ("kijai/ComfyUI-WanVideoWrapper", {'install_reqs': True}),
-    ("Gourieff/ComfyUI-ReActor", {'install_reqs': True})
+    ("Gourieff/ComfyUI-ReActor", {'install_reqs': True}),
+    ("Kosinkadink/ComfyUI-VideoHelperSuite", {'install_reqs': True})
 ]:
     image = image.run_commands([git_clone_cmd(repo, **flags)])
 
@@ -84,6 +85,9 @@ model_tasks = [
     ("Kijai/Z-Image_comfy_fp8_scaled", "z-image-turbo_fp8_scaled_e4m3fn_KJ.safetensors", "diffusion_models", None, None),
     ("jiangchengchengNLP/qwen3-4b-fp8-scaled", "qwen3_4b_fp8_scaled.safetensors", "clip", None, None),
     ("Comfy-Org/z_image_turbo", "split_files/vae/ae.safetensors", "vae", None, None),
+    ("Kijai/LongCat-Video_comfy", "LongCat_TI2V_comfy_fp8_e4m3fn_scaled_KJ.safetensors", "diffusion_models", None, None),
+    ("Kijai/LongCat-Video_comfy", "LongCat_distill_lora_alpha64_bf16.safetensors", "loras", None, None),
+    ("Kijai/LongCat-Video_comfy", "LongCat_TI2V_comfy_fp8_e4m3fn_scaled_KJ.safetensors", "diffusion_models", None, None),
 ]
 
 extra_cmds = [
