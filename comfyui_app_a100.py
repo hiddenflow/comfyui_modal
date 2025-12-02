@@ -85,7 +85,7 @@ image = image.run_commands([
     "pip install triton",
     "ls",
     "git clone https://github.com/thu-ml/SageAttention.git",
-    "cd SageAttention",
+    "%cd SageAttention",
     "pip install -e ."
 ])
 
