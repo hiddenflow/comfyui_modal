@@ -60,6 +60,7 @@ for repo, flags in [
     ("receyuki/comfyui-prompt-reader-node", {'recursive': True, 'install_reqs': True}),
     ("crystian/ComfyUI-Crystools", {'install_reqs': True}),
     ("kijai/ComfyUI-WanVideoWrapper", {'install_reqs': True}),
+    ("kijai/ComfyUI-KJNodes", {'install_reqs': True}),
     ("Gourieff/ComfyUI-ReActor", {'install_reqs': True}),
     ("Kosinkadink/ComfyUI-VideoHelperSuite", {'install_reqs': True})
 ]:
