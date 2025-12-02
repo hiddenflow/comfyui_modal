@@ -33,8 +33,8 @@ def hf_download(repo_id: str, filename: str, subdir: str, subfolder: Optional[st
 import modal
 
 cuda_version = "12.8.1"  # should be no greater than host CUDA version
-flavor = "trixie"  # includes full CUDA toolkit
-operating_sys = "debian12.12"
+flavor = "devel"  # includes full CUDA toolkit
+operating_sys = "ubuntu24.04"
 tag = f"{cuda_version}-{flavor}-{operating_sys}"
 
 # Build image with ComfyUI installed to default location /root/comfy/ComfyUI
