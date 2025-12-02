@@ -24,8 +24,8 @@ def git_clone_cmd(node_repo: str, recursive: bool = False, install_reqs: bool = 
         cmd += f" && pip install -r {dest}/requirements.txt"
     return cmd
     
-def hf_download(repo_id: str, filename: str, subdir: str, subfolder: Optional[str] = None, revision: Optional[str] = None):
-    out = hf_hub_download(repo_id=repo_id, filename=filename, subfolder=subfolder, local_dir=TMP_DL, revision=revision)
+def hf_download(repo_id: str, filename: str, subdir: str, subfolder: Optional[str] = None):
+    out = hf_hub_download(repo_id=repo_id, filename=filename, subfolder=subfolder, local_dir=TMP_DL)
     target = os.path.join(MODELS_DIR, subdir)
     os.makedirs(target, exist_ok=True)
     shutil.move(out, os.path.join(target, filename))
@@ -78,28 +78,28 @@ image = image.run_commands([
 
 # Model download tasks (will be done at runtime)
 model_tasks = [
-    ("city96/Wan2.1-I2V-14B-480P-gguf", "wan2.1-i2v-14b-480p-Q4_0.gguf", "diffusion_models", None, None),
-    ("Kijai/WanVideo_comfy", "Lightx2v/lightx2v_I2V_14B_480p_cfg_step_distill_rank64_bf16.safetensors", "loras", None, None),
-    ("Kijai/WanVideo_comfy_GGUF", "InfiniteTalk/Wan2_1-InfiniteTalk_Single_Q8.gguf", "diffusion_models", None, None),
-    ("Kijai/WanVideo_comfy", "Wan2_1_VAE_bf16.safetensors", "vae", None, None),
-    ("Comfy-Org/Wan_2.1_ComfyUI_repackaged", "split_files/clip_vision/clip_vision_h.safetensors", "clip_vision", None, None),
-    ("Comfy-Org/Wan_2.1_ComfyUI_repackaged", "split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors", "text_encoders", None, None),
-    ("Kijai/wav2vec2_safetensors", "wav2vec2-chinese-base_fp16.safetensors", "wav2vec2", None, None),
-    ("ALGOTECH/WanVideo_comfy", "umt5-xxl-enc-bf16.safetensors", "clip", None, None),
-    ("Kijai/WanVideo_comfy", "umt5-xxl-enc-fp8_e4m3fn.safetensors", "text_encoders", None, None),
-    ("facefusion/models-3.3.0", "hyperswap_1a_256.onnx", "hyperswap", None, None),
-    ("Kijai/Z-Image_comfy_fp8_scaled", "z-image-turbo_fp8_scaled_e4m3fn_KJ.safetensors", "diffusion_models", None, None),
-    ("jiangchengchengNLP/qwen3-4b-fp8-scaled", "qwen3_4b_fp8_scaled.safetensors", "clip", None, None),
-    ("Comfy-Org/z_image_turbo", "split_files/vae/ae.safetensors", "vae", None, None),
-    ("Kijai/WanVideo_comfy_fp8_scaled", "T2V/HoloCine/Wan2_2-T2V-A14B-LOW-HoloCine-full_fp8_e4m3fn_scaled_KJ.safetensors", "diffusion_models", None, None),
-    ("Kijai/WanVideo_comfy_fp8_scaled", "T2V/HoloCine/Wan2_2-T2V-A14B-HIGH-HoloCine-full_fp8_e4m3fn_scaled_KJ.safetensors", "diffusion_models", None, None),
+    ("city96/Wan2.1-I2V-14B-480P-gguf", "wan2.1-i2v-14b-480p-Q4_0.gguf", "diffusion_models", None),
+    ("Kijai/WanVideo_comfy", "lightx2v_I2V_14B_480p_cfg_step_distill_rank64_bf16.safetensors", "loras", "Lightx2v"),
+    ("Kijai/WanVideo_comfy_GGUF", "Wan2_1-InfiniteTalk_Single_Q8.gguf", "diffusion_models", "InfiniteTalk"),
+    ("Kijai/WanVideo_comfy", "Wan2_1_VAE_bf16.safetensors", "vae", None),
+    ("Comfy-Org/Wan_2.1_ComfyUI_repackaged", "clip_vision_h.safetensors", "clip_vision", "split_files/clip_vision"),
+    ("Comfy-Org/Wan_2.1_ComfyUI_repackaged", "umt5_xxl_fp8_e4m3fn_scaled.safetensors", "text_encoders", "split_files/text_encoders"),
+    ("Kijai/wav2vec2_safetensors", "wav2vec2-chinese-base_fp16.safetensors", "wav2vec2", None),
+    ("ALGOTECH/WanVideo_comfy", "umt5-xxl-enc-bf16.safetensors", "clip", None),
+    ("Kijai/WanVideo_comfy", "umt5-xxl-enc-fp8_e4m3fn.safetensors", "text_encoders", None),
+    ("facefusion/models-3.3.0", "hyperswap_1a_256.onnx", "hyperswap", None),
+    ("Kijai/Z-Image_comfy_fp8_scaled", "z-image-turbo_fp8_scaled_e4m3fn_KJ.safetensors", "diffusion_models", None),
+    ("jiangchengchengNLP/qwen3-4b-fp8-scaled", "qwen3_4b_fp8_scaled.safetensors", "clip", None),
+    ("Comfy-Org/z_image_turbo", "ae.safetensors", "vae", "split_files/vae"),
+    ("Kijai/WanVideo_comfy_fp8_scaled", "Wan2_2-T2V-A14B-LOW-HoloCine-full_fp8_e4m3fn_scaled_KJ.safetensors", "diffusion_models", "T2V/HoloCine"),
+    ("Kijai/WanVideo_comfy_fp8_scaled", "Wan2_2-T2V-A14B-HIGH-HoloCine-full_fp8_e4m3fn_scaled_KJ.safetensors", "diffusion_models", "T2V/HoloCine"),
 #    ("Kijai/LongCat-Video_comfy", "LongCat_TI2V_comfy_fp8_e4m3fn_scaled_KJ.safetensors", "diffusion_models", None, None),
 #    ("Kijai/LongCat-Video_comfy", "LongCat_distill_lora_alpha64_bf16.safetensors", "loras", None, None),
 #    ("Kijai/LongCat-Video_comfy", "LongCat_TI2V_comfy_fp8_e4m3fn_scaled_KJ.safetensors", "diffusion_models", None, None),
-    ("lightx2v/Wan2.2-Distill-Models", "wan2.2_i2v_A14b_high_noise_scaled_fp8_e4m3_lightx2v_4step_comfyui.safetensors", "diffusion_models", None, None),
-    ("Kijai/WanVideo_comfy", "Lightx2v/lightx2v_T2V_14B_cfg_step_distill_v2_lora_rank64_bf16.safetensors", "loras", None, None),
-    ("alibaba-pai/Wan2.2-Fun-Reward-LoRAs", "Wan2.2-Fun-A14B-InP-low-noise-HPS2.1.safetensors", "loras", None, None),
-    ("alibaba-pai/Wan2.2-Fun-Reward-LoRAs", "Wan2.2-Fun-A14B-InP-high-noise-HPS2.1.safetensors", "loras", None, None),
+    ("lightx2v/Wan2.2-Distill-Models", "wan2.2_i2v_A14b_high_noise_scaled_fp8_e4m3_lightx2v_4step_comfyui.safetensors", "diffusion_models", None),
+    ("Kijai/WanVideo_comfy", "lightx2v_T2V_14B_cfg_step_distill_v2_lora_rank64_bf16.safetensors", "loras", "Lightx2v"),
+    ("alibaba-pai/Wan2.2-Fun-Reward-LoRAs", "Wan2.2-Fun-A14B-InP-low-noise-HPS2.1.safetensors", "loras", None),
+    ("alibaba-pai/Wan2.2-Fun-Reward-LoRAs", "Wan2.2-Fun-A14B-InP-high-noise-HPS2.1.safetensors", "loras", None),
 ]
 
 extra_cmds = [
@@ -241,12 +241,12 @@ def ui():
 
     # Download models at runtime (only if missing)
     print("Checking and downloading missing models...")
-    for repo, fn, sub, subf, rev in model_tasks:
+    for repo, fn, sub, subf in model_tasks:
         target = os.path.join(MODELS_DIR, sub, fn)
         if not os.path.exists(target):
             print(f"Downloading {fn} to {target}...")
             try:
-                hf_download(repo, fn, sub, subf, rev)
+                hf_download(repo, fn, sub, subf)
                 print(f"Successfully downloaded {fn}")
             except Exception as e:
                 print(f"Error downloading {fn}: {e}")
