@@ -42,7 +42,7 @@ image = (
     modal.Image.debian_slim(python_version="3.12")
 #    modal.Image.from_registry(f"nvidia/cuda:{tag}", add_python="3.12")
     .entrypoint([])
-    .apt_install("git", "wget", "libgl1-mesa-glx", "libglib2.0-0", "ffmpeg")
+    .apt_install("git", "wget", "libgl1-mesa-glx", "libglib2.0-0", "ffmpeg", "build-essential", "python3-dev")
     .run_commands([
         "pip install --upgrade pip",
         "pip install --no-cache-dir comfy-cli uv",
@@ -85,7 +85,7 @@ image = image.run_commands([
     "pip install triton",
     "ls",
     "git clone https://github.com/thu-ml/SageAttention.git",
-    "%cd SageAttention",
+    "cd SageAttention",
     "pip install -e ."
 ])
 
