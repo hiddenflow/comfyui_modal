@@ -74,7 +74,8 @@ image = image.run_commands([
     "pip install packaging",
     "pip install wheel",
     "pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0",
-    "pip install http://github.com/Dao-AILab/flash-attention/releases/download/v2.8.3/flash_attn-2.8.3+cu12torch2.8cxx11abiTRUE-cp312-cp312-linux_x86_64.whl"
+    "pip install http://github.com/Dao-AILab/flash-attention/releases/download/v2.8.3/flash_attn-2.8.3+cu12torch2.8cxx11abiTRUE-cp312-cp312-linux_x86_64.whl",
+    "pip install sageattention"
 ])
 
 # Model download tasks (will be done at runtime)
