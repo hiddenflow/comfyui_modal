@@ -24,7 +24,7 @@ def git_clone_cmd(node_repo: str, recursive: bool = False, install_reqs: bool = 
         cmd += f" && pip install -r {dest}/requirements.txt"
     return cmd
     
-def hf_download(repoid: id, filename: str, subdir: str, subfolder: Optional[str] = None, revision: Optional[str] = None):
+def hf_download(repoid: str, filename: str, subdir: str, subfolder: Optional[str] = None, revision: Optional[str] = None):
     out = hf_hub_download(repo_id=repo_id, filename=filename, subfolder=subfolder, local_dir=TMP_DL, revision=revision)
     target = os.path.join(MODELS_DIR, subdir)
     os.makedirs(target, exist_ok=True)
