@@ -81,21 +81,22 @@ model_tasks = [
     ("Comfy-Org/Wan_2.1_ComfyUI_repackaged", "split_files/clip_vision/clip_vision_h.safetensors", "clip_vision", None, None),
     ("Comfy-Org/Wan_2.1_ComfyUI_repackaged", "split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors", "text_encoders", None, None),
     ("Kijai/wav2vec2_safetensors", "wav2vec2-chinese-base_fp16.safetensors", "wav2vec2", None, None),
-    ("Kijai/WanVideo_comfy", "umt5-xxl-enc-bf16.safetensors", "clip", None, None),
-    ("Kijai/WanVideo_comfy", "umt5-xxl-enc-fp8_e4m3fn.safetensors", "clip", None, None),
+    ("ALGOTECH/WanVideo_comfy", "umt5-xxl-enc-bf16.safetensors", "clip", None, None),
+    ("Kijai/WanVideo_comfy", "umt5-xxl-enc-fp8_e4m3fn.safetensors", "text_encoders", None, None),
     ("facefusion/models-3.3.0", "hyperswap_1a_256.onnx", "hyperswap", None, None),
     ("Kijai/Z-Image_comfy_fp8_scaled", "z-image-turbo_fp8_scaled_e4m3fn_KJ.safetensors", "diffusion_models", None, None),
     ("jiangchengchengNLP/qwen3-4b-fp8-scaled", "qwen3_4b_fp8_scaled.safetensors", "clip", None, None),
     ("Comfy-Org/z_image_turbo", "split_files/vae/ae.safetensors", "vae", None, None),
-    ("Kijai/WanVideo_comfy_fp8_scaled", "T2V/HoloCine/Wan2_2-T2V-A14B-LOW-HoloCine-full_fp8_e4m3fn_scaled_KJ.safetensors", "vae", None, None),
-    ("Kijai/WanVideo_comfy_fp8_scaled", "T2V/HoloCine/Wan2_2-T2V-A14B-HIGH-HoloCine-full_fp8_e4m3fn_scaled_KJ.safetensors", "vae", None, None),
+    ("Kijai/WanVideo_comfy_fp8_scaled", "T2V/HoloCine/Wan2_2-T2V-A14B-LOW-HoloCine-full_fp8_e4m3fn_scaled_KJ.safetensors", "diffusion_models", None, None),
+    ("Kijai/WanVideo_comfy_fp8_scaled", "T2V/HoloCine/Wan2_2-T2V-A14B-HIGH-HoloCine-full_fp8_e4m3fn_scaled_KJ.safetensors", "diffusion_models", None, None),
 #    ("Kijai/LongCat-Video_comfy", "LongCat_TI2V_comfy_fp8_e4m3fn_scaled_KJ.safetensors", "diffusion_models", None, None),
 #    ("Kijai/LongCat-Video_comfy", "LongCat_distill_lora_alpha64_bf16.safetensors", "loras", None, None),
 #    ("Kijai/LongCat-Video_comfy", "LongCat_TI2V_comfy_fp8_e4m3fn_scaled_KJ.safetensors", "diffusion_models", None, None),
     ("lightx2v/Wan2.2-Distill-Models", "wan2.2_i2v_A14b_high_noise_scaled_fp8_e4m3_lightx2v_4step_comfyui.safetensors", "diffusion_models", None, None),
     ("Kijai/WanVideo_comfy", "Lightx2v/lightx2v_T2V_14B_cfg_step_distill_v2_lora_rank64_bf16.safetensors", "loras", None, None),
-    ("Kijai/WanVideo_comfy_fp8_scaled", "Fun/Wan2_2-Fun-InP-A14B-HIGH_fp8_e4m3fn_scaled_KJ.safetensors", "diffusion_models", None, None),
-    ("Kijai/WanVideo_comfy_fp8_scaled", "Fun/Wan2_2-Fun-InP-A14B-LOW_fp8_e4m3fn_scaled_KJ.safetensors", "diffusion_models", None, None),
+    ("alibaba-pai/Wan2.2-Fun-Reward-LoRAs", "Wan2.2-Fun-A14B-InP-low-noise-HPS2.1.safetensors", "loras", None, None),
+    ("alibaba-pai/Wan2.2-Fun-Reward-LoRAs", "Wan2.2-Fun-A14B-InP-high-noise-HPS2.1.safetensors", "diffusion_models", None, None),
+    
 ]
 
 extra_cmds = [
