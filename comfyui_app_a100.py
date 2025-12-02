@@ -86,7 +86,7 @@ image = image.run_commands([
     "ls",
     "git clone https://github.com/thu-ml/SageAttention.git",
     "cd SageAttention",
-    "pip install -e --no-build-isolation"
+    "pip install -e"
 ])
 
 # Model download tasks (will be done at runtime)
