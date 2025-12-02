@@ -43,13 +43,6 @@ image = (
         "pip install librosa",
         # Install ComfyUI to default location
         "comfy --skip-prompt install --nvidia",
-        "pip install misaki[en]",
-        "pip install ninja",
-        "pip install psutil",
-        "pip install packaging",
-        "pip install wheel",
-        "pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0",
-        "pip install http://github.com/Dao-AILab/flash-attention/releases/download/v2.8.3/flash_attn-2.8.3+cu12torch2.8cxx11abiTRUE-cp312-cp312-linux_x86_64.whl"
     ])
     .env({"HF_HUB_ENABLE_HF_TRANSFER": "1"})
 )
@@ -67,10 +60,21 @@ for repo, flags in [
     ("receyuki/comfyui-prompt-reader-node", {'recursive': True, 'install_reqs': True}),
     ("crystian/ComfyUI-Crystools", {'install_reqs': True}),
     ("kijai/ComfyUI-WanVideoWrapper", {'install_reqs': True}),
-    ("Gourieff/ComfyUI-ReActor", {'install_reqs': True}),
-    ("Kosinkadink/ComfyUI-VideoHelperSuite", {'install_reqs': True})
+    # ("Gourieff/ComfyUI-ReActor", {'install_reqs': True}),
+    # ("Kosinkadink/ComfyUI-VideoHelperSuite", {'install_reqs': True})
 ]:
     image = image.run_commands([git_clone_cmd(repo, **flags)])
+
+# pip install
+image = image.run_commands([
+    "pip install misaki[en]",
+    "pip install ninja",
+    "pip install psutil",
+    "pip install packaging",
+    "pip install wheel",
+    "pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0",
+    "pip install http://github.com/Dao-AILab/flash-attention/releases/download/v2.8.3/flash_attn-2.8.3+cu12torch2.8cxx11abiTRUE-cp312-cp312-linux_x86_64.whl"
+])
 
 # Model download tasks (will be done at runtime)
 model_tasks = [
@@ -96,7 +100,6 @@ model_tasks = [
     ("Kijai/WanVideo_comfy", "Lightx2v/lightx2v_T2V_14B_cfg_step_distill_v2_lora_rank64_bf16.safetensors", "loras", None, None),
     ("alibaba-pai/Wan2.2-Fun-Reward-LoRAs", "Wan2.2-Fun-A14B-InP-low-noise-HPS2.1.safetensors", "loras", None, None),
     ("alibaba-pai/Wan2.2-Fun-Reward-LoRAs", "Wan2.2-Fun-A14B-InP-high-noise-HPS2.1.safetensors", "loras", None, None),
-    
 ]
 
 extra_cmds = [
@@ -108,7 +111,6 @@ extra_cmds = [
     f"wget https://github.com/visomaster/visomaster-assets/releases/download/v0.1.0/GFPGANv1.4.onnx -P {MODELS_DIR}/facerestore_models",
     f"wget https://github.com/Glat0s/GFPGAN-1024-onnx/releases/download/v0.0.1/gfpgan-1024.onnx -P {MODELS_DIR}/facerestore_models",
     f"wget https://github.com/visomaster/visomaster-assets/releases/download/v0.1.0/RestoreFormerPlusPlus.fp16.onnx -P {MODELS_DIR}/facerestore_models",
-    
 ]
 
 # Create volume
