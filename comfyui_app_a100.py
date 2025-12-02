@@ -241,12 +241,12 @@ def ui():
 
     # Download models at runtime (only if missing)
     print("Checking and downloading missing models...")
-    for repo, fn, sub, subf in model_tasks:
+    for repo, fn, sub, subf, rev in model_tasks:
         target = os.path.join(MODELS_DIR, sub, fn)
         if not os.path.exists(target):
             print(f"Downloading {fn} to {target}...")
             try:
-                hf_download(repo, fn, sub, subf)
+                hf_download(repo, fn, sub, subf, rev)
                 print(f"Successfully downloaded {fn}")
             except Exception as e:
                 print(f"Error downloading {fn}: {e}")
