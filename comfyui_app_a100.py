@@ -32,10 +32,15 @@ def hf_download(repo_id: str, filename: str, subdir: str, subfolder: Optional[st
 
 import modal
 
+cuda_version = "12.8.1"  # should be no greater than host CUDA version
+flavor = "trixie"  # includes full CUDA toolkit
+operating_sys = "debian13.2"
+tag = f"{cuda_version}-{flavor}-{operating_sys}"
+
 # Build image with ComfyUI installed to default location /root/comfy/ComfyUI
 image = (
-    modal.Image.debian_slim(python_version="3.12")
-    .from_registry(f"nvidia/cuda:12.8.1", add_python="3.12")
+#    modal.Image.debian_slim(python_version="3.12")
+    modal.Image.from_registry(f"nvidia/cuda:12.8.1", add_python="3.12")
     .entrypoint([])
     .apt_install("git", "wget", "libgl1-mesa-glx", "libglib2.0-0", "ffmpeg")
     .run_commands([
@@ -76,7 +81,7 @@ image = image.run_commands([
     "pip install packaging",
     "pip install wheel",
     "pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu128",
-    "pip install http://github.com/Dao-AILab/flash-attention/releases/download/v2.8.3/flash_attn-2.8.3+cu12torch2.8cxx11abiTRUE-cp312-cp312-linux_x86_64.whl",
+    "pip install http://github.com/Dao-AILab/flash-attention/releases/download/v2.8.3/flash_attn-2.8.3+cu12torch2.8cxx11abiTRUE-cp312-cp312-linux_x86_64.whl --no-build-isolation",
     "pip install triton",
     "pip install sageattention==2.2.0 --no-build-isolation"
 ])
