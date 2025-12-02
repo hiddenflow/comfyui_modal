@@ -40,7 +40,7 @@ tag = f"{cuda_version}-{flavor}-{operating_sys}"
 # Build image with ComfyUI installed to default location /root/comfy/ComfyUI
 image = (
 #    modal.Image.debian_slim(python_version="3.12")
-    modal.Image.from_registry(f"nvidia/cuda:12.8.1", add_python="3.12")
+    modal.Image.from_registry(f"nvidia/cuda:{tag}", add_python="3.12")
     .entrypoint([])
     .apt_install("git", "wget", "libgl1-mesa-glx", "libglib2.0-0", "ffmpeg")
     .run_commands([
