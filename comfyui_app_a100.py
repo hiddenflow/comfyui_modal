@@ -34,7 +34,7 @@ import modal
 
 cuda_version = "12.8.1"  # should be no greater than host CUDA version
 flavor = "trixie"  # includes full CUDA toolkit
-operating_sys = "debian13.2"
+operating_sys = "debian12.12"
 tag = f"{cuda_version}-{flavor}-{operating_sys}"
 
 # Build image with ComfyUI installed to default location /root/comfy/ComfyUI
