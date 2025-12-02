@@ -60,8 +60,8 @@ for repo, flags in [
     ("receyuki/comfyui-prompt-reader-node", {'recursive': True, 'install_reqs': True}),
     ("crystian/ComfyUI-Crystools", {'install_reqs': True}),
     ("kijai/ComfyUI-WanVideoWrapper", {'install_reqs': True}),
-    # ("Gourieff/ComfyUI-ReActor", {'install_reqs': True}),
-    # ("Kosinkadink/ComfyUI-VideoHelperSuite", {'install_reqs': True})
+    ("Gourieff/ComfyUI-ReActor", {'install_reqs': True}),
+    ("Kosinkadink/ComfyUI-VideoHelperSuite", {'install_reqs': True})
 ]:
     image = image.run_commands([git_clone_cmd(repo, **flags)])
 
@@ -241,12 +241,12 @@ def ui():
 
     # Download models at runtime (only if missing)
     print("Checking and downloading missing models...")
-    for sub, fn, repo, subf in model_tasks:
+    for repo, fn, sub, subf in model_tasks:
         target = os.path.join(MODELS_DIR, sub, fn)
         if not os.path.exists(target):
             print(f"Downloading {fn} to {target}...")
             try:
-                hf_download(sub, fn, repo, subf)
+                hf_download(repo, fn, sub, subf)
                 print(f"Successfully downloaded {fn}")
             except Exception as e:
                 print(f"Error downloading {fn}: {e}")
