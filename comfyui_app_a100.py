@@ -83,9 +83,10 @@ image = image.run_commands([
     "pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu129",
     "pip install http://github.com/Dao-AILab/flash-attention/releases/download/v2.8.3/flash_attn-2.8.3+cu12torch2.8cxx11abiTRUE-cp312-cp312-linux_x86_64.whl --no-build-isolation",
     "pip install triton",
+    "cd {TMP_DL}",
     "git clone https://github.com/thu-ml/SageAttention.git",
     "ls",
-    "cd sageattention",
+    "cd SageAttention",
     "pip install -e --no-build-isolation"
 ])
 
