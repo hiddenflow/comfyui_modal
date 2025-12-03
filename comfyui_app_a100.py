@@ -137,13 +137,6 @@ app = modal.App(name="comfyui", image=image)
     gpu=os.environ.get('MODAL_GPU_TYPE', 'L40S'),
     volumes={DATA_ROOT: vol},
 )
-def check_nvidia_smi():
-    import subprocess
-    output = subprocess.check_output(["nvidia-smi"], text=True)
-    assert "Driver Version:" in output
-    assert "CUDA Version:" in output
-    print(output)
-    return output
 @modal.concurrent(max_inputs=10)
 @modal.web_server(8000, startup_timeout=300)  # Increased timeout for handling restarts
 def ui():
@@ -162,6 +155,17 @@ def ui():
             print(f"Warning: {DEFAULT_COMFY_DIR} not found, creating empty structure")
             os.makedirs(DATA_BASE, exist_ok=True)
     
+    import torch
+
+    output = subprocess.check_output(["nvidia-smi"], text=True)
+    assert "Driver Version:" in output
+    assert "CUDA Version:" in output
+    print(output)
+    print(torch.__version__)
+    print(torch.version.cuda)
+    print(torch.cuda.is_available())
+    print(torch.cuda.get_device_capability(0))
+
     # Fix detached HEAD and update ComfyUI backend to the latest version
     print("Fixing git branch and updating ComfyUI backend to the latest version...")
     os.chdir(DATA_BASE)
