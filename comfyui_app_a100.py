@@ -199,7 +199,7 @@ def ui():
         # Instalasi baru
         print("ComfyUI-Manager directory not found, installing and downgrading...")
         try:
-            subprocess.run("comfy node install ComfyUI-Manager --version 3.37.1", shell=True, check=True, capture_output=True, text=True)
+            subprocess.run("comfy node registry-install ComfyUI-Manager --version 3.37.1", shell=True, check=True, capture_output=True, text=True)
             print("ComfyUI-Manager installed successfully")
             
         except subprocess.CalledProcessError as e:
