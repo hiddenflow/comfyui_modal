@@ -194,28 +194,64 @@ def ui():
     except Exception as e:
         print(f"Unexpected error during backend update: {e}")
 
-    # Update ComfyUI-Manager to the latest version
     manager_dir = os.path.join(CUSTOM_NODES_DIR, "ComfyUI-Manager")
     if os.path.exists(manager_dir):
         print("Updating ComfyUI-Manager to the latest version...")
         os.chdir(manager_dir)
         try:
-            # Configure pull strategy for ComfyUI-Manager
             subprocess.run("git config pull.ff only", shell=True, check=True, capture_output=True, text=True)
             result = subprocess.run("git pull --ff-only", shell=True, check=True, capture_output=True, text=True)
             print("ComfyUI-Manager git pull output:", result.stdout)
+            
+            # DOWNGRADE SECTION
+            version_tag = "v3.37.1"
+            print(f"Downgrading to specific version {version_tag}...")
+            subprocess.run(f"git checkout {version_tag}", shell=True, check=True, capture_output=True, text=True)
+            print(f"Successfully downgraded to version {version_tag}")
+            
         except subprocess.CalledProcessError as e:
-            print(f"Error updating ComfyUI-Manager: {e.stderr}")
+            print(f"Error updating/downgrading ComfyUI-Manager: {e.stderr}")
         except Exception as e:
-            print(f"Unexpected error during ComfyUI-Manager update: {e}")
+            print(f"Unexpected error during ComfyUI-Manager update/downgrade: {e}")
         os.chdir(DATA_BASE)  # Return to base directory
     else:
-        print("ComfyUI-Manager directory not found, installing...")
+        # Instalasi baru dengan downgrade langsung
+        print("ComfyUI-Manager directory not found, installing and downgrading...")
         try:
             subprocess.run("comfy node install ComfyUI-Manager", shell=True, check=True, capture_output=True, text=True)
             print("ComfyUI-Manager installed successfully")
+            
+            # Downgrade setelah instalasi
+            os.chdir(manager_dir)
+            version_tag = "v3.37.1"  # Ganti dengan versi yang diinginkan
+            subprocess.run(f"git checkout {version_tag}", shell=True, check=True, capture_output=True, text=True)
+            print(f"Successfully downgraded to version {version_tag}")
+            os.chdir(DATA_BASE)
         except subprocess.CalledProcessError as e:
-            print(f"Error installing ComfyUI-Manager: {e.stderr}")
+            print(f"Error installing/downgrading ComfyUI-Manager: {e.stderr}")
+
+    # Update ComfyUI-Manager to the latest version
+    # manager_dir = os.path.join(CUSTOM_NODES_DIR, "ComfyUI-Manager")
+    # if os.path.exists(manager_dir):
+    #     print("Updating ComfyUI-Manager to the latest version...")
+    #     os.chdir(manager_dir)
+    #     try:
+    #         # Configure pull strategy for ComfyUI-Manager
+    #         subprocess.run("git config pull.ff only", shell=True, check=True, capture_output=True, text=True)
+    #         result = subprocess.run("git pull --ff-only", shell=True, check=True, capture_output=True, text=True)
+    #         print("ComfyUI-Manager git pull output:", result.stdout)
+    #     except subprocess.CalledProcessError as e:
+    #         print(f"Error updating ComfyUI-Manager: {e.stderr}")
+    #     except Exception as e:
+    #         print(f"Unexpected error during ComfyUI-Manager update: {e}")
+    #     os.chdir(DATA_BASE)  # Return to base directory
+    # else:
+    #     print("ComfyUI-Manager directory not found, installing...")
+    #     try:
+    #         subprocess.run("comfy node install ComfyUI-Manager", shell=True, check=True, capture_output=True, text=True)
+    #         print("ComfyUI-Manager installed successfully")
+    #     except subprocess.CalledProcessError as e:
+    #         print(f"Error installing ComfyUI-Manager: {e.stderr}")
 
     # Upgrade pip at runtime
     print("Upgrading pip at runtime...")
