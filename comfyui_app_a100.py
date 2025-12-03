@@ -204,10 +204,10 @@ def ui():
             print("ComfyUI-Manager git pull output:", result.stdout)
             
             # DOWNGRADE SECTION
-            version_tag = "v3.37.1"
-            print(f"Downgrading to specific version {version_tag}...")
-            subprocess.run(f"git checkout tags/{version_tag}", shell=True, check=True, capture_output=True, text=True)
-            print(f"Successfully downgraded to version {version_tag}")
+            sha_id = "09f8d5cb2d5ad094a85e3bba744dec2b076d9db4"
+            print(f"Downgrading to specific version {sha_id}...")
+            subprocess.run(f"git checkout {sha_id}", shell=True, check=True, capture_output=True, text=True)
+            print(f"Successfully downgraded to version {sha_id}")
             
         except subprocess.CalledProcessError as e:
             print(f"Error updating/downgrading ComfyUI-Manager: {e.stderr}")
@@ -218,15 +218,15 @@ def ui():
         # Instalasi baru dengan downgrade langsung
         print("ComfyUI-Manager directory not found, installing and downgrading...")
         try:
-            subprocess.run("comfy node install ComfyUI-Manager", shell=True, check=True, capture_output=True, text=True)
-            print("ComfyUI-Manager installed successfully")
-            
             # Downgrade setelah instalasi
             os.chdir(manager_dir)
-            version_tag = "v3.37.1"  # Ganti dengan versi yang diinginkan
-            subprocess.run(f"git checkout {version_tag}", shell=True, check=True, capture_output=True, text=True)
-            print(f"Successfully downgraded to version {version_tag}")
+            sha_id = "09f8d5cb2d5ad094a85e3bba744dec2b076d9db4"  # Ganti dengan versi yang diinginkan
+            subprocess.run(f"git checkout {sha_id}", shell=True, check=True, capture_output=True, text=True)
+            print(f"Successfully downgraded to version {sha_id}")
             os.chdir(DATA_BASE)
+            
+            subprocess.run("comfy node install ComfyUI-Manager", shell=True, check=True, capture_output=True, text=True)
+            print("ComfyUI-Manager installed successfully")
         except subprocess.CalledProcessError as e:
             print(f"Error installing/downgrading ComfyUI-Manager: {e.stderr}")
 
