@@ -206,7 +206,7 @@ def ui():
             # DOWNGRADE SECTION
             version_tag = "v3.37.1"
             print(f"Downgrading to specific version {version_tag}...")
-            subprocess.run(f"git checkout {version_tag}", shell=True, check=True, capture_output=True, text=True)
+            subprocess.run(f"git checkout tags/{version_tag}", shell=True, check=True, capture_output=True, text=True)
             print(f"Successfully downgraded to version {version_tag}")
             
         except subprocess.CalledProcessError as e:
