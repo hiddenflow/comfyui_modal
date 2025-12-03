@@ -85,8 +85,8 @@ image = image.run_commands([
 #    "pip install triton"
     "git clone https://github.com/thu-ml/SageAttention.git",
     "cd SageAttention/sageattention3_blackwell",
-#    "python3 setup.py install"
-    "pip install -e ."
+    "python setup.py install"
+#    "pip install -e ."
 ])
 
 # Model download tasks (will be done at runtime)
