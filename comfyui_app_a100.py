@@ -80,9 +80,10 @@ image = image.run_commands([
     "pip install psutil",
     "pip install packaging",
     "pip install wheel",
-    "pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu129",
+    "pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu129",
     "pip install -r http://raw.githubusercontent.com/hiddenflow/crossOS_acceleritor/refs/heads/main/acceleritor_torch280cu129_lite.txt",
-    "pip install flash-attn --no-build-isolation"
+#    "pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu129",
+#    "pip install flash-attn --no-build-isolation"
 #    "pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu129",
 #    "pip install http://github.com/Dao-AILab/flash-attention/releases/download/v2.8.3/flash_attn-2.8.3+cu12torch2.8cxx11abiTRUE-cp312-cp312-linux_x86_64.whl --no-build-isolation",
 #    "pip install triton"
@@ -299,7 +300,7 @@ def ui():
     print(f"Starting ComfyUI from {DATA_BASE}...")
     
     # Start ComfyUI server with correct syntax and latest frontend
-    cmd = ["comfy", "launch", "--", "--listen", "0.0.0.0", "--port", "8000", "--use-flash-attention", "--front-end-version", "Comfy-Org/ComfyUI_frontend@latest"]
+    cmd = ["comfy", "launch", "--", "--listen", "0.0.0.0", "--port", "8000", "--front-end-version", "Comfy-Org/ComfyUI_frontend@latest"]
     print(f"Executing: {' '.join(cmd)}")
     
     process = subprocess.Popen(
