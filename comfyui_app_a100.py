@@ -80,7 +80,7 @@ image = image.run_commands([
     "pip install psutil",
     "pip install packaging",
     "pip install wheel",
-    "pip uninstall torch torchvision torchaudio -y"
+    "pip uninstall torch torchvision torchaudio -y",
     "pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu129",
     "pip install -r http://raw.githubusercontent.com/hiddenflow/crossOS_acceleritor/refs/heads/main/acceleritor_torch280cu129_lite.txt",
     "pip list"
@@ -162,6 +162,7 @@ def ui():
     
     import torch
 
+    os.environ['CUDA_LAUNCH_BLOCKING'] = "1"
     output = subprocess.check_output(["nvidia-smi"], text=True)
     assert "Driver Version:" in output
     assert "CUDA Version:" in output
