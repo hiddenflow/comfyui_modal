@@ -83,6 +83,10 @@ image = image.run_commands([
     "pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu129",
     "pip install http://github.com/Dao-AILab/flash-attention/releases/download/v2.8.3/flash_attn-2.8.3+cu12torch2.8cxx11abiTRUE-cp312-cp312-linux_x86_64.whl --no-build-isolation",
 #    "pip install triton"
+    "git clone https://github.com/thu-ml/SageAttention.git",
+    "cd sageattention3_blackwell",
+    "python3 setup.py install"
+#    "pip install -e ."
 ])
 
 # Model download tasks (will be done at runtime)
@@ -136,15 +140,6 @@ app = modal.App(name="comfyui", image=image)
 @modal.concurrent(max_inputs=10)
 @modal.web_server(8000, startup_timeout=300)  # Increased timeout for handling restarts
 def ui():
-    clone_sage = "git clone https://github.com/thu-ml/SageAttention.git"
-    cd_sage = "cd SageAttention"
-    install_sage = "pip install -e ."
-
-    subprocess.run("ls", shell=True, check=False, capture_output=True, text=True)
-    subprocess.run(clone_sage, shell=True, check=False, capture_output=True, text=True)
-    subprocess.run(cd_sage, shell=True, check=False, capture_output=True, text=True)
-    subprocess.run(install_sage, shell=True, check=False, capture_output=True, text=True)
-    
     # Check if volume is empty (first run)
     if not os.path.exists(os.path.join(DATA_BASE, "main.py")):
         print("First run detected. Copying ComfyUI from default location to volume...")
