@@ -81,6 +81,7 @@ image = image.run_commands([
     "pip install packaging",
     "pip install wheel",
     "pip install -r http://raw.githubusercontent.com/hiddenflow/crossOS_acceleritor/refs/heads/main/acceleritor_torch280cu129_lite.txt",
+    "pip install flash-attn --no-build-isolation"
 #    "pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu129",
 #    "pip install http://github.com/Dao-AILab/flash-attention/releases/download/v2.8.3/flash_attn-2.8.3+cu12torch2.8cxx11abiTRUE-cp312-cp312-linux_x86_64.whl --no-build-isolation",
 #    "pip install triton"
