@@ -80,6 +80,7 @@ image = image.run_commands([
     "pip install psutil",
     "pip install packaging",
     "pip install wheel",
+    "pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu129",
     "pip install -r http://raw.githubusercontent.com/hiddenflow/crossOS_acceleritor/refs/heads/main/acceleritor_torch280cu129_lite.txt",
     "pip install flash-attn --no-build-isolation"
 #    "pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu129",
