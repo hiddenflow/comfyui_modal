@@ -70,9 +70,9 @@ for repo, flags in [
     ("kijai/ComfyUI-KJNodes", {'install_reqs': True}),
     ("Gourieff/ComfyUI-ReActor", {'install_reqs': True}),
     ("Kosinkadink/ComfyUI-VideoHelperSuite", {'install_reqs': True}),
-    ("jeankassio/ComfyUI-Terminal"),
-    ("fairy-root/ComfyUI-Show-Text"),
-    ("pythongosssss/ComfyUI-Custom-Scripts")
+    ("jeankassio/ComfyUI-Terminal", {}),
+    ("fairy-root/ComfyUI-Show-Text", {}),
+    ("pythongosssss/ComfyUI-Custom-Scripts", {})
 ]:
     image = image.run_commands([git_clone_cmd(repo, **flags)])
 
