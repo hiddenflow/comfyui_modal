@@ -137,6 +137,13 @@ app = modal.App(name="comfyui", image=image)
     gpu=os.environ.get('MODAL_GPU_TYPE', 'L40S'),
     volumes={DATA_ROOT: vol},
 )
+def check_nvidia_smi():
+    import subprocess
+    output = subprocess.check_output(["nvidia-smi"], text=True)
+    assert "Driver Version:" in output
+    assert "CUDA Version:" in output
+    print(output)
+    return output
 @modal.concurrent(max_inputs=10)
 @modal.web_server(8000, startup_timeout=300)  # Increased timeout for handling restarts
 def ui():
