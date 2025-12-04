@@ -61,8 +61,6 @@ image = (
         "chmod +x /etc/profile.d/cuda.sh",
         "cat /etc/profile.d/cuda.sh",
         ". /etc/profile.d/cuda.sh",
-        "echo $PATH | grep cuda",
-        "echo $LD_LIBRARY_PATH | grep cuda",
         "nvcc --version",
         "pip install librosa",
         # Install ComfyUI to default location
