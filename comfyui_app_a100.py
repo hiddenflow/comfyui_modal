@@ -48,9 +48,9 @@ image = (
         "pip install --no-cache-dir comfy-cli uv",
         "uv pip install --system --compile-bytecode huggingface_hub[hf_transfer]==0.28.1",
         "pip install librosa",
-        "pip install torch==2.8.0+cu129 torchvision==0.23.0+cu129 torchaudio==2.8.0+cu129 --index-url https://download.pytorch.org/whl/cu129",
         # Install ComfyUI to default location
         "comfy --skip-prompt install --nvidia",
+        "pip install torch==2.8.0+cu129 torchvision==0.23.0+cu129 torchaudio==2.8.0+cu129 --index-url https://download.pytorch.org/whl/cu129 --force-reinstall",
     ])
     .env({"HF_HUB_ENABLE_HF_TRANSFER": "1"})
 )
