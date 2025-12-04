@@ -56,7 +56,7 @@ image = (
         "find / -name nvcc 2>/dev/null",
         "dpkg -l | grep cuda",
         "ls -la /usr/local/cuda-12.9/bin/nvcc",
-        "echo 'export PATH=/usr/local/cuda-12.9/bin:\$PATH' | sudo tee /etc/profile.d/cuda.sh",
+        "echo 'export PATH=/usr/local/cuda-12.9/bin:\$PATH' | tee /etc/profile.d/cuda.sh",
         "echo 'export LD_LIBRARY_PATH=/usr/local/cuda-12.9/lib64:\$LD_LIBRARY_PATH' | tee -a /etc/profile.d/cuda.sh",
         "sudo chmod +x /etc/profile.d/cuda.sh",
         "cat /etc/profile.d/cuda.sh",
