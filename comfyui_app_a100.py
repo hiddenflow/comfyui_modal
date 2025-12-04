@@ -49,6 +49,7 @@ image = (
         "uv pip install --system --compile-bytecode huggingface_hub[hf_transfer]==0.28.1",
         "whereis nvcc",
         "find / -name nvcc 2>/dev/null",
+        "dpkg -l | grep cuda",
         "pip install librosa",
         # Install ComfyUI to default location
         "comfy --skip-prompt install --nvidia",
@@ -89,6 +90,7 @@ image = image.run_commands([
     "pip install wheel",
     "whereis nvcc",
     "find / -name nvcc 2>/dev/null",
+    "dpkg -l | grep cuda",
     "git clone https://github.com/Dao-AILab/flash-attention.git && cd flash-attention/hopper && python setup.py install",
     "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && python setup.py install"
 #    "pip install -r http://raw.githubusercontent.com/hiddenflow/crossOS_acceleritor/refs/heads/main/acceleritor_torch280cu129_lite.txt",
