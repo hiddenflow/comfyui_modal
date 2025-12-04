@@ -58,7 +58,7 @@ image = (
         "ls -la /usr/local/cuda-12.9/bin/nvcc",
         "echo 'export PATH=/usr/local/cuda-12.9/bin:\$PATH' | tee /etc/profile.d/cuda.sh",
         "echo 'export LD_LIBRARY_PATH=/usr/local/cuda-12.9/lib64:\$LD_LIBRARY_PATH' | tee -a /etc/profile.d/cuda.sh",
-        "sudo chmod +x /etc/profile.d/cuda.sh",
+        "chmod +x /etc/profile.d/cuda.sh",
         "cat /etc/profile.d/cuda.sh",
         ". /etc/profile.d/cuda.sh",
         "echo $PATH | grep cuda",
@@ -70,7 +70,12 @@ image = (
         "pip install torch torchvision torchaudio xformers triton --index-url https://download.pytorch.org/whl/cu129 --force-reinstall",
         "pip install onnxruntime onnxruntime-gpu"
     ])
-    .env({"HF_HUB_ENABLE_HF_TRANSFER": "1"})
+    .env({
+        "HF_HUB_ENABLE_HF_TRANSFER": "1",
+        "PATH": "/usr/local/cuda-12.9/bin:$PATH",
+        "LD_LIBRARY_PATH": "/usr/local/cuda-12.9/lib64:$LD_LIBRARY_PATH",
+        "CUDA_HOME": "/usr/local/cuda-12.9"
+    })
 )
 
 # Install nodes to default ComfyUI location during build
