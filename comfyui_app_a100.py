@@ -85,7 +85,7 @@ image = image.run_commands([
     "pip install psutil",
     "pip install packaging",
     "pip install wheel",
-    "git clone https://github.com/Dao-AILab/flash-attention.git,
+    "git clone https://github.com/Dao-AILab/flash-attention.git",
     "cd flash-attention/hopper",
     "python setup.py install",
     "git clone https://github.com/thu-ml/SageAttention.git",
