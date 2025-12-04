@@ -193,7 +193,7 @@ def ui():
             result = subprocess.run("git pull --ff-only", shell=True, check=True, capture_output=True, text=True)
             print("ComfyUI-Manager git pull output:", result.stdout)
             
-            DOWNGRADE SECTION
+            # DOWNGRADE SECTION
             sha_id = "09f8d5cb2d5ad094a85e3bba744dec2b076d9db4"
             print(f"Downgrading to specific version {sha_id}...")
             subprocess.run(f"git checkout {sha_id}", shell=True, check=True, capture_output=True, text=True)
