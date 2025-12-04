@@ -53,6 +53,7 @@ image = (
         "pip install --no-cache-dir comfy-cli uv",
         "uv pip install --system --compile-bytecode huggingface_hub[hf_transfer]==0.28.1",
         "find / -name nvcc 2>/dev/null",
+        "ls /usr/local/cuda-12.9",
         "ls -la /usr/local/cuda-12.9/bin/nvcc",
         "echo 'export PATH=/usr/local/cuda-12.9/bin:\$PATH' | tee /etc/profile.d/cuda.sh",
         "echo 'export LD_LIBRARY_PATH=/usr/local/cuda-12.9/lib64:\$LD_LIBRARY_PATH' | tee -a /etc/profile.d/cuda.sh",
