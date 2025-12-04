@@ -51,6 +51,7 @@ image = (
         # Install ComfyUI to default location
         "comfy --skip-prompt install --nvidia",
         "pip install torch==2.8.0+cu129 torchvision==0.23.0+cu129 torchaudio==2.8.0+cu129 xformers==0.0.32.post2 triton --index-url https://download.pytorch.org/whl/cu129 --force-reinstall",
+        "pip install onnxruntime onnxruntime-gpu"
     ])
     .env({"HF_HUB_ENABLE_HF_TRANSFER": "1"})
 )
