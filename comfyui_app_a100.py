@@ -69,7 +69,7 @@ image = (
     .env({
         "HF_HUB_ENABLE_HF_TRANSFER": "1",
         "PATH": "/usr/local/cuda-12.9/bin:$PATH",
-        "LD_LIBRARY_PATH": "/usr/local/cuda-12.9/lib64:/usr/local/nvidia/lib:/usr/local/nvidia/lib64",,
+        "LD_LIBRARY_PATH": "/usr/local/cuda-12.9/lib64:/usr/local/nvidia/lib:/usr/local/nvidia/lib64",
         "CUDA_HOME": "/usr/local/cuda-12.9"
     })
 )
