@@ -47,30 +47,32 @@ image = (
         "wget https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/cuda-keyring_1.1-1_all.deb",
         "dpkg -i cuda-keyring_1.1-1_all.deb",
         "apt-get update",
-        "apt-get install -y cuda-toolkit-12-9",
+        "apt-get install -y cuda-toolkit-12-8",
         "rm cuda-keyring_1.1-1_all.deb",
         "pip install --upgrade pip",
         "pip install --no-cache-dir comfy-cli uv",
         "uv pip install --system --compile-bytecode huggingface_hub[hf_transfer]==0.28.1",
         "find / -name nvcc 2>/dev/null",
-        "ls /usr/local/cuda-12.9",
-        "ls -la /usr/local/cuda-12.9/bin/nvcc",
-        "echo 'export PATH=/usr/local/cuda-12.9/bin:\$PATH' | tee /etc/profile.d/cuda.sh",
-        "echo 'export LD_LIBRARY_PATH=/usr/local/cuda-12.9/lib64:\$LD_LIBRARY_PATH' | tee -a /etc/profile.d/cuda.sh",
-        "chmod +x /etc/profile.d/cuda.sh",
-        "cat /etc/profile.d/cuda.sh",
-        ". /etc/profile.d/cuda.sh",
+        "ls /usr/local/cuda-12.8",
+        "ls -la /usr/local/cuda-12.8/bin/nvcc",
+        "echo 'export CUDA_HOME=/usr/local/cuda-12.8' >> ~/.bashrc echo 'export PATH=\$CUDA_HOME/bin:\$PATH' >> ~/.bashrc && echo 'export LD_LIBRARY_PATH=\$CUDA_HOME/lib64:\$LD_LIBRARY_PATH' >> ~/.bashrc",
+        ". ~/.bashrc",
+        # "echo 'export PATH=/usr/local/cuda-12.8/bin:\$PATH' | tee /etc/profile.d/cuda.sh",
+        # "echo 'export LD_LIBRARY_PATH=/usr/local/cuda-12.8/lib64:\$LD_LIBRARY_PATH' | tee -a /etc/profile.d/cuda.sh",
+        # "chmod +x /etc/profile.d/cuda.sh",
+        # "cat /etc/profile.d/cuda.sh",
+        # ". /etc/profile.d/cuda.sh",
         "pip install librosa",
         # Install ComfyUI to default location
         "comfy --skip-prompt install --nvidia",
-        "pip install torch torchvision torchaudio xformers triton --index-url https://download.pytorch.org/whl/cu129 --force-reinstall",
+        "pip install torch torchvision torchaudio xformers triton --index-url https://download.pytorch.org/whl/cu128 --force-reinstall",
         "pip install onnxruntime onnxruntime-gpu"
     ])
     .env({
         "HF_HUB_ENABLE_HF_TRANSFER": "1",
-        "PATH": "/usr/local/cuda-12.9/bin:$PATH",
-        "LD_LIBRARY_PATH": "/usr/local/cuda-12.9/lib64:/usr/local/nvidia/lib:/usr/local/nvidia/lib64",
-        "CUDA_HOME": "/usr/local/cuda-12.9"
+        "PATH": "/usr/local/cuda-12.8/bin:$PATH",
+        "LD_LIBRARY_PATH": "/usr/local/cuda-12.8/lib64:/usr/local/nvidia/lib:/usr/local/nvidia/lib64",
+        "CUDA_HOME": "/usr/local/cuda-12.8"
     })
 )
 
