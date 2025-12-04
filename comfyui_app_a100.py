@@ -49,13 +49,15 @@ image = (
         "apt-get update",
         "apt-get install -y cuda-toolkit-12-9",
         "rm cuda-keyring_1.1-1_all.deb",
+        "export PATH=/usr/local/cuda-12.9/bin${PATH:+:${PATH}}$",
+        "export LD_LIBRARY_PATH=/usr/local/cuda-12.9/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}",
         "pip install --upgrade pip",
         "pip install --no-cache-dir comfy-cli uv",
         "uv pip install --system --compile-bytecode huggingface_hub[hf_transfer]==0.28.1",
         "whereis nvcc",
         "find / -name nvcc 2>/dev/null",
         "dpkg -l | grep cuda",
-        "nvcc --version"
+        "nvcc --version",
         "pip install librosa",
         # Install ComfyUI to default location
         "comfy --skip-prompt install --nvidia",
