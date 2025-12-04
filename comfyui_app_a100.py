@@ -55,6 +55,7 @@ image = (
         "whereis nvcc",
         "find / -name nvcc 2>/dev/null",
         "dpkg -l | grep cuda",
+        "nvcc --version"
         "pip install librosa",
         # Install ComfyUI to default location
         "comfy --skip-prompt install --nvidia",
