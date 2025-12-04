@@ -50,7 +50,7 @@ image = (
         "pip install librosa",
         # Install ComfyUI to default location
         "comfy --skip-prompt install --nvidia",
-        "pip install torch==2.8.0+cu129 torchvision==0.23.0+cu129 torchaudio==2.8.0+cu129 xformers==0.0.28 triton==3.4.0 --index-url https://download.pytorch.org/whl/cu129 --force-reinstall",
+        "pip install torch==2.8.0+cu129 torchvision==0.23.0+cu129 torchaudio==2.8.0+cu129 xformers triton --index-url https://download.pytorch.org/whl/cu129 --force-reinstall",
     ])
     .env({"HF_HUB_ENABLE_HF_TRANSFER": "1"})
 )
