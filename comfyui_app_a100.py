@@ -55,7 +55,7 @@ image = (
         "find / -name nvcc 2>/dev/null",
         "ls /usr/local/cuda-12.9",
         "ls -la /usr/local/cuda-12.9/bin/nvcc",
-        "echo 'export CUDA_HOME=/usr/local/cuda-12.9' >> ~/.bashrc echo 'export PATH=\$CUDA_HOME/bin:\$PATH' >> ~/.bashrc && echo 'export LD_LIBRARY_PATH=\$CUDA_HOME/lib64:\$LD_LIBRARY_PATH' >> ~/.bashrc",
+        "echo 'export CUDA_HOME=/usr/local/cuda-12.9' >> ~/.bashrc && echo 'export PATH=\$CUDA_HOME/bin:\$PATH' >> ~/.bashrc && echo 'export LD_LIBRARY_PATH=\$CUDA_HOME/lib64:\$LD_LIBRARY_PATH' >> ~/.bashrc",
         ". ~/.bashrc",
         # "echo 'export PATH=/usr/local/cuda-12.8/bin:\$PATH' | tee /etc/profile.d/cuda.sh",
         # "echo 'export LD_LIBRARY_PATH=/usr/local/cuda-12.8/lib64:\$LD_LIBRARY_PATH' | tee -a /etc/profile.d/cuda.sh",
@@ -65,8 +65,8 @@ image = (
         "pip install librosa",
         # Install ComfyUI to default location
         "comfy --skip-prompt install --nvidia",
-        "pip install torch==2.8.0+cu129 torchvision==0.23.0+cu129 torchaudio==2.8.0+cu129 xformers==0.0.32.post2 triton==3.4.0 --index-url https://download.pytorch.org/whl/cu129 --force-reinstall",
-        "pip install onnxruntime onnxruntime-gpu"
+        "uv pip install torch==2.8.0+cu129 torchvision==0.23.0+cu129 torchaudio==2.8.0+cu129 xformers==0.0.32.post2 triton==3.4.0 --index-url https://download.pytorch.org/whl/cu129 --force-reinstall",
+        "uv pip install onnxruntime onnxruntime-gpu"
     ])
     .env({
         "HF_HUB_ENABLE_HF_TRANSFER": "1",
