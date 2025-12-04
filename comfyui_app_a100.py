@@ -161,18 +161,6 @@ def ui():
         else:
             print(f"Warning: {DEFAULT_COMFY_DIR} not found, creating empty structure")
             os.makedirs(DATA_BASE, exist_ok=True)
-    
-    import torch
-
-    os.environ['CUDA_LAUNCH_BLOCKING'] = "1"
-    output = subprocess.check_output(["nvidia-smi"], text=True)
-    assert "Driver Version:" in output
-    assert "CUDA Version:" in output
-    print(output)
-    print(torch.__version__)
-    print(torch.version.cuda)
-    print(torch.cuda.is_available())
-    print(torch.cuda.get_device_capability(0))
 
     # Fix detached HEAD and update ComfyUI backend to the latest version
     print("Fixing git branch and updating ComfyUI backend to the latest version...")
@@ -315,6 +303,17 @@ def ui():
     # Ensure all required directories exist
     for d in [CUSTOM_NODES_DIR, MODELS_DIR, TMP_DL]:
         os.makedirs(d, exist_ok=True)
+
+    import torch
+
+    output = subprocess.check_output(["nvidia-smi"], text=True)
+    assert "Driver Version:" in output
+    assert "CUDA Version:" in output
+    print(output)
+    print(torch.__version__)
+    print(torch.version.cuda)
+    print(torch.cuda.is_available())
+    print(torch.cuda.get_device_capability(0))
 
     # Download models at runtime (only if missing)
     print("Checking and downloading missing models...")
