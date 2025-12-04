@@ -47,6 +47,7 @@ image = (
         "pip install --upgrade pip",
         "pip install --no-cache-dir comfy-cli uv",
         "uv pip install --system --compile-bytecode huggingface_hub[hf_transfer]==0.28.1",
+        "ls usr/local/",
         "whereis nvcc",
         "pip install librosa",
         # Install ComfyUI to default location
