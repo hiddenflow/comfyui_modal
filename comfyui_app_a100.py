@@ -48,7 +48,7 @@ image = (
         "pip install --no-cache-dir comfy-cli uv",
         "uv pip install --system --compile-bytecode huggingface_hub[hf_transfer]==0.28.1",
         "whereis nvcc",
-        "ls /usr/local | grep cuda",
+        "ls usr/local | grep cuda",
         "find / -name nvcc 2>/dev/null",
         "pip install librosa",
         # Install ComfyUI to default location
@@ -89,7 +89,7 @@ image = image.run_commands([
     "pip install packaging",
     "pip install wheel",
     "whereis nvcc",
-    "ls /usr/local | grep cuda",
+    "ls usr/local | grep cuda",
     "find / -name nvcc 2>/dev/null",
     "git clone https://github.com/Dao-AILab/flash-attention.git && cd flash-attention/hopper && python setup.py install",
     "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && python setup.py install"
