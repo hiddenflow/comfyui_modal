@@ -84,8 +84,8 @@ image = image.run_commands([
     "pip install psutil",
     "pip install packaging",
     "pip install wheel",
-#    "pip install torch==2.8.0+cu129 torchvision==0.23.0+cu129 torchaudio==2.8.0+cu129 --index-url https://download.pytorch.org/whl/cu129 --force-reinstall",
-    "pip install -r http://raw.githubusercontent.com/hiddenflow/crossOS_acceleritor/refs/heads/main/acceleritor_torch280cu129_lite.txt"
+    "pip install -r http://raw.githubusercontent.com/hiddenflow/crossOS_acceleritor/refs/heads/main/acceleritor_torch280cu129_lite.txt",
+    "pip install torch==2.8.0+cu129 torchvision==0.23.0+cu129 torchaudio==2.8.0+cu129 --index-url https://download.pytorch.org/whl/cu129 --force-reinstall",
 #    "pip list"
 #    "pip --upgrade --force-reinstall torch==2.10.0.dev20251016+cu129 torchvision==0.25.0.dev20251016+cu129 torchaudio==2.8.0.dev20251016+cu129 --index-url https://download.pytorch.org/whl/nightly/cu129",
 #    "pip install flash-attn --no-build-isolation"
