@@ -61,7 +61,7 @@ image = image.run_commands([
 
 # Git-based nodes baked into image at default ComfyUI location
 for repo, flags in [
-    ("ssitu/ComfyUI_UltimateSDUpscale", {'recursive': True}),
+    ("ssitu/ComfyUI_UltimateSDUpscale", {}),
     ("welltop-cn/ComfyUI-TeaCache", {'install_reqs': True}),
     ("nkchocoai/ComfyUI-SaveImageWithMetaData", {}),
     ("receyuki/comfyui-prompt-reader-node", {'recursive': True, 'install_reqs': True}),
