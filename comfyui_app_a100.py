@@ -44,6 +44,11 @@ image = (
     .entrypoint([])
     .apt_install("git", "wget", "libgl1-mesa-glx", "libglib2.0-0", "ffmpeg", "build-essential", "python3-dev")
     .run_commands([
+        "wget https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/cuda-keyring_1.1-1_all.deb",
+        "dpkg -i cuda-keyring_1.1-1_all.deb",
+        "apt-get update",
+        "apt-get install -y cuda-toolkit-12-9",
+        "rm cuda-keyring_1.1-1_all.deb",
         "pip install --upgrade pip",
         "pip install --no-cache-dir comfy-cli uv",
         "uv pip install --system --compile-bytecode huggingface_hub[hf_transfer]==0.28.1",
@@ -88,9 +93,6 @@ image = image.run_commands([
     "pip install psutil",
     "pip install packaging",
     "pip install wheel",
-    "whereis nvcc",
-    "find / -name nvcc 2>/dev/null",
-    "dpkg -l | grep cuda",
     "git clone https://github.com/Dao-AILab/flash-attention.git && cd flash-attention/hopper && python setup.py install",
     "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && python setup.py install"
 #    "pip install -r http://raw.githubusercontent.com/hiddenflow/crossOS_acceleritor/refs/heads/main/acceleritor_torch280cu129_lite.txt",
