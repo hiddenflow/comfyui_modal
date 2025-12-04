@@ -50,7 +50,7 @@ image = (
         "pip install librosa",
         # Install ComfyUI to default location
         "comfy --skip-prompt install --nvidia",
-        "pip install torch==2.8.0+cu129 torchvision==0.23.0+cu129 torchaudio==2.8.0+cu129 --index-url https://download.pytorch.org/whl/cu129 --force-reinstall",
+        "pip install torch==2.8.0+cu129 torchvision==0.23.0+cu129 torchaudio==2.8.0+cu129 xformers==0.0.30 --index-url https://download.pytorch.org/whl/cu129 --force-reinstall",
     ])
     .env({"HF_HUB_ENABLE_HF_TRANSFER": "1"})
 )
@@ -85,7 +85,7 @@ image = image.run_commands([
     "pip install packaging",
     "pip install wheel",
     "pip install -r http://raw.githubusercontent.com/hiddenflow/crossOS_acceleritor/refs/heads/main/acceleritor_torch280cu129_lite.txt",
-    "pip install torch==2.8.0+cu129 torchvision==0.23.0+cu129 torchaudio==2.8.0+cu129 --index-url https://download.pytorch.org/whl/cu129 --force-reinstall",
+#    "pip install torch==2.8.0+cu129 torchvision==0.23.0+cu129 torchaudio==2.8.0+cu129 --index-url https://download.pytorch.org/whl/cu129 --force-reinstall",
 #    "pip list"
 #    "pip --upgrade --force-reinstall torch==2.10.0.dev20251016+cu129 torchvision==0.25.0.dev20251016+cu129 torchaudio==2.8.0.dev20251016+cu129 --index-url https://download.pytorch.org/whl/nightly/cu129",
 #    "pip install flash-attn --no-build-isolation"
