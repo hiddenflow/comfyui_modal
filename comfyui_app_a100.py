@@ -52,7 +52,7 @@ image = (
         "echo 'export CUDA_HOME=/usr/local/cuda-12.9' >> ~/.bashrc",
         "echo 'export PATH=${CUDA_HOME}/bin:${PATH}' >> ~/.bashrc",
         "echo 'export LD_LIBRARY_PATH=${CUDA_HOME}/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc",
-        "source ~/.bashrc",
+        ". ~/.bashrc",
         "pip install --upgrade pip",
         "pip install --no-cache-dir comfy-cli uv",
         "uv pip install --system --compile-bytecode huggingface_hub[hf_transfer]==0.28.1",
