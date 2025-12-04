@@ -204,7 +204,7 @@ def ui():
         except Exception as e:
             print(f"Unexpected error during ComfyUI-Manager update/downgrade: {e}")
         os.chdir(DATA_BASE)  # Return to base directory
-    else
+    else:
         # Instalasi baru
         print("ComfyUI-Manager directory not found, installing and downgrading...")
         try:
