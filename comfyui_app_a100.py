@@ -85,6 +85,7 @@ image = image.run_commands([
     "pip install psutil",
     "pip install packaging",
     "pip install wheel",
+    "pip install soxr==0.5.0.post1",
     "pip install -r http://raw.githubusercontent.com/hiddenflow/crossOS_acceleritor/refs/heads/main/acceleritor_torch280cu129_lite.txt",
 #   "pip install torch==2.8.0+cu129 torchvision==0.23.0+cu129 torchaudio==2.8.0+cu129 xformers==0.0.30 triton==3.4.0 --index-url https://download.pytorch.org/whl/cu129 --force-reinstall",
 #    "pip list"
