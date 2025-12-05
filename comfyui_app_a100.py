@@ -52,7 +52,7 @@ image = (
         # "rm cuda-keyring_1.1-1_all.deb",
         "wget http://archive.ubuntu.com/ubuntu/pool/universe/m/mesa/libgl1-mesa-glx_23.0.4-0ubuntu1~22.04.1_amd64.deb",
         "apt-get install ./libgl1-mesa-glx_23.0.4-0ubuntu1~22.04.1_amd64.deb",
-        "apt-get install ubuntu-drivers-common",
+        "apt-get install -y ubuntu-drivers-common",
         "pip install --upgrade pip",
         "pip install --no-cache-dir comfy-cli uv",
         "uv pip install --system --compile-bytecode huggingface_hub[hf_transfer]==0.28.1",
