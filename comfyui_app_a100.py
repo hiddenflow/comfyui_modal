@@ -83,8 +83,7 @@ image = (
         "LD_LIBRARY_PATH": "/usr/local/cuda-12.8/lib64:$LD_LIBRARY_PATH",
         "CUDA_HOME": "/usr/local/cuda-12.8",
         "FORCE_CUDA": "1",
-        "TORCH_CUDA_ARCH_LIST": "8.9",
-        "MAX_JOBS": "8"
+        "TORCH_CUDA_ARCH_LIST": "8.9"
     })
 )
 
