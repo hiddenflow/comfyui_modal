@@ -67,6 +67,7 @@ image = (
         "comfy --skip-prompt install --nvidia",
         "pip install torch==2.8.0+cu128 torchvision==0.23.0+cu128 torchaudio==2.8.0+cu128 xformers==0.0.32.post2 triton==3.4.0 --index-url https://download.pytorch.org/whl/cu128 --force-reinstall",
         "pip install onnxruntime onnxruntime-gpu",
+        "pip install wheel",
         "pip install -r http://raw.githubusercontent.com/deepinsight/insightface/refs/heads/master/requirements.txt"
     ])
     .env({
@@ -105,7 +106,6 @@ image = image.run_commands([
     "pip install ninja",
     "pip install psutil",
     "pip install packaging",
-    "pip install wheel",
     "pip install soxr==0.5.0.post1 --force-reinstall",
     "pip install sageattention==2.2.0 --no-build-isolation"
 #    "git clone https://github.com/Dao-AILab/flash-attention.git && cd flash-attention/hopper && python setup.py install",
