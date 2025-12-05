@@ -44,7 +44,7 @@ image = (
     .entrypoint([])
     .apt_install("git", "wget", "libgl1", "libglib2.0-0", "ffmpeg")
     .apt_install("build-essential", "python3-dev", "cmake", "clang", "gcc", "g++")
-    .apt_install("alsa-utils", "ubuntu-drivers-common")
+    # .apt_install("alsa-utils", "ubuntu-drivers-common", "nvidia-driver-570", "nvidia-cuda-toolkit")
     .run_commands([
         # "wget https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/cuda-keyring_1.1-1_all.deb",
         # "dpkg -i cuda-keyring_1.1-1_all.deb",
@@ -59,7 +59,6 @@ image = (
         "find / -name nvcc 2>/dev/null",
         "ls /usr/local/cuda-12.8",
         "ls -la /usr/local/cuda-12.8/bin/nvcc",
-        "ubuntu-drivers devices",
         # "echo 'export CUDA_HOME=/usr/local/cuda-12.8' >> ~/.bashrc && echo 'export PATH=\$CUDA_HOME/bin:\$PATH' >> ~/.bashrc && echo 'export LD_LIBRARY_PATH=\$CUDA_HOME/lib64:\$LD_LIBRARY_PATH' >> ~/.bashrc",
         # ". ~/.bashrc",
         # "echo 'export PATH=/usr/local/cuda-12.8/bin:\$PATH' | tee /etc/profile.d/cuda.sh",
@@ -67,6 +66,9 @@ image = (
         # "chmod +x /etc/profile.d/cuda.sh",
         # "cat /etc/profile.d/cuda.sh",
         # ". /etc/profile.d/cuda.sh",
+        "lsmod | grep nvidia",
+        "nvidia-smi",
+        "nvcc --version",
         "pip install librosa",
         # Install ComfyUI to default location
         "comfy --skip-prompt install --nvidia",
@@ -113,8 +115,6 @@ image = image.run_commands([
     "pip install psutil",
     "pip install packaging",
     "pip install soxr==0.5.0.post1 --force-reinstall",
-    "nvidia-smi",
-    "nvcc --version",
     "pip install sageattention==2.2.0 --no-build-isolation"
 #    "git clone https://github.com/Dao-AILab/flash-attention.git && cd flash-attention/hopper && python setup.py install",
 #    "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && python setup.py install"
