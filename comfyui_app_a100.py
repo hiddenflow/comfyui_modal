@@ -114,10 +114,7 @@ image = image.run_commands([
     "pip install psutil",
     "pip install packaging",
     "pip install soxr==0.5.0.post1 --force-reinstall",
-    "git clone https://github.com/thu-ml/SageAttention.git",
-    "cd SageAttention",
-    "export EXT_PARALLEL=4 NVCC_APPEND_FLAGS='--threads 8' MAX_JOBS=32",
-    "python setup.py install",
+    "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && export EXT_PARALLEL=4 NVCC_APPEND_FLAGS='--threads 8' MAX_JOBS=32 && python setup.py install",
 #    "pip install sageattention==2.2.0 --no-build-isolation"
 #    "git clone https://github.com/Dao-AILab/flash-attention.git && cd flash-attention/hopper && python setup.py install",
 #    "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && python setup.py install"
