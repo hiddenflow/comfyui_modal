@@ -65,8 +65,8 @@ image = (
         "pip install librosa",
         # Install ComfyUI to default location
         "comfy --skip-prompt install --nvidia",
-        "uv pip install torch==2.8.0+cu129 torchvision==0.23.0+cu129 torchaudio==2.8.0+cu129 xformers==0.0.32.post2 triton==3.4.0 --index-url https://download.pytorch.org/whl/cu129 --force-reinstall",
-        "uv pip install onnxruntime onnxruntime-gpu"
+        "pip install torch==2.8.0+cu129 torchvision==0.23.0+cu129 torchaudio==2.8.0+cu129 xformers==0.0.32.post2 triton==3.4.0 --index-url https://download.pytorch.org/whl/cu129 --force-reinstall",
+        "pip install onnxruntime onnxruntime-gpu"
     ])
     .env({
         "HF_HUB_ENABLE_HF_TRANSFER": "1",
