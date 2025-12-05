@@ -33,7 +33,7 @@ def hf_download(repo_id: str, filename: str, subdir: str, subfolder: Optional[st
 import modal
 
 cuda_version = "12.8.1"  # should be no greater than host CUDA version
-flavor = "devel"  # includes full CUDA toolkit
+flavor = "cudnn-devel"  # includes full CUDA toolkit
 operating_sys = "ubuntu24.04"
 tag = f"{cuda_version}-{flavor}-{operating_sys}"
 
