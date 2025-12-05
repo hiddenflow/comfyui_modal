@@ -43,9 +43,7 @@ image = (
     modal.Image.from_registry(f"nvidia/cuda:{tag}", add_python="3.12")
     .entrypoint([])
     .apt_install("git", "wget", "libgl1", "libglib2.0-0", "ffmpeg")
-    .apt_install("build-essential", "python3-dev", "cmake", "libgtk2.0-dev", "pkg-config", "libavcodec-dev","libavformat-dev","libswscale-dev")
-    .apt_install("libglib2.0-0", "libsm6", "libxext6", "libxrender-dev")
-    .apt_install("libatlas-base-dev", "liblapack-dev", "gfortran")
+    .apt_install("build-essential", "python3-dev", "cmake", "clang", "gcc", "g++")
     .run_commands([
         # "wget https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/cuda-keyring_1.1-1_all.deb",
         # "dpkg -i cuda-keyring_1.1-1_all.deb",
