@@ -42,13 +42,15 @@ image = (
 #    modal.Image.debian_slim(python_version="3.12")
     modal.Image.from_registry(f"nvidia/cuda:{tag}", add_python="3.12")
     .entrypoint([])
-    .apt_install("git", "wget", "libgl1", "libglx-mesa0", "libglib2.0-0", "ffmpeg", "build-essential", "gdb", "cmake", "python3-dev")
+    .apt_install("git", "wget", "libgl1", "libglib2.0-0", "ffmpeg", "build-essential", "python3-dev")
     .run_commands([
         # "wget https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/cuda-keyring_1.1-1_all.deb",
         # "dpkg -i cuda-keyring_1.1-1_all.deb",
         # "apt-get update",
         # "apt-get install -y cuda-toolkit-12-8",
         # "rm cuda-keyring_1.1-1_all.deb",
+        "wget http://archive.ubuntu.com/ubuntu/pool/universe/m/mesa/libgl1-mesa-glx_23.0.4-0ubuntu1~22.04.1_amd64.deb",
+        "apt install ./libgl1-mesa-glx_23.0.4-0ubuntu1~22.04.1_amd64.deb",
         "pip install --upgrade pip",
         "pip install --no-cache-dir comfy-cli uv",
         "uv pip install --system --compile-bytecode huggingface_hub[hf_transfer]==0.28.1",
