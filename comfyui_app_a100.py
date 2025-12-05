@@ -58,6 +58,7 @@ image = (
         "find / -name nvcc 2>/dev/null",
         "ls /usr/local/cuda-12.8",
         "ls -la /usr/local/cuda-12.8/bin/nvcc",
+        "ubuntu-drivers devices",
         # "echo 'export CUDA_HOME=/usr/local/cuda-12.8' >> ~/.bashrc && echo 'export PATH=\$CUDA_HOME/bin:\$PATH' >> ~/.bashrc && echo 'export LD_LIBRARY_PATH=\$CUDA_HOME/lib64:\$LD_LIBRARY_PATH' >> ~/.bashrc",
         # ". ~/.bashrc",
         # "echo 'export PATH=/usr/local/cuda-12.8/bin:\$PATH' | tee /etc/profile.d/cuda.sh",
