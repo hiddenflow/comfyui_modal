@@ -32,7 +32,7 @@ def hf_download(repo_id: str, filename: str, subdir: str, subfolder: Optional[st
 
 import modal
 
-cuda_version = "12.9.1"  # should be no greater than host CUDA version
+cuda_version = "12.8.1"  # should be no greater than host CUDA version
 flavor = "devel"  # includes full CUDA toolkit
 operating_sys = "ubuntu24.04"
 tag = f"{cuda_version}-{flavor}-{operating_sys}"
@@ -42,7 +42,7 @@ image = (
 #    modal.Image.debian_slim(python_version="3.12")
     modal.Image.from_registry(f"nvidia/cuda:{tag}", add_python="3.12")
     .entrypoint([])
-    .apt_install("git", "wget", "libgl1", "libglx-mesa0", "libglib2.0-0", "ffmpeg", "build-essential", "python3-dev")
+    .apt_install("git", "wget", "libgl1", "libglx-mesa0", "libglib2.0-0", "libssl-dev", "libffi-dev", "ffmpeg", "build-essential", "python3-dev")
     .run_commands([
         # "wget https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/cuda-keyring_1.1-1_all.deb",
         # "dpkg -i cuda-keyring_1.1-1_all.deb",
@@ -53,8 +53,8 @@ image = (
         "pip install --no-cache-dir comfy-cli uv",
         "uv pip install --system --compile-bytecode huggingface_hub[hf_transfer]==0.28.1",
         "find / -name nvcc 2>/dev/null",
-        "ls /usr/local/cuda-12.9",
-        "ls -la /usr/local/cuda-12.9/bin/nvcc",
+        "ls /usr/local/cuda-12.8",
+        "ls -la /usr/local/cuda-12.8/bin/nvcc",
         # "echo 'export CUDA_HOME=/usr/local/cuda-12.8' >> ~/.bashrc && echo 'export PATH=\$CUDA_HOME/bin:\$PATH' >> ~/.bashrc && echo 'export LD_LIBRARY_PATH=\$CUDA_HOME/lib64:\$LD_LIBRARY_PATH' >> ~/.bashrc",
         # ". ~/.bashrc",
         # "echo 'export PATH=/usr/local/cuda-12.8/bin:\$PATH' | tee /etc/profile.d/cuda.sh",
@@ -65,7 +65,7 @@ image = (
         "pip install librosa",
         # Install ComfyUI to default location
         "comfy --skip-prompt install --nvidia",
-        "pip install torch==2.8.0+cu128 torchvision==0.23.0+cu128 torchaudio==2.8.0+cu128 xformers==0.0.32.post2 triton==3.4.0 --index-url https://download.pytorch.org/whl/cu129 --force-reinstall",
+        "pip install torch==2.8.0+cu128 torchvision==0.23.0+cu128 torchaudio==2.8.0+cu128 xformers==0.0.32.post2 triton==3.4.0 --index-url https://download.pytorch.org/whl/cu128 --force-reinstall",
         "pip install onnxruntime onnxruntime-gpu"
     ])
     .env({
@@ -106,10 +106,10 @@ image = image.run_commands([
     "pip install packaging",
     "pip install wheel",
     "pip install soxr==0.5.0.post1 --force-reinstall",
-#    "pip install sageattention==2.2.0 --no-build-isolation"
+    "pip install sageattention==2.2.0 --no-build-isolation"
 #    "git clone https://github.com/Dao-AILab/flash-attention.git && cd flash-attention/hopper && python setup.py install",
 #    "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && python setup.py install"
-    "pip install -r http://raw.githubusercontent.com/hiddenflow/crossOS_acceleritor/refs/heads/main/acceleritor_torch280cu129_lite.txt",
+#    "pip install -r http://raw.githubusercontent.com/hiddenflow/crossOS_acceleritor/refs/heads/main/acceleritor_torch280cu129_lite.txt",
 #   "pip install torch==2.8.0+cu129 torchvision==0.23.0+cu129 torchaudio==2.8.0+cu129 xformers==0.0.30 triton==3.4.0 --index-url https://download.pytorch.org/whl/cu129 --force-reinstall",
 #    "pip list"
 #    "pip --upgrade --force-reinstall torch==2.10.0.dev20251016+cu129 torchvision==0.25.0.dev20251016+cu129 torchaudio==2.8.0.dev20251016+cu129 --index-url https://download.pytorch.org/whl/nightly/cu129",
