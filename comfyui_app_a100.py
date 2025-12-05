@@ -80,9 +80,11 @@ image = (
     .env({
         "HF_HUB_ENABLE_HF_TRANSFER": "1",
         "PATH": "/usr/local/cuda-12.8/bin:$PATH",
-        "LD_LIBRARY_PATH": "/usr/local/cuda-12.8/lib64:/usr/local/nvidia/lib:/usr/local/nvidia/lib64",
+        "LD_LIBRARY_PATH": "/usr/local/cuda-12.8/lib64:$LD_LIBRARY_PATH",
         "CUDA_HOME": "/usr/local/cuda-12.8",
-        "FORCE_CUDA": "1"
+        "FORCE_CUDA": "1",
+        "TORCH_CUDA_ARCH_LIST": "8.9",
+        "MAX_JOBS": "8"
     })
 )
 
