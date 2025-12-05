@@ -42,7 +42,7 @@ image = (
 #    modal.Image.debian_slim(python_version="3.12")
     modal.Image.from_registry(f"nvidia/cuda:{tag}", add_python="3.12")
     .entrypoint([])
-    .apt_install("git", "wget", "libgl1", "libglx-mesa0", "libglib2.0-0", "ffmpeg", "build-essential", "python3-dev")
+    .apt_install("git", "wget", "libgl1", "libglx-mesa0", "libglib2.0-0", "ffmpeg", "build-essential", "gdb", "cmake", "python3-dev")
     .run_commands([
         # "wget https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/cuda-keyring_1.1-1_all.deb",
         # "dpkg -i cuda-keyring_1.1-1_all.deb",
@@ -67,6 +67,7 @@ image = (
         "comfy --skip-prompt install --nvidia",
         "pip install torch==2.8.0+cu128 torchvision==0.23.0+cu128 torchaudio==2.8.0+cu128 xformers==0.0.32.post2 triton==3.4.0 --index-url https://download.pytorch.org/whl/cu128 --force-reinstall",
         "pip install onnxruntime onnxruntime-gpu",
+        "pip install setuptools",
         "pip install wheel",
         "pip install -r http://raw.githubusercontent.com/deepinsight/insightface/refs/heads/master/requirements.txt"
     ])
