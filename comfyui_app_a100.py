@@ -44,14 +44,13 @@ image = (
     .entrypoint([])
     .apt_install("git", "wget", "libgl1", "libglib2.0-0", "ffmpeg")
     .apt_install("build-essential", "python3-dev", "cmake", "clang", "gcc", "g++")
-    .apt_install("alsa-utils", "ubuntu-drivers-common")
+    #.apt_install("alsa-utils", "ubuntu-drivers-common", "nvidia-driver-570", "nvidia-cuda-toolkit")
     .run_commands([
         # "wget https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/cuda-keyring_1.1-1_all.deb",
         # "dpkg -i cuda-keyring_1.1-1_all.deb",
         # "apt-get update",
         # "apt-get install -y cuda-toolkit-12-8",
         # "rm cuda-keyring_1.1-1_all.deb",
-        "ubuntu-drivers --gpgpu install nvidia",
         "wget http://archive.ubuntu.com/ubuntu/pool/universe/m/mesa/libgl1-mesa-glx_23.0.4-0ubuntu1~22.04.1_amd64.deb",
         "apt-get install ./libgl1-mesa-glx_23.0.4-0ubuntu1~22.04.1_amd64.deb",
         "pip install --upgrade pip",
@@ -60,6 +59,7 @@ image = (
         "find / -name nvcc 2>/dev/null",
         "ls /usr/local/cuda-12.8",
         "ls -la /usr/local/cuda-12.8/bin/nvcc",
+        "lspci | grep -i nvidia",
         # "echo 'export CUDA_HOME=/usr/local/cuda-12.8' >> ~/.bashrc && echo 'export PATH=\$CUDA_HOME/bin:\$PATH' >> ~/.bashrc && echo 'export LD_LIBRARY_PATH=\$CUDA_HOME/lib64:\$LD_LIBRARY_PATH' >> ~/.bashrc",
         # ". ~/.bashrc",
         # "echo 'export PATH=/usr/local/cuda-12.8/bin:\$PATH' | tee /etc/profile.d/cuda.sh",
