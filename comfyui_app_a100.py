@@ -42,7 +42,7 @@ image = (
 #    modal.Image.debian_slim(python_version="3.12")
     modal.Image.from_registry(f"nvidia/cuda:{tag}", add_python="3.12")
     .entrypoint([])
-    .apt_install("git", "wget", "libgl1", "libglib2.0-0", "ffmpeg", "build-essential", "python3-dev", "libsm6", "libxrender1", "libfontconfig1")
+    .apt_install("git", "wget", "libgl1", "libglib2.0-0", "ffmpeg", "build-essential", "python3.12-dev", "libsm6", "libxrender1", "libfontconfig1")
     .run_commands([
         # "wget https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/cuda-keyring_1.1-1_all.deb",
         # "dpkg -i cuda-keyring_1.1-1_all.deb",
@@ -71,7 +71,7 @@ image = (
         "pip install onnxruntime onnxruntime-gpu",
         "pip install setuptools",
         "pip install wheel",
-        "pip install -r http://raw.githubusercontent.com/deepinsight/insightface/refs/heads/master/requirements.txt"
+        "pip install insightface"
     ])
     .env({
         "HF_HUB_ENABLE_HF_TRANSFER": "1",
