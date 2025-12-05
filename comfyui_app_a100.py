@@ -44,6 +44,7 @@ image = (
     .entrypoint([])
     .apt_install("git", "wget", "libgl1", "libglib2.0-0", "ffmpeg")
     .apt_install("build-essential", "python3-dev", "cmake", "clang", "gcc", "g++")
+    .apt_install("ubuntu-drivers-common")
     .run_commands([
         # "wget https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/cuda-keyring_1.1-1_all.deb",
         # "dpkg -i cuda-keyring_1.1-1_all.deb",
