@@ -43,7 +43,7 @@ image = (
     modal.Image.from_registry(f"nvidia/cuda:{tag}", add_python="3.12")
     .entrypoint([])
     .apt_install("git", "wget", "libgl1", "libglib2.0-0", "ffmpeg", "pciutils")
-    .apt_install("build-essential", "python3-dev", "cmake", "clang", "gcc", "g++")
+    .apt_install("ninja-build", "build-essential", "python3-dev", "cmake", "clang", "gcc", "g++")
     #.apt_install("alsa-utils", "ubuntu-drivers-common", "nvidia-driver-570", "nvidia-cuda-toolkit")
     .run_commands([
         # "wget https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/cuda-keyring_1.1-1_all.deb",
@@ -79,9 +79,10 @@ image = (
     ])
     .env({
         "HF_HUB_ENABLE_HF_TRANSFER": "1",
-        # "PATH": "/usr/local/cuda-12.8/bin:$PATH",
-        # "LD_LIBRARY_PATH": "/usr/local/cuda-12.8/lib64:/usr/local/nvidia/lib:/usr/local/nvidia/lib64",
-        # "CUDA_HOME": "/usr/local/cuda-12.8"
+        "PATH": "/usr/local/cuda-12.8/bin:$PATH",
+        "LD_LIBRARY_PATH": "/usr/local/cuda-12.8/lib64:/usr/local/nvidia/lib:/usr/local/nvidia/lib64",
+        "CUDA_HOME": "/usr/local/cuda-12.8",
+        "FORCE_CUDA": "1"
     })
 )
 
