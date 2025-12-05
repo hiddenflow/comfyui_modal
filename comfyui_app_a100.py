@@ -42,7 +42,7 @@ image = (
 #    modal.Image.debian_slim(python_version="3.12")
     modal.Image.from_registry(f"nvidia/cuda:{tag}", add_python="3.12")
     .entrypoint([])
-    .apt_install("git", "wget", "libgl1", "libglib2.0-0", "ffmpeg", "kmod")
+    .apt_install("git", "wget", "libgl1", "libglib2.0-0", "ffmpeg")
     .apt_install("build-essential", "python3-dev", "cmake", "clang", "gcc", "g++")
     # .apt_install("alsa-utils", "ubuntu-drivers-common", "nvidia-driver-570", "nvidia-cuda-toolkit")
     .run_commands([
@@ -56,6 +56,7 @@ image = (
         "pip install --upgrade pip",
         "pip install --no-cache-dir comfy-cli uv",
         "uv pip install --system --compile-bytecode huggingface_hub[hf_transfer]==0.28.1",
+        "pip install nvidia-ml-py",
         "find / -name nvcc 2>/dev/null",
         "ls /usr/local/cuda-12.8",
         "ls -la /usr/local/cuda-12.8/bin/nvcc",
@@ -66,7 +67,6 @@ image = (
         # "chmod +x /etc/profile.d/cuda.sh",
         # "cat /etc/profile.d/cuda.sh",
         # ". /etc/profile.d/cuda.sh",
-        "lsmod | grep nvidia",
         "nvidia-smi",
         "nvcc --version",
         "pip install librosa",
