@@ -42,7 +42,7 @@ image = (
 #    modal.Image.debian_slim(python_version="3.12")
     modal.Image.from_registry(f"nvidia/cuda:{tag}", add_python="3.12")
     .entrypoint([])
-    .apt_install("git", "wget", "libgl1", "libglib2.0-0", "ffmpeg")
+    .apt_install("git", "wget", "libgl1", "libglib2.0-0", "ffmpeg", "pciutils")
     .apt_install("build-essential", "python3-dev", "cmake", "clang", "gcc", "g++")
     #.apt_install("alsa-utils", "ubuntu-drivers-common", "nvidia-driver-570", "nvidia-cuda-toolkit")
     .run_commands([
