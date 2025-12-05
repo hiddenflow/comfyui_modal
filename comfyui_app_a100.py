@@ -32,31 +32,31 @@ def hf_download(repo_id: str, filename: str, subdir: str, subfolder: Optional[st
 
 import modal
 
-# cuda_version = "12.8.1"  # should be no greater than host CUDA version
-# flavor = "devel"  # includes full CUDA toolkit
-# operating_sys = "ubuntu24.04"
-# tag = f"{cuda_version}-{flavor}-{operating_sys}"
+cuda_version = "12.8.1"  # should be no greater than host CUDA version
+flavor = "devel"  # includes full CUDA toolkit
+operating_sys = "ubuntu24.04"
+tag = f"{cuda_version}-{flavor}-{operating_sys}"
 
 # Build image with ComfyUI installed to default location /root/comfy/ComfyUI
 image = (
-    modal.Image.debian_slim(python_version="3.12")
-#    modal.Image.from_registry(f"nvidia/cuda:{tag}", add_python="3.12")
+#    modal.Image.debian_slim(python_version="3.12")
+    modal.Image.from_registry(f"nvidia/cuda:{tag}", add_python="3.12")
     .entrypoint([])
-    .apt_install("git", "wget", "libgl1-mesa-glx", "libglib2.0-0", "ffmpeg", "build-essential", "python3-dev")
+    .apt_install("git", "wget", "libgl1", "libglx-mesa0", "libglib2.0-0", "ffmpeg", "build-essential", "python3-dev")
     .run_commands([
-        "wget https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/cuda-keyring_1.1-1_all.deb",
-        "dpkg -i cuda-keyring_1.1-1_all.deb",
-        "apt-get update",
-        "apt-get install -y cuda-toolkit-12-8",
-        "rm cuda-keyring_1.1-1_all.deb",
+        # "wget https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/cuda-keyring_1.1-1_all.deb",
+        # "dpkg -i cuda-keyring_1.1-1_all.deb",
+        # "apt-get update",
+        # "apt-get install -y cuda-toolkit-12-8",
+        # "rm cuda-keyring_1.1-1_all.deb",
         "pip install --upgrade pip",
         "pip install --no-cache-dir comfy-cli uv",
         "uv pip install --system --compile-bytecode huggingface_hub[hf_transfer]==0.28.1",
         "find / -name nvcc 2>/dev/null",
         "ls /usr/local/cuda-12.8",
         "ls -la /usr/local/cuda-12.8/bin/nvcc",
-        "echo 'export CUDA_HOME=/usr/local/cuda-12.8' >> ~/.bashrc && echo 'export PATH=\$CUDA_HOME/bin:\$PATH' >> ~/.bashrc && echo 'export LD_LIBRARY_PATH=\$CUDA_HOME/lib64:\$LD_LIBRARY_PATH' >> ~/.bashrc",
-        ". ~/.bashrc",
+        # "echo 'export CUDA_HOME=/usr/local/cuda-12.8' >> ~/.bashrc && echo 'export PATH=\$CUDA_HOME/bin:\$PATH' >> ~/.bashrc && echo 'export LD_LIBRARY_PATH=\$CUDA_HOME/lib64:\$LD_LIBRARY_PATH' >> ~/.bashrc",
+        # ". ~/.bashrc",
         # "echo 'export PATH=/usr/local/cuda-12.8/bin:\$PATH' | tee /etc/profile.d/cuda.sh",
         # "echo 'export LD_LIBRARY_PATH=/usr/local/cuda-12.8/lib64:\$LD_LIBRARY_PATH' | tee -a /etc/profile.d/cuda.sh",
         # "chmod +x /etc/profile.d/cuda.sh",
@@ -70,9 +70,9 @@ image = (
     ])
     .env({
         "HF_HUB_ENABLE_HF_TRANSFER": "1",
-        "PATH": "/usr/local/cuda-12.8/bin:$PATH",
-        "LD_LIBRARY_PATH": "/usr/local/cuda-12.8/lib64:/usr/local/nvidia/lib:/usr/local/nvidia/lib64",
-        "CUDA_HOME": "/usr/local/cuda-12.8"
+        # "PATH": "/usr/local/cuda-12.8/bin:$PATH",
+        # "LD_LIBRARY_PATH": "/usr/local/cuda-12.8/lib64:/usr/local/nvidia/lib:/usr/local/nvidia/lib64",
+        # "CUDA_HOME": "/usr/local/cuda-12.8"
     })
 )
 
