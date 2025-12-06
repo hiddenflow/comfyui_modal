@@ -89,7 +89,10 @@ image = (
         "EXT_PARALLEL": "8",
         "NVCC_APPEND_FLAGS": "--threads 4",
         "MAX_JOBS": "16",
-        "USE_NINJA": "1"
+        "USE_NINJA": "1",
+        "CC": "gcc-13",  # Compiler yang lebih baru
+        "CXX": "g++-13",
+        "USE_SYSTEM_LIBS": "1"
     })
 )
 
