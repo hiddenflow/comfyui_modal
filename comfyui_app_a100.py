@@ -43,7 +43,7 @@ image = (
     modal.Image.from_registry(f"nvidia/cuda:{tag}", add_python="3.12")
     .entrypoint([])
     .apt_install("git", "wget", "libgl1", "libglib2.0-0", "ffmpeg", "pciutils")
-    .apt_install("ninja-build", "build-essential", "python3-dev", "cmake", "clang", "gcc", "g++")
+    .apt_install("ninja-build", "build-essential", "python3-dev", "cmake", "clang")
     #.apt_install("alsa-utils", "ubuntu-drivers-common", "nvidia-driver-570", "nvidia-cuda-toolkit")
     .run_commands([
         # "wget https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/cuda-keyring_1.1-1_all.deb",
@@ -51,6 +51,8 @@ image = (
         # "apt-get update",
         # "apt-get install -y cuda-toolkit-12-8",
         # "rm cuda-keyring_1.1-1_all.deb",
+        "gcc --version",
+        "g++ --version",
         "wget http://archive.ubuntu.com/ubuntu/pool/universe/m/mesa/libgl1-mesa-glx_23.0.4-0ubuntu1~22.04.1_amd64.deb",
         "apt-get install ./libgl1-mesa-glx_23.0.4-0ubuntu1~22.04.1_amd64.deb",
         "pip install --upgrade pip",
