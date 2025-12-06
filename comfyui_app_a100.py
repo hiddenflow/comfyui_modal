@@ -83,7 +83,11 @@ image = (
         "LD_LIBRARY_PATH": "/usr/local/cuda-12.8/lib64:$LD_LIBRARY_PATH",
         "CUDA_HOME": "/usr/local/cuda-12.8",
         "FORCE_CUDA": "1",
-        "TORCH_CUDA_ARCH_LIST": "8.9"
+        "TORCH_CUDA_ARCH_LIST": "8.9",
+        "EXT_PARALLEL": "8",
+        "NVCC_APPEND_FLAGS": "--threads 4",
+        "MAX_JOBS": "16",
+        "USE_NINJA": "1"
     })
 )
 
@@ -116,7 +120,7 @@ image = image.run_commands([
     "pip install psutil",
     "pip install packaging",
     "pip install soxr==0.5.0.post1 --force-reinstall",
-    "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && export EXT_PARALLEL=4 NVCC_APPEND_FLAGS='--threads 8' MAX_JOBS=32 && pip install . --no-build-isolation",
+    "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && pip install . --no-build-isolation",
 #    "pip install sageattention==2.2.0 --no-build-isolation"
 #    "git clone https://github.com/Dao-AILab/flash-attention.git && cd flash-attention/hopper && python setup.py install",
 #    "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && python setup.py install"
