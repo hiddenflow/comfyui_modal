@@ -175,6 +175,14 @@ model_tasks = [
     ("Kijai/WanVideo_comfy", "lightx2v_T2V_14B_cfg_step_distill_v2_lora_rank64_bf16.safetensors", "loras", "Lightx2v"),
     ("alibaba-pai/Wan2.2-Fun-Reward-LoRAs", "Wan2.2-Fun-A14B-InP-low-noise-HPS2.1.safetensors", "loras", None),
     ("alibaba-pai/Wan2.2-Fun-Reward-LoRAs", "Wan2.2-Fun-A14B-InP-high-noise-MPS.safetensors", "loras", None),
+    ("numz/SeedVR2_comfyUI", "ema_vae_fp16.safetensors", "SEEDVR2", None),
+    ("numz/SeedVR2_comfyUI", "seedvr2_ema_3b_fp8_e4m3fn.safetensors", "SEEDVR2", None),
+    ("numz/SeedVR2_comfyUI", "seedvr2_ema_7b_fp8_e4m3fn.safetensors", "SEEDVR2", None),
+    ("numz/SeedVR2_comfyUI", "seedvr2_ema_7b_sharp_fp8_e4m3fn.safetensors", "SEEDVR2", None),
+    ("JunhaoZhuang/FlashVSR-v1.1", "LQ_proj_in.ckpt", "FlashVSR", None),
+    ("JunhaoZhuang/FlashVSR-v1.1", "TCDecoder.ckpt", "FlashVSR", None),
+    ("JunhaoZhuang/FlashVSR-v1.1", "Wan2.1_VAE.pth", "FlashVSR", None),
+    ("JunhaoZhuang/FlashVSR-v1.1", "diffusion_pytorch_model_streaming_dmd.safetensors", "FlashVSR", None),
 ]
 
 extra_cmds = [
