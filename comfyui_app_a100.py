@@ -395,16 +395,16 @@ def ui():
 
     # Run extra download commands
     print("Running additional downloads...")
-    for cmd in extra_cmds:
-        try:
-            print(f"Running: {cmd}")
-            result = subprocess.run(cmd, shell=True, check=False, cwd=DATA_BASE, capture_output=True, text=True)
-            if result.returncode == 0:
-                print(f"Command completed successfully")
-            else:
-                print(f"Command failed with return code {result.returncode}: {result.stderr}")
-        except Exception as e:
-            print(f"Error running command {cmd}: {e}")
+    # for cmd in extra_cmds:
+    #     try:
+    #         print(f"Running: {cmd}")
+    #         result = subprocess.run(cmd, shell=True, check=False, cwd=DATA_BASE, capture_output=True, text=True)
+    #         if result.returncode == 0:
+    #             print(f"Command completed successfully")
+    #         else:
+    #             print(f"Command failed with return code {result.returncode}: {result.stderr}")
+    #     except Exception as e:
+    #         print(f"Error running command {cmd}: {e}")
 
     # Set COMFY_DIR environment variable to volume location
     os.environ["COMFY_DIR"] = DATA_BASE
