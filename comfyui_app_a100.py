@@ -116,7 +116,8 @@ for repo, flags in [
     ("Kosinkadink/ComfyUI-VideoHelperSuite", {'install_reqs': True}),
     ("jeankassio/ComfyUI-Terminal", {}),
 #    ("fairy-root/ComfyUI-Show-Text", {}),
-    ("pythongosssss/ComfyUI-Custom-Scripts", {})
+    ("pythongosssss/ComfyUI-Custom-Scripts", {}),
+    ("Fannovel16/ComfyUI-Frame-Interpolation", {})
 ]:
     image = image.run_commands([git_clone_cmd(repo, **flags)])
 
