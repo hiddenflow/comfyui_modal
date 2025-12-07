@@ -117,7 +117,12 @@ for repo, flags in [
     ("jeankassio/ComfyUI-Terminal", {}),
 #    ("fairy-root/ComfyUI-Show-Text", {}),
     ("pythongosssss/ComfyUI-Custom-Scripts", {}),
-    ("Fannovel16/ComfyUI-Frame-Interpolation", {})
+    ("Fannovel16/ComfyUI-Frame-Interpolation", {}),
+    ("chflame163/ComfyUI_LayerStyle", {'install_reqs': True}),
+    ("numz/ComfyUI-SeedVR2_VideoUpscaler", {'install_reqs': True}),
+    ("lihaoyun6/ComfyUI-FlashVSR_Ultra_Fast", {'install_reqs': True}),
+    ("kijai/ComfyUI-GIMM-VFI", {'install_reqs': True}),
+    ("aining2022/ComfyUI_Swwan", {'install_reqs': True}),
 ]:
     image = image.run_commands([git_clone_cmd(repo, **flags)])
 
