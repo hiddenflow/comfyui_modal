@@ -22,6 +22,8 @@ def git_clone_cmd(node_repo: str, recursive: bool = False, install_reqs: bool = 
         cmd += " --recursive"
     if install_reqs:
         cmd += f" && pip install -r {dest}/requirements.txt"
+    if "ComfyUI-Frame-Interpolation" in node_repo:
+        cmd += "install.py"
     return cmd
     
 def hf_download(repo_id: str, filename: str, subdir: str, subfolder: Optional[str] = None):
