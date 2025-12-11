@@ -238,10 +238,10 @@ def ui():
             subprocess.run("git checkout -B main origin/main", shell=True, check=True, capture_output=True, text=True)
             print("Successfully checked out main branch")
         # Configure pull strategy to fast-forward only
-        subprocess.run("git config pull.ff only", shell=True, check=True, capture_output=True, text=True)
+        #subprocess.run("git config pull.ff only", shell=True, check=True, capture_output=True, text=True)
         # Perform git pull
-        result = subprocess.run("git pull --ff-only", shell=True, check=True, capture_output=True, text=True)
-        print("Git pull output:", result.stdout)
+        #result = subprocess.run("git pull --ff-only", shell=True, check=True, capture_output=True, text=True)
+        #print("Git pull output:", result.stdout)
     except subprocess.CalledProcessError as e:
         print(f"Error updating ComfyUI backend: {e.stderr}")
     except Exception as e:
