@@ -252,9 +252,10 @@ def ui():
         print("Updating ComfyUI-Manager to the latest version...")
         os.chdir(manager_dir)
         try:
-            subprocess.run("git config pull.ff only", shell=True, check=True, capture_output=True, text=True)
-            result = subprocess.run("git pull --ff-only", shell=True, check=True, capture_output=True, text=True)
-            print("ComfyUI-Manager git pull output:", result.stdout)
+            subprocess.run("git checkout main", shell=True, check=True, capture_output=True, text=True)
+            # subprocess.run("git config pull.ff only", shell=True, check=True, capture_output=True, text=True)
+            # result = subprocess.run("git pull --ff-only", shell=True, check=True, capture_output=True, text=True)
+            # print("ComfyUI-Manager git pull output:", result.stdout)
             
             # DOWNGRADE SECTION
             sha_id = "09f8d5cb2d5ad094a85e3bba744dec2b076d9db4"
