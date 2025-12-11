@@ -34,7 +34,7 @@ def hf_download(repo_id: str, filename: str, subdir: str, subfolder: Optional[st
 
 import modal
 
-cuda_version = "12.9.1"  # should be no greater than host CUDA version
+cuda_version = "12.8.1"  # should be no greater than host CUDA version
 flavor = "cudnn-devel"  # includes full CUDA toolkit
 operating_sys = "ubuntu24.04"
 tag = f"{cuda_version}-{flavor}-{operating_sys}"
@@ -61,8 +61,8 @@ image = (
         "pip install --no-cache-dir comfy-cli uv",
         "uv pip install --system --compile-bytecode huggingface_hub[hf_transfer]==0.28.1",
         "find / -name nvcc 2>/dev/null",
-        "ls /usr/local/cuda-12.9",
-        "ls -la /usr/local/cuda-12.9/bin/nvcc",
+        "ls /usr/local/cuda-12.8",
+        "ls -la /usr/local/cuda-12.8/bin/nvcc",
         # "echo 'export CUDA_HOME=/usr/local/cuda-12.8' >> ~/.bashrc && echo 'export PATH=\$CUDA_HOME/bin:\$PATH' >> ~/.bashrc && echo 'export LD_LIBRARY_PATH=\$CUDA_HOME/lib64:\$LD_LIBRARY_PATH' >> ~/.bashrc",
         # ". ~/.bashrc",
         # "echo 'export PATH=/usr/local/cuda-12.8/bin:\$PATH' | tee /etc/profile.d/cuda.sh",
@@ -75,7 +75,7 @@ image = (
         "pip install librosa",
         # Install ComfyUI to default location
         "comfy --skip-prompt install --nvidia",
-        "pip install torch==2.8.0+cu129 torchvision==0.23.0+cu129 torchaudio==2.8.0+cu129 xformers==0.0.32.post2 triton==3.4.0 --index-url https://download.pytorch.org/whl/cu129 --force-reinstall",
+        "pip install torch==2.8.0+cu128 torchvision==0.23.0+cu128 torchaudio==2.8.0+cu128 xformers==0.0.32.post2 triton==3.4.0 --index-url https://download.pytorch.org/whl/cu128 --force-reinstall",
         "pip install onnxruntime-gpu",
         "pip install setuptools",
         "pip install wheel",
@@ -83,9 +83,9 @@ image = (
     ])
     .env({
         "HF_HUB_ENABLE_HF_TRANSFER": "1",
-        "PATH": "/usr/local/cuda-12.9/bin:$PATH",
-        "LD_LIBRARY_PATH": "/usr/local/cuda-12.9/lib64:$LD_LIBRARY_PATH",
-        "CUDA_HOME": "/usr/local/cuda-12.9",
+        "PATH": "/usr/local/cuda-12.8/bin:$PATH",
+        "LD_LIBRARY_PATH": "/usr/local/cuda-12.8/lib64:$LD_LIBRARY_PATH",
+        "CUDA_HOME": "/usr/local/cuda-12.8",
         "FORCE_CUDA": "1",
         "TORCH_CUDA_ARCH_LIST": "8.9",
         "EXT_PARALLEL": "8",
@@ -133,10 +133,9 @@ image = image.run_commands([
     "pip install psutil",
     "pip install packaging",
     "pip install soxr==0.5.0.post1 --force-reinstall",
-    "pip install https://github.com/loscrossos/lib_sageattention/releases/download/v2.2.0/sageattention-2.2.0+cu129torch280-cp312-cp312-linux_x86_64.whl --no-build-isolation",
-#    "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && python setup.py install",
-    "pip install https://github.com/loscrossos/lib_compileguides/releases/download/2025.11/flash_attn-2.8.2+cu129torch2.8.0-cp312-cp312-linux_x86_64.whl --no-build-isolation"
-#    "pip install https://github.com/Dao-AILab/flash-attention/releases/download/v2.8.1/flash_attn-2.8.1+cu12torch2.8cxx11abiTRUE-cp312-cp312-linux_x86_64.whl --no-build-isolation"
+#    "pip install sageattention==2.2.0 --no-build-isolation",
+    "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && git checkout eb615cf6cf4d221338033340ee2de1c37fbdba4a && python setup.py install",
+    "pip install https://github.com/Dao-AILab/flash-attention/releases/download/v2.8.1/flash_attn-2.8.1+cu12torch2.8cxx11abiTRUE-cp312-cp312-linux_x86_64.whl --no-build-isolation"
 #    "git clone https://github.com/Dao-AILab/flash-attention.git && cd flash-attention/hopper && python setup.py install"
 #    "pip install sageattention==2.2.0 --no-build-isolation"
 #    "git clone https://github.com/Dao-AILab/flash-attention.git && cd flash-attention/hopper && python setup.py install",
