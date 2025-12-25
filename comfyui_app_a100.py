@@ -115,6 +115,7 @@ for repo, flags in [
     ("Gourieff/ComfyUI-ReActor", {'install_reqs': True}),
     ("Kosinkadink/ComfyUI-VideoHelperSuite", {'install_reqs': True}),
     ("jeankassio/ComfyUI-Terminal", {}),
+    ("ltdrdata/ComfyUI-Impact-Pack", {}),
 #    ("fairy-root/ComfyUI-Show-Text", {}),
     ("pythongosssss/ComfyUI-Custom-Scripts", {}),
     ("Fannovel16/ComfyUI-Frame-Interpolation", {}),
@@ -123,6 +124,7 @@ for repo, flags in [
     ("lihaoyun6/ComfyUI-FlashVSR_Ultra_Fast", {'install_reqs': True}),
     ("kijai/ComfyUI-GIMM-VFI", {'install_reqs': True}),
     ("aining2022/ComfyUI_Swwan", {'install_reqs': True}),
+    ("2kpr/ComfyUI-PMRF", {})
 ]:
     image = image.run_commands([git_clone_cmd(repo, **flags)])
 
@@ -175,27 +177,30 @@ model_tasks = [
 #    ("Kijai/LongCat-Video_comfy", "LongCat_TI2V_comfy_fp8_e4m3fn_scaled_KJ.safetensors", "diffusion_models", None, None),
 #    ("Kijai/LongCat-Video_comfy", "LongCat_distill_lora_alpha64_bf16.safetensors", "loras", None, None),
 #    ("Kijai/LongCat-Video_comfy", "LongCat_TI2V_comfy_fp8_e4m3fn_scaled_KJ.safetensors", "diffusion_models", None, None),
-    ("lightx2v/Wan2.2-Distill-Models", "wan2.2_i2v_A14b_high_noise_scaled_fp8_e4m3_lightx2v_4step_comfyui.safetensors", "diffusion_models", None),
-    ("Kijai/WanVideo_comfy", "lightx2v_T2V_14B_cfg_step_distill_v2_lora_rank64_bf16.safetensors", "loras", "Lightx2v"),
-    ("alibaba-pai/Wan2.2-Fun-Reward-LoRAs", "Wan2.2-Fun-A14B-InP-low-noise-HPS2.1.safetensors", "loras", None),
-    ("alibaba-pai/Wan2.2-Fun-Reward-LoRAs", "Wan2.2-Fun-A14B-InP-high-noise-MPS.safetensors", "loras", None),
-    ("numz/SeedVR2_comfyUI", "ema_vae_fp16.safetensors", "SEEDVR2", None),
-    ("numz/SeedVR2_comfyUI", "seedvr2_ema_3b_fp8_e4m3fn.safetensors", "SEEDVR2", None),
-    ("numz/SeedVR2_comfyUI", "seedvr2_ema_7b_fp8_e4m3fn.safetensors", "SEEDVR2", None),
-    ("numz/SeedVR2_comfyUI", "seedvr2_ema_7b_sharp_fp8_e4m3fn.safetensors", "SEEDVR2", None),
-    ("JunhaoZhuang/FlashVSR-v1.1", "LQ_proj_in.ckpt", "FlashVSR", None),
-    ("JunhaoZhuang/FlashVSR-v1.1", "TCDecoder.ckpt", "FlashVSR", None),
-    ("JunhaoZhuang/FlashVSR-v1.1", "Wan2.1_VAE.pth", "FlashVSR", None),
-    ("JunhaoZhuang/FlashVSR-v1.1", "diffusion_pytorch_model_streaming_dmd.safetensors", "FlashVSR", None),
+
+    # ("lightx2v/Wan2.2-Distill-Models", "wan2.2_i2v_A14b_high_noise_scaled_fp8_e4m3_lightx2v_4step_comfyui.safetensors", "diffusion_models", None),
+    # ("Kijai/WanVideo_comfy", "lightx2v_T2V_14B_cfg_step_distill_v2_lora_rank64_bf16.safetensors", "loras", "Lightx2v"),
+    # ("alibaba-pai/Wan2.2-Fun-Reward-LoRAs", "Wan2.2-Fun-A14B-InP-low-noise-HPS2.1.safetensors", "loras", None),
+    # ("alibaba-pai/Wan2.2-Fun-Reward-LoRAs", "Wan2.2-Fun-A14B-InP-high-noise-MPS.safetensors", "loras", None),
+    # ("numz/SeedVR2_comfyUI", "ema_vae_fp16.safetensors", "SEEDVR2", None),
+    # ("numz/SeedVR2_comfyUI", "seedvr2_ema_3b_fp8_e4m3fn.safetensors", "SEEDVR2", None),
+    # ("numz/SeedVR2_comfyUI", "seedvr2_ema_7b_fp8_e4m3fn.safetensors", "SEEDVR2", None),
+    # ("numz/SeedVR2_comfyUI", "seedvr2_ema_7b_sharp_fp8_e4m3fn.safetensors", "SEEDVR2", None),
+    # ("JunhaoZhuang/FlashVSR-v1.1", "LQ_proj_in.ckpt", "FlashVSR", None),
+    # ("JunhaoZhuang/FlashVSR-v1.1", "TCDecoder.ckpt", "FlashVSR", None),
+    # ("JunhaoZhuang/FlashVSR-v1.1", "Wan2.1_VAE.pth", "FlashVSR", None),
+    # ("JunhaoZhuang/FlashVSR-v1.1", "diffusion_pytorch_model_streaming_dmd.safetensors", "FlashVSR", None),
 ]
 
 extra_cmds = [
     f"wget https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth -P {MODELS_DIR}/upscale_models",
     f"wget https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.1/RealESRGAN_x2plus.pth -P {MODELS_DIR}/upscale_models",
+    f"wget https://github.com/Phhofm/models/releases/download/4xBHI_dat2_real/4xBHI_dat2_real.pth -P {MODELS_DIR}/upscale_models",
     f"wget https://github.com/Phhofm/models/releases/download/1xgaterv3_r_sharpen/1xgaterv3_r_sharpen_fp32_op17_onnxslim.onnx -P {MODELS_DIR}/upscale_models",
     f"wget https://github.com/Phhofm/models/releases/download/2xPublic_realplksr_dysample_layernorm_real_nn/2xPublic_realplksr_dysample_layernorm_real_nn.pth -P {MODELS_DIR}/upscale_models",
-    f"wget https://github.com/Phhofm/models/releases/download/2xParagonSR_Nano_gan/2xParagonSR_Nano_gan_op18_fp16.onnx -P {MODELS_DIR}/upscale_models",
+ #   f"wget https://github.com/Phhofm/models/releases/download/2xParagonSR_Nano_gan/2xParagonSR_Nano_gan_op18_fp16.onnx -P {MODELS_DIR}/upscale_models",
     f"wget https://github.com/visomaster/visomaster-assets/releases/download/v0.1.0/GFPGANv1.4.onnx -P {MODELS_DIR}/facerestore_models",
+    f"wget https://github.com/visomaster/visomaster-assets/releases/download/v0.1.0/GPEN-BFR-512.onnx -P {MODELS_DIR}/facerestore_models",
     f"wget https://github.com/Glat0s/GFPGAN-1024-onnx/releases/download/v0.0.1/gfpgan-1024.onnx -P {MODELS_DIR}/facerestore_models",
     f"wget https://github.com/visomaster/visomaster-assets/releases/download/v0.1.0/RestoreFormerPlusPlus.fp16.onnx -P {MODELS_DIR}/facerestore_models",
 ]
