@@ -249,36 +249,84 @@ def ui():
     except Exception as e:
         print(f"Unexpected error during backend update: {e}")
 
+    # Define paths for Manager config (use new secure path)
+    manager_config_dir = os.path.join(DATA_BASE, "user", "__manager")
+    manager_config_path = os.path.join(manager_config_dir, "config.ini")
+    legacy_dir = os.path.join(DATA_BASE, "user", "default", "ComfyUI-Manager")
+
+    # Migrate from legacy path if it exists
+    if os.path.exists(legacy_dir):
+        print("Migrating Manager data from legacy path to __manager...")
+        os.makedirs(manager_config_dir, exist_ok=True)
+        shutil.copytree(legacy_dir, manager_config_dir, dirs_exist_ok=True)  # Copy contents
+        shutil.rmtree(legacy_dir)  # Delete legacy dir to prevent detection
+        print("Migration completed and legacy dir removed.")
+
+    # Delete any legacy backup to stop persistent notifications
+    backup_dir = os.path.join(manager_config_dir, ".legacy-manager-backup")
+    if os.path.exists(backup_dir):
+        shutil.rmtree(backup_dir)
+        print(f"Removed legacy backup at {backup_dir} to stop notifications")
+
+    # Configure ComfyUI-Manager: Disable auto-fetch, set weak security, and disable file logging
+    print("Configuring ComfyUI-Manager: Disabling auto-fetch, setting security_level to weak, and disabling file logging...")
+    os.makedirs(manager_config_dir, exist_ok=True)
+    config_content = "[default]\nnetwork_mode = private\nsecurity_level = weak\nlog_to_file = false\n"
+    with open(manager_config_path, "w") as f:
+        f.write(config_content)
+    print(f"Updated {manager_config_path} with security_level=weak, log_to_file=false")
+
     manager_dir = os.path.join(CUSTOM_NODES_DIR, "ComfyUI-Manager")
     if os.path.exists(manager_dir):
         print("Updating ComfyUI-Manager to the latest version...")
         os.chdir(manager_dir)
         try:
-            subprocess.run("git checkout main", shell=True, check=True, capture_output=True, text=True)
-            # subprocess.run("git config pull.ff only", shell=True, check=True, capture_output=True, text=True)
-            # result = subprocess.run("git pull --ff-only", shell=True, check=True, capture_output=True, text=True)
-            # print("ComfyUI-Manager git pull output:", result.stdout)
-            
-            # DOWNGRADE SECTION
-            sha_id = "09f8d5cb2d5ad094a85e3bba744dec2b076d9db4"
-            print(f"Downgrading to specific version {sha_id}...")
-            subprocess.run(f"git checkout {sha_id}", shell=True, check=True, capture_output=True, text=True)
-            print(f"Successfully downgraded to version {sha_id}")
-            
+            # Configure pull strategy for ComfyUI-Manager
+            subprocess.run("git config pull.ff only", shell=True, check=True, capture_output=True, text=True)
+            result = subprocess.run("git pull --ff-only", shell=True, check=True, capture_output=True, text=True)
+            print("ComfyUI-Manager git pull output:", result.stdout)
         except subprocess.CalledProcessError as e:
-            print(f"Error updating/downgrading ComfyUI-Manager: {e.stderr}")
+            print(f"Error updating ComfyUI-Manager: {e.stderr}")
         except Exception as e:
-            print(f"Unexpected error during ComfyUI-Manager update/downgrade: {e}")
+            print(f"Unexpected error during ComfyUI-Manager update: {e}")
         os.chdir(DATA_BASE)  # Return to base directory
     else:
-        # Instalasi baru
-        print("ComfyUI-Manager directory not found, installing and downgrading...")
+        print("ComfyUI-Manager directory not found, installing...")
         try:
-            subprocess.run("comfy node registry-install ComfyUI-Manager --version 3.37.1", shell=True, check=True, capture_output=True, text=True)
+            subprocess.run("comfy node install ComfyUI-Manager", shell=True, check=True, capture_output=True, text=True)
             print("ComfyUI-Manager installed successfully")
-            
         except subprocess.CalledProcessError as e:
-            print(f"Error installing/downgrading ComfyUI-Manager: {e.stderr}")
+            print(f"Error installing ComfyUI-Manager: {e.stderr}")
+
+    # if os.path.exists(manager_dir):
+    #     print("Updating ComfyUI-Manager to the latest version...")
+    #     os.chdir(manager_dir)
+    #     try:
+    #         subprocess.run("git checkout main", shell=True, check=True, capture_output=True, text=True)
+    #         # subprocess.run("git config pull.ff only", shell=True, check=True, capture_output=True, text=True)
+    #         # result = subprocess.run("git pull --ff-only", shell=True, check=True, capture_output=True, text=True)
+    #         # print("ComfyUI-Manager git pull output:", result.stdout)
+            
+    #         # DOWNGRADE SECTION
+    #         sha_id = "09f8d5cb2d5ad094a85e3bba744dec2b076d9db4"
+    #         print(f"Downgrading to specific version {sha_id}...")
+    #         subprocess.run(f"git checkout {sha_id}", shell=True, check=True, capture_output=True, text=True)
+    #         print(f"Successfully downgraded to version {sha_id}")
+            
+    #     except subprocess.CalledProcessError as e:
+    #         print(f"Error updating/downgrading ComfyUI-Manager: {e.stderr}")
+    #     except Exception as e:
+    #         print(f"Unexpected error during ComfyUI-Manager update/downgrade: {e}")
+    #     os.chdir(DATA_BASE)  # Return to base directory
+    # else:
+    #     # Instalasi baru
+    #     print("ComfyUI-Manager directory not found, installing and downgrading...")
+    #     try:
+    #         subprocess.run("comfy node registry-install ComfyUI-Manager --version 3.37.1", shell=True, check=True, capture_output=True, text=True)
+    #         print("ComfyUI-Manager installed successfully")
+            
+    #     except subprocess.CalledProcessError as e:
+    #         print(f"Error installing/downgrading ComfyUI-Manager: {e.stderr}")
     # else:
     #     # Instalasi baru dengan downgrade langsung
     #     print("ComfyUI-Manager directory not found, installing and downgrading...")
@@ -357,20 +405,39 @@ def ui():
             print(f"Unexpected error during frontend update: {e}")
     else:
         print(f"Warning: {requirements_path} not found, skipping frontend update")
-
-    # Configure ComfyUI-Manager: Disable auto-fetch, set weak security, and disable file logging
-    manager_config_dir = os.path.join(DATA_BASE, "user", "default", "ComfyUI-Manager")
-    manager_config_path = os.path.join(manager_config_dir, "config.ini")
-    print("Configuring ComfyUI-Manager: Disabling auto-fetch, setting security_level to weak, and disabling file logging...")
-    os.makedirs(manager_config_dir, exist_ok=True)
-    config_content = "[default]\nnetwork_mode = private\nsecurity_level = weak\nlog_to_file = false\n"
-    with open(manager_config_path, "w") as f:
-        f.write(config_content)
-    print(f"Updated {manager_config_path} with network_mode=private, security_level=weak, log_to_file=false")
+    
+    # Install pip dependencies for new ComfyUI Manager
+    print("Installing pip dependencies for new ComfyUI Manager...")
+    manager_req_path = os.path.join(DATA_BASE, "manager_requirements.txt")
+    if os.path.exists(manager_req_path):
+        try:
+            result = subprocess.run(
+                f"pip install -r {manager_req_path}",
+                shell=True, check=True, capture_output=True, text=True
+            )
+            print("New Manager dependencies installed:", result.stdout)
+        except subprocess.CalledProcessError as e:
+            print(f"Error installing new Manager dependencies: {e.stderr}")
+    else:
+        print(f"Warning: {manager_req_path} not found, skipping new Manager dependencies installation")
 
     # Ensure all required directories exist
     for d in [CUSTOM_NODES_DIR, MODELS_DIR, TMP_DL]:
         os.makedirs(d, exist_ok=True)
+
+    # # Configure ComfyUI-Manager: Disable auto-fetch, set weak security, and disable file logging
+    # manager_config_dir = os.path.join(DATA_BASE, "user", "default", "ComfyUI-Manager")
+    # manager_config_path = os.path.join(manager_config_dir, "config.ini")
+    # print("Configuring ComfyUI-Manager: Disabling auto-fetch, setting security_level to weak, and disabling file logging...")
+    # os.makedirs(manager_config_dir, exist_ok=True)
+    # config_content = "[default]\nnetwork_mode = private\nsecurity_level = weak\nlog_to_file = false\n"
+    # with open(manager_config_path, "w") as f:
+    #     f.write(config_content)
+    # print(f"Updated {manager_config_path} with network_mode=private, security_level=weak, log_to_file=false")
+
+    # Ensure all required directories exist
+    # for d in [CUSTOM_NODES_DIR, MODELS_DIR, TMP_DL]:
+    #     os.makedirs(d, exist_ok=True)
 
     import torch
 
