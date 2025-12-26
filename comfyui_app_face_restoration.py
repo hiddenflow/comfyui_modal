@@ -108,7 +108,7 @@ image = image.run_commands([
     "export CXX=g++-13",
     "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && git checkout eb615cf6cf4d221338033340ee2de1c37fbdba4a && python setup.py install",
     "pip install https://github.com/Dao-AILab/flash-attention/releases/download/v2.8.1/flash_attn-2.8.1+cu12torch2.8cxx11abiTRUE-cp312-cp312-linux_x86_64.whl --no-build-isolation",
-    "git clone https://github.com/SHI-Labs/NATTEN.git && cd NATTEN && git checkout 4831f059049d4d0c08f4cc1fd328edd69a97389e && pip install -e ."
+    "git clone --recursive https://github.com/SHI-Labs/NATTEN.git && cd NATTEN && git checkout v0.17.5 && git submodule update --init --recursive && pip install -e ."
 ])
 
 # Model download tasks (will be done at runtime)
