@@ -94,6 +94,7 @@ for repo, flags in [
     ("jeankassio/ComfyUI-Terminal", {}),
     ("jeffy5/comfyui-faceless-node", {'install_reqs': True}),
     ("ltdrdata/ComfyUI-Impact-Pack", {'install_reqs': True}),
+    ("ltdrdata/ComfyUI-Impact-Subpack", {'install_reqs': True}),
 ]:
     image = image.run_commands([git_clone_cmd(repo, **flags)])
 
