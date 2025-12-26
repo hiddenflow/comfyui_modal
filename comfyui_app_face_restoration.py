@@ -130,7 +130,7 @@ extra_cmds = [
     f"wget https://huggingface.co/crj/dl-ws/resolve/main/gfpgan_1.4.onnx -P {MODELS_DIR}/faceless/face_restoration",
     f"wget https://huggingface.co/crj/dl-ws/resolve/main/gpen_bfr_512.onnx -P {MODELS_DIR}/faceless/face_restoration",
     f"wget https://github.com/Glat0s/GFPGAN-1024-onnx/releases/download/v0.0.1/gfpgan-1024.onnx -P {MODELS_DIR}/faceless/face_restoration",
-    f"wget https://github.com/visomaster/visomaster-assets/releases/download/v0.1.0/RestoreFormerPlusPlus.fp16.onnx -P {MODELS_DIR}/faceless/face_restoration",
+    f"wget https://huggingface.co/crj/dl-ws/resolve/main/restoreformer_plus_plus.onnx -P {MODELS_DIR}/faceless/face_restoration",
     f"wget https://huggingface.co/crj/dl-ws/resolve/main/gender_age.onnx -P {MODELS_DIR}/faceless",
 ]
 
