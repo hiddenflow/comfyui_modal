@@ -46,13 +46,7 @@ image = (
     .entrypoint([])
     .apt_install("git", "wget", "libgl1", "libglib2.0-0", "ffmpeg", "pciutils")
     .apt_install("ninja-build", "build-essential", "python3-dev", "cmake", "clang")
-    #.apt_install("alsa-utils", "ubuntu-drivers-common", "nvidia-driver-570", "nvidia-cuda-toolkit")
     .run_commands([
-        # "wget https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/cuda-keyring_1.1-1_all.deb",
-        # "dpkg -i cuda-keyring_1.1-1_all.deb",
-        # "apt-get update",
-        # "apt-get install -y cuda-toolkit-12-8",
-        # "rm cuda-keyring_1.1-1_all.deb",
         "gcc --version",
         "g++ --version",
         "wget http://archive.ubuntu.com/ubuntu/pool/universe/m/mesa/libgl1-mesa-glx_23.0.4-0ubuntu1~22.04.1_amd64.deb",
@@ -60,26 +54,11 @@ image = (
         "pip install --upgrade pip",
         "pip install --no-cache-dir comfy-cli uv",
         "uv pip install --system --compile-bytecode huggingface_hub[hf_transfer]==0.28.1",
-        "find / -name nvcc 2>/dev/null",
-        "ls /usr/local/cuda-12.8",
-        "ls -la /usr/local/cuda-12.8/bin/nvcc",
-        # "echo 'export CUDA_HOME=/usr/local/cuda-12.8' >> ~/.bashrc && echo 'export PATH=\$CUDA_HOME/bin:\$PATH' >> ~/.bashrc && echo 'export LD_LIBRARY_PATH=\$CUDA_HOME/lib64:\$LD_LIBRARY_PATH' >> ~/.bashrc",
-        # ". ~/.bashrc",
-        # "echo 'export PATH=/usr/local/cuda-12.8/bin:\$PATH' | tee /etc/profile.d/cuda.sh",
-        # "echo 'export LD_LIBRARY_PATH=/usr/local/cuda-12.8/lib64:\$LD_LIBRARY_PATH' | tee -a /etc/profile.d/cuda.sh",
-        # "chmod +x /etc/profile.d/cuda.sh",
-        # "cat /etc/profile.d/cuda.sh",
-        # ". /etc/profile.d/cuda.sh",
-        # "nvidia-smi",
-        "nvcc --version",
-        "pip install librosa",
         # Install ComfyUI to default location
         "comfy --skip-prompt install --nvidia",
         "pip install torch==2.8.0+cu128 torchvision==0.23.0+cu128 torchaudio==2.8.0+cu128 xformers==0.0.32.post2 triton==3.4.0 --index-url https://download.pytorch.org/whl/cu128 --force-reinstall",
-        "pip install onnxruntime-gpu",
         "pip install setuptools",
         "pip install wheel",
-        # "pip install -r http://raw.githubusercontent.com/deepinsight/insightface/refs/heads/master/requirements.txt"
     ])
     .env({
         "HF_HUB_ENABLE_HF_TRANSFER": "1",
@@ -116,14 +95,6 @@ for repo, flags in [
     ("Kosinkadink/ComfyUI-VideoHelperSuite", {'install_reqs': True}),
     ("jeankassio/ComfyUI-Terminal", {}),
     ("ltdrdata/ComfyUI-Impact-Pack", {}),
-#    ("fairy-root/ComfyUI-Show-Text", {}),
-    ("pythongosssss/ComfyUI-Custom-Scripts", {}),
-    ("Fannovel16/ComfyUI-Frame-Interpolation", {}),
-    ("chflame163/ComfyUI_LayerStyle", {'install_reqs': True}),
-    ("numz/ComfyUI-SeedVR2_VideoUpscaler", {'install_reqs': True}),
-    ("lihaoyun6/ComfyUI-FlashVSR_Ultra_Fast", {'install_reqs': True}),
-    ("kijai/ComfyUI-GIMM-VFI", {'install_reqs': True}),
-    ("aining2022/ComfyUI_Swwan", {'install_reqs': True}),
     ("chflame163/ComfyUI-PMRFF", {'install_reqs': True})
 ]:
     image = image.run_commands([git_clone_cmd(repo, **flags)])
@@ -137,24 +108,9 @@ image = image.run_commands([
     "pip install soxr==0.5.0.post1 --force-reinstall",
     "export CC=gcc++-13",
     "export CXX=g++-13",
-#    "pip install sageattention==2.2.0 --no-build-isolation",
     "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && git checkout eb615cf6cf4d221338033340ee2de1c37fbdba4a && python setup.py install",
     "pip install https://github.com/Dao-AILab/flash-attention/releases/download/v2.8.1/flash_attn-2.8.1+cu12torch2.8cxx11abiTRUE-cp312-cp312-linux_x86_64.whl --no-build-isolation"
-#    "git clone https://github.com/Dao-AILab/flash-attention.git && cd flash-attention/hopper && python setup.py install"
-#    "pip install sageattention==2.2.0 --no-build-isolation"
-#    "git clone https://github.com/Dao-AILab/flash-attention.git && cd flash-attention/hopper && python setup.py install",
-#    "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && python setup.py install"
-#    "pip install -r http://raw.githubusercontent.com/hiddenflow/crossOS_acceleritor/refs/heads/main/acceleritor_torch280cu129_lite.txt",
-#   "pip install torch==2.8.0+cu129 torchvision==0.23.0+cu129 torchaudio==2.8.0+cu129 xformers==0.0.30 triton==3.4.0 --index-url https://download.pytorch.org/whl/cu129 --force-reinstall",
-#    "pip list"
-#    "pip --upgrade --force-reinstall torch==2.10.0.dev20251016+cu129 torchvision==0.25.0.dev20251016+cu129 torchaudio==2.8.0.dev20251016+cu129 --index-url https://download.pytorch.org/whl/nightly/cu129",
-#    "pip install flash-attn --no-build-isolation"
-#    "pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu129",
-#    "pip install http://github.com/Dao-AILab/flash-attention/releases/download/v2.8.3/flash_attn-2.8.3+cu12torch2.8cxx11abiTRUE-cp312-cp312-linux_x86_64.whl --no-build-isolation",
-#    "pip install triton"
-#    "git clone https://github.com/thu-ml/SageAttention.git",
-#    "python SageAttention/sageattention3_blackwell/setup.py install"
-#    "pip install -e ."
+
 ])
 
 # Model download tasks (will be done at runtime)
@@ -174,22 +130,6 @@ model_tasks = [
     ("Comfy-Org/z_image_turbo", "ae.safetensors", "vae", "split_files/vae"),
     ("Kijai/WanVideo_comfy_fp8_scaled", "Wan2_2-T2V-A14B-LOW-HoloCine-full_fp8_e4m3fn_scaled_KJ.safetensors", "diffusion_models", "T2V/HoloCine"),
     ("Kijai/WanVideo_comfy_fp8_scaled", "Wan2_2-T2V-A14B-HIGH-HoloCine-full_fp8_e4m3fn_scaled_KJ.safetensors", "diffusion_models", "T2V/HoloCine"),
-#    ("Kijai/LongCat-Video_comfy", "LongCat_TI2V_comfy_fp8_e4m3fn_scaled_KJ.safetensors", "diffusion_models", None, None),
-#    ("Kijai/LongCat-Video_comfy", "LongCat_distill_lora_alpha64_bf16.safetensors", "loras", None, None),
-#    ("Kijai/LongCat-Video_comfy", "LongCat_TI2V_comfy_fp8_e4m3fn_scaled_KJ.safetensors", "diffusion_models", None, None),
-
-    # ("lightx2v/Wan2.2-Distill-Models", "wan2.2_i2v_A14b_high_noise_scaled_fp8_e4m3_lightx2v_4step_comfyui.safetensors", "diffusion_models", None),
-    # ("Kijai/WanVideo_comfy", "lightx2v_T2V_14B_cfg_step_distill_v2_lora_rank64_bf16.safetensors", "loras", "Lightx2v"),
-    # ("alibaba-pai/Wan2.2-Fun-Reward-LoRAs", "Wan2.2-Fun-A14B-InP-low-noise-HPS2.1.safetensors", "loras", None),
-    # ("alibaba-pai/Wan2.2-Fun-Reward-LoRAs", "Wan2.2-Fun-A14B-InP-high-noise-MPS.safetensors", "loras", None),
-    # ("numz/SeedVR2_comfyUI", "ema_vae_fp16.safetensors", "SEEDVR2", None),
-    # ("numz/SeedVR2_comfyUI", "seedvr2_ema_3b_fp8_e4m3fn.safetensors", "SEEDVR2", None),
-    # ("numz/SeedVR2_comfyUI", "seedvr2_ema_7b_fp8_e4m3fn.safetensors", "SEEDVR2", None),
-    # ("numz/SeedVR2_comfyUI", "seedvr2_ema_7b_sharp_fp8_e4m3fn.safetensors", "SEEDVR2", None),
-    # ("JunhaoZhuang/FlashVSR-v1.1", "LQ_proj_in.ckpt", "FlashVSR", None),
-    # ("JunhaoZhuang/FlashVSR-v1.1", "TCDecoder.ckpt", "FlashVSR", None),
-    # ("JunhaoZhuang/FlashVSR-v1.1", "Wan2.1_VAE.pth", "FlashVSR", None),
-    # ("JunhaoZhuang/FlashVSR-v1.1", "diffusion_pytorch_model_streaming_dmd.safetensors", "FlashVSR", None),
 ]
 
 extra_cmds = [
@@ -241,14 +181,14 @@ def ui():
         # Check if in detached HEAD state
         result = subprocess.run("git symbolic-ref HEAD", shell=True, capture_output=True, text=True)
         if result.returncode != 0:
-            print("Detected detached HEAD, checking out main branch...")
-            subprocess.run("git checkout -B main origin/main", shell=True, check=True, capture_output=True, text=True)
-            print("Successfully checked out main branch")
+            print("Detected detached HEAD, checking out master branch...")
+            subprocess.run("git checkout -B master origin/master", shell=True, check=True, capture_output=True, text=True)
+            print("Successfully checked out master branch")
         # Configure pull strategy to fast-forward only
-        #subprocess.run("git config pull.ff only", shell=True, check=True, capture_output=True, text=True)
+        subprocess.run("git config pull.ff only", shell=True, check=True, capture_output=True, text=True)
         # Perform git pull
-        #result = subprocess.run("git pull --ff-only", shell=True, check=True, capture_output=True, text=True)
-        #print("Git pull output:", result.stdout)
+        result = subprocess.run("git pull --ff-only", shell=True, check=True, capture_output=True, text=True)
+        print("Git pull output:", result.stdout)
     except subprocess.CalledProcessError as e:
         print(f"Error updating ComfyUI backend: {e.stderr}")
     except Exception as e:
@@ -302,74 +242,6 @@ def ui():
             print("ComfyUI-Manager installed successfully")
         except subprocess.CalledProcessError as e:
             print(f"Error installing ComfyUI-Manager: {e.stderr}")
-
-    # if os.path.exists(manager_dir):
-    #     print("Updating ComfyUI-Manager to the latest version...")
-    #     os.chdir(manager_dir)
-    #     try:
-    #         subprocess.run("git checkout main", shell=True, check=True, capture_output=True, text=True)
-    #         # subprocess.run("git config pull.ff only", shell=True, check=True, capture_output=True, text=True)
-    #         # result = subprocess.run("git pull --ff-only", shell=True, check=True, capture_output=True, text=True)
-    #         # print("ComfyUI-Manager git pull output:", result.stdout)
-            
-    #         # DOWNGRADE SECTION
-    #         sha_id = "09f8d5cb2d5ad094a85e3bba744dec2b076d9db4"
-    #         print(f"Downgrading to specific version {sha_id}...")
-    #         subprocess.run(f"git checkout {sha_id}", shell=True, check=True, capture_output=True, text=True)
-    #         print(f"Successfully downgraded to version {sha_id}")
-            
-    #     except subprocess.CalledProcessError as e:
-    #         print(f"Error updating/downgrading ComfyUI-Manager: {e.stderr}")
-    #     except Exception as e:
-    #         print(f"Unexpected error during ComfyUI-Manager update/downgrade: {e}")
-    #     os.chdir(DATA_BASE)  # Return to base directory
-    # else:
-    #     # Instalasi baru
-    #     print("ComfyUI-Manager directory not found, installing and downgrading...")
-    #     try:
-    #         subprocess.run("comfy node registry-install ComfyUI-Manager --version 3.37.1", shell=True, check=True, capture_output=True, text=True)
-    #         print("ComfyUI-Manager installed successfully")
-            
-    #     except subprocess.CalledProcessError as e:
-    #         print(f"Error installing/downgrading ComfyUI-Manager: {e.stderr}")
-    # else:
-    #     # Instalasi baru dengan downgrade langsung
-    #     print("ComfyUI-Manager directory not found, installing and downgrading...")
-    #     try:
-    #         # Downgrade setelah instalasi
-    #         os.chdir(manager_dir)
-    #         sha_id = "09f8d5cb2d5ad094a85e3bba744dec2b076d9db4"  # Ganti dengan versi yang diinginkan
-    #         subprocess.run(f"git checkout {sha_id}", shell=True, check=True, capture_output=True, text=True)
-    #         print(f"Successfully downgraded to version {sha_id}")
-    #         os.chdir(DATA_BASE)
-            
-    #         subprocess.run("comfy node install ComfyUI-Manager", shell=True, check=True, capture_output=True, text=True)
-    #         print("ComfyUI-Manager installed successfully")
-    #     except subprocess.CalledProcessError as e:
-    #         print(f"Error installing/downgrading ComfyUI-Manager: {e.stderr}")
-
-    # Update ComfyUI-Manager to the latest version
-    # manager_dir = os.path.join(CUSTOM_NODES_DIR, "ComfyUI-Manager")
-    # if os.path.exists(manager_dir):
-    #     print("Updating ComfyUI-Manager to the latest version...")
-    #     os.chdir(manager_dir)
-    #     try:
-    #         # Configure pull strategy for ComfyUI-Manager
-    #         subprocess.run("git config pull.ff only", shell=True, check=True, capture_output=True, text=True)
-    #         result = subprocess.run("git pull --ff-only", shell=True, check=True, capture_output=True, text=True)
-    #         print("ComfyUI-Manager git pull output:", result.stdout)
-    #     except subprocess.CalledProcessError as e:
-    #         print(f"Error updating ComfyUI-Manager: {e.stderr}")
-    #     except Exception as e:
-    #         print(f"Unexpected error during ComfyUI-Manager update: {e}")
-    #     os.chdir(DATA_BASE)  # Return to base directory
-    # else:
-    #     print("ComfyUI-Manager directory not found, installing...")
-    #     try:
-    #         subprocess.run("comfy node install ComfyUI-Manager", shell=True, check=True, capture_output=True, text=True)
-    #         print("ComfyUI-Manager installed successfully")
-    #     except subprocess.CalledProcessError as e:
-    #         print(f"Error installing ComfyUI-Manager: {e.stderr}")
 
     # Upgrade pip at runtime
     print("Upgrading pip at runtime...")
@@ -430,57 +302,32 @@ def ui():
     for d in [CUSTOM_NODES_DIR, MODELS_DIR, TMP_DL]:
         os.makedirs(d, exist_ok=True)
 
-    # # Configure ComfyUI-Manager: Disable auto-fetch, set weak security, and disable file logging
-    # manager_config_dir = os.path.join(DATA_BASE, "user", "default", "ComfyUI-Manager")
-    # manager_config_path = os.path.join(manager_config_dir, "config.ini")
-    # print("Configuring ComfyUI-Manager: Disabling auto-fetch, setting security_level to weak, and disabling file logging...")
-    # os.makedirs(manager_config_dir, exist_ok=True)
-    # config_content = "[default]\nnetwork_mode = private\nsecurity_level = weak\nlog_to_file = false\n"
-    # with open(manager_config_path, "w") as f:
-    #     f.write(config_content)
-    # print(f"Updated {manager_config_path} with network_mode=private, security_level=weak, log_to_file=false")
-
-    # Ensure all required directories exist
-    # for d in [CUSTOM_NODES_DIR, MODELS_DIR, TMP_DL]:
-    #     os.makedirs(d, exist_ok=True)
-
-    import torch
-
-    output = subprocess.check_output(["nvidia-smi"], text=True)
-    assert "Driver Version:" in output
-    assert "CUDA Version:" in output
-    print(output)
-    print(torch.__version__)
-    print(torch.version.cuda)
-    print(torch.cuda.is_available())
-    print(torch.cuda.get_device_capability(0))
-
     # Download models at runtime (only if missing)
-    print("Checking and downloading missing models...")
-    for repo, fn, sub, subf in model_tasks:
-        target = os.path.join(MODELS_DIR, sub, fn)
-        if not os.path.exists(target):
-            print(f"Downloading {fn} to {target}...")
-            try:
-                hf_download(repo, fn, sub, subf)
-                print(f"Successfully downloaded {fn}")
-            except Exception as e:
-                print(f"Error downloading {fn}: {e}")
-        else:
-            print(f"Model {fn} already exists, skipping download")
+    # print("Checking and downloading missing models...")
+    # for repo, fn, sub, subf in model_tasks:
+    #     target = os.path.join(MODELS_DIR, sub, fn)
+    #     if not os.path.exists(target):
+    #         print(f"Downloading {fn} to {target}...")
+    #         try:
+    #             hf_download(repo, fn, sub, subf)
+    #             print(f"Successfully downloaded {fn}")
+    #         except Exception as e:
+    #             print(f"Error downloading {fn}: {e}")
+    #     else:
+    #         print(f"Model {fn} already exists, skipping download")
 
     # Run extra download commands
     print("Running additional downloads...")
-    # for cmd in extra_cmds:
-    #     try:
-    #         print(f"Running: {cmd}")
-    #         result = subprocess.run(cmd, shell=True, check=False, cwd=DATA_BASE, capture_output=True, text=True)
-    #         if result.returncode == 0:
-    #             print(f"Command completed successfully")
-    #         else:
-    #             print(f"Command failed with return code {result.returncode}: {result.stderr}")
-    #     except Exception as e:
-    #         print(f"Error running command {cmd}: {e}")
+    for cmd in extra_cmds:
+        try:
+            print(f"Running: {cmd}")
+            result = subprocess.run(cmd, shell=True, check=False, cwd=DATA_BASE, capture_output=True, text=True)
+            if result.returncode == 0:
+                print(f"Command completed successfully")
+            else:
+                print(f"Command failed with return code {result.returncode}: {result.stderr}")
+        except Exception as e:
+            print(f"Error running command {cmd}: {e}")
 
     # Set COMFY_DIR environment variable to volume location
     os.environ["COMFY_DIR"] = DATA_BASE
