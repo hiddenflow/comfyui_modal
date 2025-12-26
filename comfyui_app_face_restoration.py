@@ -47,8 +47,6 @@ image = (
     .apt_install("git", "wget", "libgl1", "libglib2.0-0", "ffmpeg", "pciutils")
     .apt_install("ninja-build", "build-essential", "python3-dev", "cmake", "clang")
     .run_commands([
-        "gcc --version",
-        "g++ --version",
         "wget http://archive.ubuntu.com/ubuntu/pool/universe/m/mesa/libgl1-mesa-glx_23.0.4-0ubuntu1~22.04.1_amd64.deb",
         "apt-get install ./libgl1-mesa-glx_23.0.4-0ubuntu1~22.04.1_amd64.deb",
         "pip install --upgrade pip",
