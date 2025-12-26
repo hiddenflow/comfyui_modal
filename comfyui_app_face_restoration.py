@@ -53,22 +53,11 @@ image = (
         "pip install --no-cache-dir comfy-cli uv",
         "uv pip install --system --compile-bytecode huggingface_hub[hf_transfer]==0.28.1",
         # Install ComfyUI to default location
-        "comfy --skip-prompt install --nvidia"
+        "comfy --skip-prompt install --nvidia",
+        "pip install torch==2.8.0+cu128 torchvision==0.23.0+cu128 torchaudio==2.8.0+cu128 xformers==0.0.32.post2 triton==3.4.0 --index-url https://download.pytorch.org/whl/cu128 --force-reinstall",
+        "pip install setuptools",
+        "pip install wheel",
     ])
-    .pip_install(
-        "torch==2.8.0+cu128",
-        "torchvision==0.23.0+cu128",
-        "torchaudio==2.8.0+cu128",
-        "xformers==0.0.32.post2",
-        "triton==3.4.0",
-        index_url="https://download.pytorch.org/whl/cu128",
-        extra_options="--force-reinstall"
-    )
-    .pip_install(
-        "setuptools",
-        "wheel",
-        "NATTEN==0.17.5"
-    )
     .env({
         "HF_HUB_ENABLE_HF_TRANSFER": "1",
         "PATH": "/usr/local/cuda-12.8/bin:$PATH",
@@ -114,11 +103,12 @@ image = image.run_commands([
     "pip install ninja",
     "pip install psutil",
     "pip install packaging",
+    "pip install soxr==0.5.0.post1 --force-reinstall",
     "export CC=gcc++-13",
     "export CXX=g++-13",
     "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && git checkout eb615cf6cf4d221338033340ee2de1c37fbdba4a && python setup.py install",
     "pip install https://github.com/Dao-AILab/flash-attention/releases/download/v2.8.1/flash_attn-2.8.1+cu12torch2.8cxx11abiTRUE-cp312-cp312-linux_x86_64.whl --no-build-isolation",
-    "git clone --recursive https://github.com/SHI-Labs/NATTEN.git && cd NATTEN && git checkout v0.17.5 && git submodule update --init --recursive && pip install -e ."
+    "git clone --recursive https://github.com/SHI-Labs/NATTEN.git && cd NATTEN && git checkout v0.17.5 && git submodule update --init --recursive && python setup.py install"
 ])
 
 # Model download tasks (will be done at runtime)
