@@ -102,7 +102,6 @@ image = image.run_commands([
     "pip install ninja",
     "pip install psutil",
     "pip install packaging",
-    "pip install soxr==0.5.0.post1 --force-reinstall",
     "export CC=gcc++-13",
     "export CXX=g++-13",
     "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && git checkout eb615cf6cf4d221338033340ee2de1c37fbdba4a && python setup.py install",
@@ -111,21 +110,9 @@ image = image.run_commands([
 
 # Model download tasks (will be done at runtime)
 model_tasks = [
-    ("city96/Wan2.1-I2V-14B-480P-gguf", "wan2.1-i2v-14b-480p-Q4_0.gguf", "diffusion_models", None),
-    ("Kijai/WanVideo_comfy", "lightx2v_I2V_14B_480p_cfg_step_distill_rank64_bf16.safetensors", "loras", "Lightx2v"),
-    ("Kijai/WanVideo_comfy_GGUF", "Wan2_1-InfiniteTalk_Single_Q8.gguf", "diffusion_models", "InfiniteTalk"),
-    ("Kijai/WanVideo_comfy", "Wan2_1_VAE_bf16.safetensors", "vae", None),
-    ("Comfy-Org/Wan_2.1_ComfyUI_repackaged", "clip_vision_h.safetensors", "clip_vision", "split_files/clip_vision"),
-    ("Comfy-Org/Wan_2.1_ComfyUI_repackaged", "umt5_xxl_fp8_e4m3fn_scaled.safetensors", "text_encoders", "split_files/text_encoders"),
-    ("Kijai/wav2vec2_safetensors", "wav2vec2-chinese-base_fp16.safetensors", "wav2vec2", None),
-    ("ALGOTECH/WanVideo_comfy", "umt5-xxl-enc-bf16.safetensors", "clip", None),
-    ("Kijai/WanVideo_comfy", "umt5-xxl-enc-fp8_e4m3fn.safetensors", "text_encoders", None),
-    ("facefusion/models-3.3.0", "hyperswap_1a_256.onnx", "hyperswap", None),
     ("Kijai/Z-Image_comfy_fp8_scaled", "z-image-turbo_fp8_scaled_e4m3fn_KJ.safetensors", "diffusion_models", None),
-    ("jiangchengchengNLP/qwen3-4b-fp8-scaled", "qwen3_4b_fp8_scaled.safetensors", "clip", None),
-    ("Comfy-Org/z_image_turbo", "ae.safetensors", "vae", "split_files/vae"),
-    ("Kijai/WanVideo_comfy_fp8_scaled", "Wan2_2-T2V-A14B-LOW-HoloCine-full_fp8_e4m3fn_scaled_KJ.safetensors", "diffusion_models", "T2V/HoloCine"),
-    ("Kijai/WanVideo_comfy_fp8_scaled", "Wan2_2-T2V-A14B-HIGH-HoloCine-full_fp8_e4m3fn_scaled_KJ.safetensors", "diffusion_models", "T2V/HoloCine"),
+    ("Comfy-Org/z_image_turbo", "qwen_3_4b.safetensors", "text_encoders", "split_files/text_encoders"),
+    ("Comfy-Org/z_image_turbo", "ae.safetensors", "vae", "split_files/vae")
 ]
 
 extra_cmds = [
@@ -299,18 +286,18 @@ def ui():
         os.makedirs(d, exist_ok=True)
 
     # Download models at runtime (only if missing)
-    # print("Checking and downloading missing models...")
-    # for repo, fn, sub, subf in model_tasks:
-    #     target = os.path.join(MODELS_DIR, sub, fn)
-    #     if not os.path.exists(target):
-    #         print(f"Downloading {fn} to {target}...")
-    #         try:
-    #             hf_download(repo, fn, sub, subf)
-    #             print(f"Successfully downloaded {fn}")
-    #         except Exception as e:
-    #             print(f"Error downloading {fn}: {e}")
-    #     else:
-    #         print(f"Model {fn} already exists, skipping download")
+    print("Checking and downloading missing models...")
+    for repo, fn, sub, subf in model_tasks:
+        target = os.path.join(MODELS_DIR, sub, fn)
+        if not os.path.exists(target):
+            print(f"Downloading {fn} to {target}...")
+            try:
+                hf_download(repo, fn, sub, subf)
+                print(f"Successfully downloaded {fn}")
+            except Exception as e:
+                print(f"Error downloading {fn}: {e}")
+        else:
+            print(f"Model {fn} already exists, skipping download")
 
     # Run extra download commands
     print("Running additional downloads...")
