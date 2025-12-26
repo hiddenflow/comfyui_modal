@@ -124,7 +124,7 @@ for repo, flags in [
     ("lihaoyun6/ComfyUI-FlashVSR_Ultra_Fast", {'install_reqs': True}),
     ("kijai/ComfyUI-GIMM-VFI", {'install_reqs': True}),
     ("aining2022/ComfyUI_Swwan", {'install_reqs': True}),
-    ("2kpr/ComfyUI-PMRF", {})
+    ("chflame163/ComfyUI-PMRFF", {'install_reqs': True})
 ]:
     image = image.run_commands([git_clone_cmd(repo, **flags)])
 
