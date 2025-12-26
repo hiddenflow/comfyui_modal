@@ -123,16 +123,15 @@ extra_cmds = [
     f"wget https://github.com/Phhofm/models/releases/download/1xgaterv3_r_sharpen/1xgaterv3_r_sharpen_fp32_op17_onnxslim.onnx -P {MODELS_DIR}/upscale_models",
     f"wget https://github.com/Phhofm/models/releases/download/2xPublic_realplksr_dysample_layernorm_real_nn/2xPublic_realplksr_dysample_layernorm_real_nn.pth -P {MODELS_DIR}/upscale_models",
  #   f"wget https://github.com/Phhofm/models/releases/download/2xParagonSR_Nano_gan/2xParagonSR_Nano_gan_op18_fp16.onnx -P {MODELS_DIR}/upscale_models",
-    f"wget https://github.com/visomaster/visomaster-assets/releases/download/v0.1.0/yoloface_8n.onnx -P {MODELS_DIR}/faceless/face_detector",
-    f"wget https://huggingface.co/giangndm/yolo11-onnx/resolve/main/yolo11s_480.onnx -P {MODELS_DIR}/faceless/face_detector",
-    f"wget https://github.com/visomaster/visomaster-assets/releases/download/v0.1.0/2dfan4.onnx -P {MODELS_DIR}/faceless/face_landmarker",
+    f"wget https://huggingface.co/crj/dl-ws/resolve/main/yoloface_8n.onnx -P {MODELS_DIR}/faceless/face_detector",
+    f"wget https://huggingface.co/crj/dl-ws/resolve/main/2dfan4.onnx -P {MODELS_DIR}/faceless/face_landmarker",
     f"wget https://huggingface.co/crj/dl-ws/resolve/eb6e7e673da4c13994012ab57d71e94ba16f6a5a/face_landmarker_68_5.onnx -P {MODELS_DIR}/faceless/face_landmarker",
-    f"wget https://github.com/facefusion/facefusion-assets/releases/download/models-3.0.0/arcface_w600k_r50.onnx -P {MODELS_DIR}/faceless/face_recognizer",
-    f"wget https://github.com/visomaster/visomaster-assets/releases/download/v0.1.0/GFPGANv1.4.onnx -P {MODELS_DIR}/faceless/face_restoration",
-    f"wget https://github.com/visomaster/visomaster-assets/releases/download/v0.1.0/GPEN-BFR-512.onnx -P {MODELS_DIR}/faceless/face_restoration",
+    f"wget https://huggingface.co/crj/dl-ws/resolve/main/arcface_w600k_r50.onnx -P {MODELS_DIR}/faceless/face_recognizer",
+    f"wget https://huggingface.co/crj/dl-ws/resolve/main/gfpgan_1.4.onnx -P {MODELS_DIR}/faceless/face_restoration",
+    f"wget https://huggingface.co/crj/dl-ws/resolve/main/gpen_bfr_512.onnx -P {MODELS_DIR}/faceless/face_restoration",
     f"wget https://github.com/Glat0s/GFPGAN-1024-onnx/releases/download/v0.0.1/gfpgan-1024.onnx -P {MODELS_DIR}/faceless/face_restoration",
     f"wget https://github.com/visomaster/visomaster-assets/releases/download/v0.1.0/RestoreFormerPlusPlus.fp16.onnx -P {MODELS_DIR}/faceless/face_restoration",
-    f"wget https://huggingface.co/crj/dl-ws/resolve/eb6e7e673da4c13994012ab57d71e94ba16f6a5a/gender_age.onnx -P {MODELS_DIR}/faceless",
+    f"wget https://huggingface.co/crj/dl-ws/resolve/main/gender_age.onnx -P {MODELS_DIR}/faceless",
 ]
 
 # Create volume
