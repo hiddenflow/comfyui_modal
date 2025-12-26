@@ -95,7 +95,7 @@ for repo, flags in [
     ("Kosinkadink/ComfyUI-VideoHelperSuite", {'install_reqs': True}),
     ("jeankassio/ComfyUI-Terminal", {}),
     ("ltdrdata/ComfyUI-Impact-Pack", {}),
-    ("chflame163/ComfyUI-PMRFF", {'install_reqs': True})
+    ("hiddenflow/ComfyUI-PMRF", {'install_reqs': True})
 ]:
     image = image.run_commands([git_clone_cmd(repo, **flags)])
 
@@ -110,7 +110,6 @@ image = image.run_commands([
     "export CXX=g++-13",
     "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && git checkout eb615cf6cf4d221338033340ee2de1c37fbdba4a && python setup.py install",
     "pip install https://github.com/Dao-AILab/flash-attention/releases/download/v2.8.1/flash_attn-2.8.1+cu12torch2.8cxx11abiTRUE-cp312-cp312-linux_x86_64.whl --no-build-isolation"
-
 ])
 
 # Model download tasks (will be done at runtime)
