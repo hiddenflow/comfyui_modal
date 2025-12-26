@@ -132,7 +132,7 @@ extra_cmds = [
     f"wget https://github.com/visomaster/visomaster-assets/releases/download/v0.1.0/GPEN-BFR-512.onnx -P {MODELS_DIR}/faceless/face_restoration",
     f"wget https://github.com/Glat0s/GFPGAN-1024-onnx/releases/download/v0.0.1/gfpgan-1024.onnx -P {MODELS_DIR}/faceless/face_restoration",
     f"wget https://github.com/visomaster/visomaster-assets/releases/download/v0.1.0/RestoreFormerPlusPlus.fp16.onnx -P {MODELS_DIR}/faceless/face_restoration",
-    f"wget https://huggingface.co/ApacheOne/insightface/resolve/main/insightface/models/buffalo_l/genderage.onnx -P {MODELS_DIR}/faceless",
+    f"wget https://huggingface.co/numz/wav2lip_studio/resolve/5a495df67fa2d2ca599eb78d02211df58496544e/face_analyser/gender_age.onnx -P {MODELS_DIR}/faceless",
 ]
 
 # Create volume
