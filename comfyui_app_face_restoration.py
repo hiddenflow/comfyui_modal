@@ -133,6 +133,8 @@ extra_cmds = [
     f"wget https://github.com/Glat0s/GFPGAN-1024-onnx/releases/download/v0.0.1/gfpgan-1024.onnx -P {MODELS_DIR}/faceless/face_restoration",
     f"wget https://huggingface.co/crj/dl-ws/resolve/main/restoreformer_plus_plus.onnx -P {MODELS_DIR}/faceless/face_restoration",
     f"wget https://huggingface.co/crj/dl-ws/resolve/main/gender_age.onnx -P {MODELS_DIR}/faceless",
+    f"wget -O face_yolov11m.pt https://huggingface.co/AlekseyKorshuk/yolov11-face/resolve/main/yolov11m-face.pt -P {MODELS_DIR}/ultralytics/bbox",
+    f"wget -O face_yolov11x.pt https://huggingface.co/AdamCodd/YOLOv11x-face-detection/resolve/main/model.pt -P {MODELS_DIR}/ultralytics/bbox",
 ]
 
 # Create volume
