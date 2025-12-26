@@ -57,7 +57,6 @@ image = (
         "pip install torch==2.8.0+cu128 torchvision==0.23.0+cu128 torchaudio==2.8.0+cu128 xformers==0.0.32.post2 triton==3.4.0 --index-url https://download.pytorch.org/whl/cu128 --force-reinstall",
         "pip install setuptools",
         "pip install wheel",
-        "pip3 install natten==0.21.1+torch280cu128 -f https://whl.natten.org"
     ])
     .env({
         "HF_HUB_ENABLE_HF_TRANSFER": "1",
@@ -108,7 +107,8 @@ image = image.run_commands([
     "export CC=gcc++-13",
     "export CXX=g++-13",
     "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && git checkout eb615cf6cf4d221338033340ee2de1c37fbdba4a && python setup.py install",
-    "pip install https://github.com/Dao-AILab/flash-attention/releases/download/v2.8.1/flash_attn-2.8.1+cu12torch2.8cxx11abiTRUE-cp312-cp312-linux_x86_64.whl --no-build-isolation"
+    "pip install https://github.com/Dao-AILab/flash-attention/releases/download/v2.8.1/flash_attn-2.8.1+cu12torch2.8cxx11abiTRUE-cp312-cp312-linux_x86_64.whl --no-build-isolation",
+    "git clone https://github.com/SHI-Labs/NATTEN.git && cd NATTEN && git checkout 4831f059049d4d0c08f4cc1fd328edd69a97389e && pip install -e ."
 ])
 
 # Model download tasks (will be done at runtime)
