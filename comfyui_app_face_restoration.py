@@ -124,12 +124,15 @@ extra_cmds = [
     f"wget https://github.com/Phhofm/models/releases/download/2xPublic_realplksr_dysample_layernorm_real_nn/2xPublic_realplksr_dysample_layernorm_real_nn.pth -P {MODELS_DIR}/upscale_models",
  #   f"wget https://github.com/Phhofm/models/releases/download/2xParagonSR_Nano_gan/2xParagonSR_Nano_gan_op18_fp16.onnx -P {MODELS_DIR}/upscale_models",
     f"wget https://github.com/visomaster/visomaster-assets/releases/download/v0.1.0/yoloface_8n.onnx -P {MODELS_DIR}/faceless/face_detector",
+    f"wget https://huggingface.co/giangndm/yolo11-onnx/resolve/main/yolo11s_480.onnx -P {MODELS_DIR}/faceless/face_detector",
     f"wget https://github.com/visomaster/visomaster-assets/releases/download/v0.1.0/2dfan4.onnx -P {MODELS_DIR}/faceless/face_landmarker",
     f"wget https://github.com/visomaster/visomaster-assets/releases/download/v0.1.0/face_landmarks_detector_Nx3x256x256.onnx -P {MODELS_DIR}/faceless/face_landmarker",
+    f"wget https://github.com/facefusion/facefusion-assets/releases/download/models-3.0.0/arcface_w600k_r50.onnx -P {MODELS_DIR}/faceless/face_recognizer",
     f"wget https://github.com/visomaster/visomaster-assets/releases/download/v0.1.0/GFPGANv1.4.onnx -P {MODELS_DIR}/faceless/face_restoration",
     f"wget https://github.com/visomaster/visomaster-assets/releases/download/v0.1.0/GPEN-BFR-512.onnx -P {MODELS_DIR}/faceless/face_restoration",
     f"wget https://github.com/Glat0s/GFPGAN-1024-onnx/releases/download/v0.0.1/gfpgan-1024.onnx -P {MODELS_DIR}/faceless/face_restoration",
     f"wget https://github.com/visomaster/visomaster-assets/releases/download/v0.1.0/RestoreFormerPlusPlus.fp16.onnx -P {MODELS_DIR}/faceless/face_restoration",
+    f"wget https://huggingface.co/ApacheOne/insightface/resolve/main/insightface/models/buffalo_l/genderage.onnx -P {MODELS_DIR}/faceless",
 ]
 
 # Create volume
