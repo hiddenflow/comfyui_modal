@@ -107,7 +107,8 @@ image = image.run_commands([
     "pip install packaging",
     "export CC=gcc++-13",
     "export CXX=g++-13",
-    "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && git checkout eb615cf6cf4d221338033340ee2de1c37fbdba4a && python setup.py install",
+    "pip install sageattention==2.2.0 --no-build-isolation",
+#    "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && git checkout eb615cf6cf4d221338033340ee2de1c37fbdba4a && python setup.py install",
     "pip install https://github.com/Dao-AILab/flash-attention/releases/download/v2.8.1/flash_attn-2.8.1+cu12torch2.8cxx11abiTRUE-cp312-cp312-linux_x86_64.whl --no-build-isolation",
 ])
 
@@ -117,11 +118,11 @@ model_tasks = [
     ("Comfy-Org/z_image_turbo", "qwen_3_4b.safetensors", "text_encoders", "split_files/text_encoders"),
     ("Comfy-Org/z_image_turbo", "ae.safetensors", "vae", "split_files/vae"),
     ("Comfy-Org/z_image_turbo", "z_image_turbo_distill_patch_lora_bf16.safetensors", "loras", "split_files/loras"),
-    ("malcolmrey/zimage", "zimage_babajagawardega_v1.safetensors", "loras", None),
     ("Owen777/UltraFlux-v1", "diffusion_pytorch_model.safetensors", "vae", "vae"),
 ]
 
 extra_cmds = [
+    f"wget https://github.com/hiddenflow/comfyui_modal/releases/download/loras/skin_texture_v2.1.safetensors -P {MODELS_DIR}/loras",
     f"wget https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth -P {MODELS_DIR}/upscale_models",
     f"wget https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.1/RealESRGAN_x2plus.pth -P {MODELS_DIR}/upscale_models",
     f"wget https://github.com/Phhofm/models/releases/download/4xBHI_dat2_real/4xBHI_dat2_real.pth -P {MODELS_DIR}/upscale_models",
