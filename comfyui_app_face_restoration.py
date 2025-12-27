@@ -115,7 +115,8 @@ model_tasks = [
     ("Kijai/Z-Image_comfy_fp8_scaled", "z-image-turbo_fp8_scaled_e4m3fn_KJ.safetensors", "diffusion_models", None),
     ("Comfy-Org/z_image_turbo", "qwen_3_4b.safetensors", "text_encoders", "split_files/text_encoders"),
     ("Comfy-Org/z_image_turbo", "ae.safetensors", "vae", "split_files/vae"),
-    ("Comfy-Org/z_image_turbo", "z_image_turbo_distill_patch_lora_bf16.safetensors", "loras", "split_files/loras"),    
+    ("Comfy-Org/z_image_turbo", "z_image_turbo_distill_patch_lora_bf16.safetensors", "loras", "split_files/loras"),
+    ("malcolmrey/zimage", "zimage_babajagawardega_v1.safetensors", "loras", None),
     ("Owen777/UltraFlux-v1", "diffusion_pytorch_model.safetensors", "vae", "vae"),
 ]
 
