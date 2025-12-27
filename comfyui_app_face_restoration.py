@@ -97,6 +97,7 @@ for repo, flags in [
     ("ltdrdata/ComfyUI-Impact-Subpack", {'install_reqs': True}),
     ("peterkickasspeter-civit/ComfyUI-Custom-LoRA-Loader", {}),
     ("pythongosssss/ComfyUI-Custom-Scripts", {}),
+    ("idrirap/ComfyUI-Lora-Auto-Trigger-Words", {}),
 ]:
     image = image.run_commands([git_clone_cmd(repo, **flags)])
 
