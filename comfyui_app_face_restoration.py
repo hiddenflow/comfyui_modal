@@ -193,25 +193,27 @@ def ui():
         print(f"Unexpected error during backend update: {e}")
 
     # Define paths for Manager config (use new secure path)
-    manager_config_dir = os.path.join(DATA_BASE, "user", "__manager")
-    manager_config_path = os.path.join(manager_config_dir, "config.ini")
-    legacy_dir = os.path.join(DATA_BASE, "user", "default", "ComfyUI-Manager")
+    # manager_config_dir = os.path.join(DATA_BASE, "user", "__manager")
+    # manager_config_path = os.path.join(manager_config_dir, "config.ini")
+    # legacy_dir = os.path.join(DATA_BASE, "user", "default", "ComfyUI-Manager")
 
     # Migrate from legacy path if it exists
-    if os.path.exists(legacy_dir):
-        print("Migrating Manager data from legacy path to __manager...")
-        os.makedirs(manager_config_dir, exist_ok=True)
-        shutil.copytree(legacy_dir, manager_config_dir, dirs_exist_ok=True)  # Copy contents
-        shutil.rmtree(legacy_dir)  # Delete legacy dir to prevent detection
-        print("Migration completed and legacy dir removed.")
+    # if os.path.exists(legacy_dir):
+    #     print("Migrating Manager data from legacy path to __manager...")
+    #     os.makedirs(manager_config_dir, exist_ok=True)
+    #     shutil.copytree(legacy_dir, manager_config_dir, dirs_exist_ok=True)  # Copy contents
+    #     shutil.rmtree(legacy_dir)  # Delete legacy dir to prevent detection
+    #     print("Migration completed and legacy dir removed.")
 
     # Delete any legacy backup to stop persistent notifications
-    backup_dir = os.path.join(manager_config_dir, ".legacy-manager-backup")
-    if os.path.exists(backup_dir):
-        shutil.rmtree(backup_dir)
-        print(f"Removed legacy backup at {backup_dir} to stop notifications")
+    # backup_dir = os.path.join(manager_config_dir, ".legacy-manager-backup")
+    # if os.path.exists(backup_dir):
+    #     shutil.rmtree(backup_dir)
+    #     print(f"Removed legacy backup at {backup_dir} to stop notifications")
 
     # Configure ComfyUI-Manager: Disable auto-fetch, set weak security, and disable file logging
+    manager_config_dir = os.path.join(DATA_BASE, "user", "__manager")
+    manager_config_path = os.path.join(manager_config_dir, "config.ini")
     print("Configuring ComfyUI-Manager: Disabling auto-fetch, setting security_level to weak, and disabling file logging...")
     os.makedirs(manager_config_dir, exist_ok=True)
     config_content = "[default]\nnetwork_mode = private\nsecurity_level = weak\nlog_to_file = false\n"
