@@ -98,6 +98,7 @@ for repo, flags in [
     ("peterkickasspeter-civit/ComfyUI-Custom-LoRA-Loader", {}),
     ("pythongosssss/ComfyUI-Custom-Scripts", {}),
     ("willmiao/ComfyUI-Lora-Manager", {'install_reqs': True}),
+    ("ClownsharkBatwing/RES4LYF", {'install_reqs': True}),
 ]:
     image = image.run_commands([git_clone_cmd(repo, **flags)])
 
