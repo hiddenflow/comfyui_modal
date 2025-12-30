@@ -92,6 +92,7 @@ for repo, flags in [
     ("kijai/ComfyUI-KJNodes", {'install_reqs': True}),
     ("kijai/ComfyUI-MelBandRoFormer", {'install_reqs': True}),
     ("Kosinkadink/ComfyUI-VideoHelperSuite", {'install_reqs': True}),
+    ("Chaoses-Ib/ComfyUI_Ib_CustomNodes", {'install_reqs': True}),
     ("Gourieff/ComfyUI-ReActor", {'install_reqs': True}),
 ]:
     image = image.run_commands([git_clone_cmd(repo, **flags)])
