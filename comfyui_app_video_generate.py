@@ -91,6 +91,7 @@ for repo, flags in [
     ("kijai/ComfyUI-WanVideoWrapper", {'install_reqs': True}),
     ("kijai/ComfyUI-KJNodes", {'install_reqs': True}),
     ("kijai/ComfyUI-MelBandRoFormer", {'install_reqs': True}),
+    ("Kosinkadink/ComfyUI-VideoHelperSuite", {'install_reqs': True}),
     ("Gourieff/ComfyUI-ReActor", {'install_reqs': True}),
 ]:
     image = image.run_commands([git_clone_cmd(repo, **flags)])
@@ -207,16 +208,6 @@ def ui():
     #     shutil.rmtree(backup_dir)
     #     print(f"Removed legacy backup at {backup_dir} to stop notifications")
 
-    # Configure ComfyUI-Manager: Disable auto-fetch, set weak security, and disable file logging
-    manager_config_dir = os.path.join(DATA_BASE, "user", "__manager")
-    manager_config_path = os.path.join(manager_config_dir, "config.ini")
-    print("Configuring ComfyUI-Manager: Disabling auto-fetch, setting security_level to weak, and disabling file logging...")
-    os.makedirs(manager_config_dir, exist_ok=True)
-    config_content = "[default]\nnetwork_mode = private\nsecurity_level = weak\nlog_to_file = false\n"
-    with open(manager_config_path, "w") as f:
-        f.write(config_content)
-    print(f"Updated {manager_config_path} with security_level=weak, log_to_file=false")
-
     manager_dir = os.path.join(CUSTOM_NODES_DIR, "ComfyUI-Manager")
     if os.path.exists(manager_dir):
         print("Updating ComfyUI-Manager to the latest version...")
@@ -238,6 +229,16 @@ def ui():
             print("ComfyUI-Manager installed successfully")
         except subprocess.CalledProcessError as e:
             print(f"Error installing ComfyUI-Manager: {e.stderr}")
+
+    # Configure ComfyUI-Manager: Disable auto-fetch, set weak security, and disable file logging
+    manager_config_dir = os.path.join(DATA_BASE, "user", "__manager")
+    manager_config_path = os.path.join(manager_config_dir, "config.ini")
+    print("Configuring ComfyUI-Manager: Disabling auto-fetch, setting security_level to weak, and disabling file logging...")
+    os.makedirs(manager_config_dir, exist_ok=True)
+    config_content = "[default]\nnetwork_mode = private\nsecurity_level = weak\nlog_to_file = false\n"
+    with open(manager_config_path, "w") as f:
+        f.write(config_content)
+    print(f"Updated {manager_config_path} with security_level=weak, log_to_file=false")
 
     # Upgrade pip at runtime
     print("Upgrading pip at runtime...")
