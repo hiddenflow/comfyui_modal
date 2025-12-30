@@ -97,8 +97,7 @@ for repo, flags in [
     image = image.run_commands([git_clone_cmd(repo, **flags)])
 
 # pip install
-image = image.run_commands([
-    "pip install -U numpy==1.26.4",
+image = image.pip_install("numpy==1.26.4").run_commands([
     "pip install misaki[en]",
     "pip install ninja",
     "pip install psutil",
