@@ -121,6 +121,7 @@ model_tasks = [
     ("Kijai/WanVideo_comfy", "LongVie2_attn_layers_bf16.safetensors", "diffusion_models", "LongVie2"),
     ("Kijai/WanVideo_comfy", "longvie2_attn_layers_lora_rank_64_bf16.safetensors", "loras", "LongVie2"),
     ("Kijai/WanVideo_comfy", "LongVie2_dual_controller_controlnet_bf16.safetensors", "controlnet", "LongVie2"),
+    ("Comfy-Org/Wan_2.1_ComfyUI_repackaged", "clip_vision_h.safetensors", "clip_vision", "split_files/clip_vision"),
 ]
 
 extra_cmds = [
