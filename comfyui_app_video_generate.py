@@ -98,6 +98,7 @@ for repo, flags in [
 
 # pip install
 image = image.run_commands([
+    "pip install numpy==1.26.4",
     "pip install misaki[en]",
     "pip install ninja",
     "pip install psutil",
