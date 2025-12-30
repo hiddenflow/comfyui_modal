@@ -54,6 +54,7 @@ image = (
         "uv pip install --system --compile-bytecode huggingface_hub[hf_transfer]==0.28.1",
         # Install ComfyUI to default location
         "comfy --skip-prompt install --nvidia",
+        "pip install librosa",
         "pip install torch==2.8.0+cu128 torchvision==0.23.0+cu128 torchaudio==2.8.0+cu128 xformers==0.0.32.post2 triton==3.4.0 --index-url https://download.pytorch.org/whl/cu128 --force-reinstall",
         "pip install onnxruntime-gpu",
         "pip install -U pip setuptools wheel"
@@ -89,16 +90,8 @@ for repo, flags in [
     ("crystian/ComfyUI-Crystools", {'install_reqs': True}),
     ("kijai/ComfyUI-WanVideoWrapper", {'install_reqs': True}),
     ("kijai/ComfyUI-KJNodes", {'install_reqs': True}),
+    ("kijai/ComfyUI-MelBandRoFormer", {'install_reqs': True}),
     ("Gourieff/ComfyUI-ReActor", {'install_reqs': True}),
-    ("Kosinkadink/ComfyUI-VideoHelperSuite", {'install_reqs': True}),
-    ("jeankassio/ComfyUI-Terminal", {}),
-    ("jeffy5/comfyui-faceless-node", {'install_reqs': True}),
-    ("ltdrdata/ComfyUI-Impact-Pack", {'install_reqs': True}),
-    ("ltdrdata/ComfyUI-Impact-Subpack", {'install_reqs': True}),
-    ("peterkickasspeter-civit/ComfyUI-Custom-LoRA-Loader", {}),
-    ("pythongosssss/ComfyUI-Custom-Scripts", {}),
-    ("willmiao/ComfyUI-Lora-Manager", {'install_reqs': True}),
-    ("ClownsharkBatwing/RES4LYF", {'install_reqs': True}),
 ]:
     image = image.run_commands([git_clone_cmd(repo, **flags)])
 
@@ -108,6 +101,7 @@ image = image.run_commands([
     "pip install ninja",
     "pip install psutil",
     "pip install packaging",
+    "pip install soxr==0.5.0.post1 --force-reinstall",
     "export CC=gcc++-13",
     "export CXX=g++-13",
     "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && git checkout eb615cf6cf4d221338033340ee2de1c37fbdba4a && python setup.py install",
@@ -116,11 +110,14 @@ image = image.run_commands([
 
 # Model download tasks (will be done at runtime)
 model_tasks = [
-    ("Kijai/Z-Image_comfy_fp8_scaled", "z-image-turbo_fp8_scaled_e4m3fn_KJ.safetensors", "diffusion_models", None),
-    ("Comfy-Org/z_image_turbo", "qwen_3_4b.safetensors", "text_encoders", "split_files/text_encoders"),
-    ("Comfy-Org/z_image_turbo", "ae.safetensors", "vae", "split_files/vae"),
-    ("Comfy-Org/z_image_turbo", "z_image_turbo_distill_patch_lora_bf16.safetensors", "loras", "split_files/loras"),
-    ("Owen777/UltraFlux-v1", "diffusion_pytorch_model.safetensors", "vae", "vae"),
+    ("Kijai/LongCat-Video_comfy", "LongCat-Avatar_comfy_bf16.safetensors", "diffusion_models", "Avatar"),
+    ("Kijai/WanVideo_comfy", "umt5-xxl-enc-bf16.safetensors", "text_encoders", None),
+    ("Comfy-Org/Wan_2.2_ComfyUI_Repackaged", "wan_2.1_vae.safetensors", "vae", "split_files/vae"),
+    ("Kijai/LongCat-Video_comfy", "LongCat_distill_lora_alpha64_bf16.safetensors", "loras", None),
+    ("Kijai/MelBandRoFormer_comfy", "MelBandRoformer_fp16.safetensors", "diffusion_models", None),
+    ("Kijai/WanVideo_comfy", "LongVie2_attn_layers_bf16.safetensors", "diffusion_models", "LongVie2"),
+    ("Kijai/WanVideo_comfy", "longvie2_attn_layers_lora_rank_64_bf16.safetensors", "loras", "LongVie2"),
+    ("Kijai/WanVideo_comfy", "LongVie2_dual_controller_controlnet_bf16.safetensors", "controlnet", "LongVie2"),
 ]
 
 extra_cmds = [
@@ -140,8 +137,6 @@ extra_cmds = [
     f"wget https://github.com/Glat0s/GFPGAN-1024-onnx/releases/download/v0.0.1/gfpgan-1024.onnx -P {MODELS_DIR}/faceless/face_restoration",
     f"wget https://huggingface.co/crj/dl-ws/resolve/main/restoreformer_plus_plus.onnx -P {MODELS_DIR}/faceless/face_restoration",
     f"wget https://huggingface.co/crj/dl-ws/resolve/main/gender_age.onnx -P {MODELS_DIR}/faceless",
-    f"wget https://huggingface.co/AlekseyKorshuk/yolov11-face/resolve/main/yolov11m-face.pt -O {MODELS_DIR}/ultralytics/bbox/face_yolov11m.pt",
-    f"wget https://huggingface.co/AdamCodd/YOLOv11x-face-detection/resolve/main/model.pt -O {MODELS_DIR}/ultralytics/bbox/face_yolov11x.pt",
 ]
 
 # Create volume
