@@ -103,6 +103,7 @@ image = image.run_commands([
     "pip install psutil",
     "pip install packaging",
     "pip install soxr==0.5.0.post1 --force-reinstall",
+    "pip install numpy==1.26.4 --force-reinstall",
     "export CC=gcc++-13",
     "export CXX=g++-13",
     "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && git checkout eb615cf6cf4d221338033340ee2de1c37fbdba4a && python setup.py install",
