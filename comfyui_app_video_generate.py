@@ -123,7 +123,6 @@ model_tasks = [
 ]
 
 extra_cmds = [
-    f"wget https://github.com/hiddenflow/comfyui_modal/releases/download/loras/skin_texture_v2.1.safetensors -P {MODELS_DIR}/loras",
     f"wget https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth -P {MODELS_DIR}/upscale_models",
     f"wget https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.1/RealESRGAN_x2plus.pth -P {MODELS_DIR}/upscale_models",
     f"wget https://github.com/Phhofm/models/releases/download/4xBHI_dat2_real/4xBHI_dat2_real.pth -P {MODELS_DIR}/upscale_models",
