@@ -119,6 +119,7 @@ model_tasks = [
     ("Comfy-Org/Wan_2.2_ComfyUI_Repackaged", "wan_2.1_vae.safetensors", "vae", "split_files/vae"),
     ("Kijai/LongCat-Video_comfy", "LongCat_distill_lora_alpha64_bf16.safetensors", "loras", None),
     ("Kijai/MelBandRoFormer_comfy", "MelBandRoformer_fp16.safetensors", "diffusion_models", None),
+    ("Kijai/wav2vec2_safetensors", "wav2vec2-chinese-base_fp16.safetensors", "wav2vec2", None),
     ("Kijai/WanVideo_comfy", "LongVie2_attn_layers_bf16.safetensors", "diffusion_models", "LongVie2"),
     ("Kijai/WanVideo_comfy", "longvie2_attn_layers_lora_rank_64_bf16.safetensors", "loras", "LongVie2"),
     ("Kijai/WanVideo_comfy", "LongVie2_dual_controller_controlnet_bf16.safetensors", "controlnet", "LongVie2"),
