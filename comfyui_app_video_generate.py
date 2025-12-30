@@ -94,6 +94,7 @@ for repo, flags in [
     ("Kosinkadink/ComfyUI-VideoHelperSuite", {'install_reqs': True}),
     ("Chaoses-Ib/ComfyUI_Ib_CustomNodes", {'install_reqs': True}),
     ("Gourieff/ComfyUI-ReActor", {'install_reqs': True}),
+    ("ClownsharkBatwing/RES4LYF", {'install_reqs': True}),
 ]:
     image = image.run_commands([git_clone_cmd(repo, **flags)])
 
