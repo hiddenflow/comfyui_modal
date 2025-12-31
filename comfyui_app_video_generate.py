@@ -115,6 +115,7 @@ image = image.run_commands([
 # Model download tasks (will be done at runtime)
 model_tasks = [
     ("Kijai/LongCat-Video_comfy", "LongCat-Avatar_comfy_bf16.safetensors", "diffusion_models", "Avatar"),
+    ("Kijai/LongCat-Video_comfy", "LongCat-Avatar-single_fp8_e4m3fn_scaled_mixed_KJ.safetensors", "diffusion_models", "Avatar"),
     ("Kijai/WanVideo_comfy", "umt5-xxl-enc-bf16.safetensors", "text_encoders", None),
     ("Comfy-Org/Wan_2.2_ComfyUI_Repackaged", "wan_2.1_vae.safetensors", "vae", "split_files/vae"),
     ("Kijai/LongCat-Video_comfy", "LongCat_distill_lora_alpha64_bf16.safetensors", "loras", None),
