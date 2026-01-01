@@ -84,6 +84,7 @@ for repo, flags in [
     ("nkchocoai/ComfyUI-SaveImageWithMetaData", {}),
     ("receyuki/comfyui-prompt-reader-node", {'recursive': True, 'install_reqs': True}),
     ("crystian/ComfyUI-Crystools", {'install_reqs': True}),
+    ("jamesWalker55/comfyui-various", {}),
     ("kijai/ComfyUI-WanVideoWrapper", {'install_reqs': True}),
     ("kijai/ComfyUI-KJNodes", {'install_reqs': True}),
     ("kijai/ComfyUI-MelBandRoFormer", {'install_reqs': True}),
