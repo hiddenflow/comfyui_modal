@@ -56,7 +56,7 @@ image = (
         "comfy --skip-prompt install --nvidia",
         "pip install torch==2.8.0+cu128 torchvision==0.23.0+cu128 torchaudio==2.8.0+cu128 xformers==0.0.32.post2 triton==3.4.0 --index-url https://download.pytorch.org/whl/cu128 --force-reinstall",
         "pip install onnxruntime-gpu",
-        "pip install -U pip setuptools wheel"
+        "pip install -U setuptools wheel"
     ])
     .env({
         "HF_HUB_ENABLE_HF_TRANSFER": "1",
@@ -95,10 +95,13 @@ for repo, flags in [
     ("jeffy5/comfyui-faceless-node", {'install_reqs': True}),
     ("ltdrdata/ComfyUI-Impact-Pack", {'install_reqs': True}),
     ("ltdrdata/ComfyUI-Impact-Subpack", {'install_reqs': True}),
-    ("peterkickasspeter-civit/ComfyUI-Custom-LoRA-Loader", {}),
+    # ("peterkickasspeter-civit/ComfyUI-Custom-LoRA-Loader", {}),
     ("pythongosssss/ComfyUI-Custom-Scripts", {}),
     ("willmiao/ComfyUI-Lora-Manager", {'install_reqs': True}),
     ("ClownsharkBatwing/RES4LYF", {'install_reqs': True}),
+    ("LykosAI/ComfyUI-Inference-Core-Nodes", {}),
+    ("TheLustriVA/ComfyUI-Image-Size-Tools", {'install_reqs': True}),
+    ("vrgamegirl19/comfyui-vrgamedevgirl", {'install_reqs': True}),
 ]:
     image = image.run_commands([git_clone_cmd(repo, **flags)])
 
