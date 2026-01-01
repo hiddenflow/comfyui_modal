@@ -54,10 +54,6 @@ image = (
         "uv pip install --system --compile-bytecode huggingface_hub[hf_transfer]==0.28.1",
         # Install ComfyUI to default location
         "comfy --skip-prompt install --nvidia",
-        "pip install librosa",
-        "pip install torch==2.8.0+cu128 torchvision==0.23.0+cu128 torchaudio==2.8.0+cu128 xformers==0.0.32.post2 triton==3.4.0 --index-url https://download.pytorch.org/whl/cu128 --force-reinstall",
-        "pip install onnxruntime-gpu",
-        "pip install -U setuptools wheel"
     ])
     .env({
         "HF_HUB_ENABLE_HF_TRANSFER": "1",
@@ -91,6 +87,15 @@ for repo, flags in [
     ("kijai/ComfyUI-WanVideoWrapper", {'install_reqs': True}),
     ("kijai/ComfyUI-KJNodes", {'install_reqs': True}),
     ("kijai/ComfyUI-MelBandRoFormer", {'install_reqs': True}),
+    ("Long-form-AI-video-generation/ComfyUI_vaceFramepack", {}),
+    ("Fannovel16/ComfyUI-Frame-Interpolation", {}),
+    ("numz/ComfyUI-SeedVR2_VideoUpscaler", {'install_reqs': True}),
+    ("lihaoyun6/ComfyUI-FlashVSR_Ultra_Fast", {'install_reqs': True}),
+    ("kijai/ComfyUI-GIMM-VFI", {'install_reqs': True}),
+    ("aining2022/ComfyUI_Swwan", {'install_reqs': True}),
+    ("LeonQ8/ComfyUI-Dynamic-Lora-Scheduler", {'install_reqs': True}),
+    ("whmc76/ComfyUI-AudioSuiteAdvanced", {'install_reqs': True}),
+    ("christian-byrne/audio-separation-nodes-comfyui", {'install_reqs': True}),
     ("Kosinkadink/ComfyUI-VideoHelperSuite", {'install_reqs': True}),
     ("Chaoses-Ib/ComfyUI_Ib_CustomNodes", {'install_reqs': True}),
     ("Gourieff/ComfyUI-ReActor", {'install_reqs': True}),
@@ -100,6 +105,10 @@ for repo, flags in [
 
 # pip install
 image = image.run_commands([
+    "pip install librosa",
+    "pip install torch==2.8.0+cu128 torchvision==0.23.0+cu128 torchaudio==2.8.0+cu128 xformers==0.0.32.post2 triton==3.4.0 --index-url https://download.pytorch.org/whl/cu128 --force-reinstall",
+    "pip install onnxruntime-gpu",
+    "pip install -U setuptools wheel"
     "pip install misaki[en]",
     "pip install ninja",
     "pip install psutil",
@@ -115,11 +124,15 @@ image = image.run_commands([
 
 # Model download tasks (will be done at runtime)
 model_tasks = [
+    ("city96/Wan2.1-I2V-14B-480P-gguf", "wan2.1-i2v-14b-480p-Q4_0.gguf", "diffusion_models", None),
     ("Kijai/LongCat-Video_comfy", "LongCat-Avatar_comfy_bf16.safetensors", "diffusion_models", "Avatar"),
     ("Kijai/LongCat-Video_comfy", "LongCat-Avatar-single_fp8_e4m3fn_scaled_mixed_KJ.safetensors", "diffusion_models", "Avatar"),
     ("Kijai/WanVideo_comfy", "umt5-xxl-enc-bf16.safetensors", "text_encoders", None),
-    ("Comfy-Org/Wan_2.2_ComfyUI_Repackaged", "wan_2.1_vae.safetensors", "vae", "split_files/vae"),
+    ("Kijai/WanVideo_comfy", "Wan2_1_VAE_bf16.safetensors", "vae", None),
+    # ("Comfy-Org/Wan_2.2_ComfyUI_Repackaged", "wan_2.1_vae.safetensors", "vae", "split_files/vae"),
     ("Kijai/LongCat-Video_comfy", "LongCat_distill_lora_alpha64_bf16.safetensors", "loras", None),
+    ("Kijai/LongCat-Video_comfy", "Wan_2_1_T2V_14B_rCM_lora_average_rank_83_bf16.safetensors", "loras", "LoRAs/rCM"),
+    ("lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v", "Wan21_I2V_14B_lightx2v_cfg_step_distill_lora_rank64.safetensors", "loras", "loras"),
     ("Kijai/MelBandRoFormer_comfy", "MelBandRoformer_fp16.safetensors", "diffusion_models", None),
     ("Kijai/wav2vec2_safetensors", "wav2vec2-chinese-base_fp16.safetensors", "wav2vec2", None),
     ("Kijai/WanVideo_comfy", "LongVie2_attn_layers_bf16.safetensors", "diffusion_models", "LongVie2"),
