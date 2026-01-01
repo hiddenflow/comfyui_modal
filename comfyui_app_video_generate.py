@@ -118,8 +118,8 @@ image = image.run_commands([
     "export CC=gcc++-13",
     "export CXX=g++-13",
     "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && git checkout eb615cf6cf4d221338033340ee2de1c37fbdba4a && python setup.py install",
-    # "pip install https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.7.2/flash_attn-2.8.3+cu128torch2.8-cp312-cp312-linux_x86_64.whl --no-build-isolation",
-    "git clone https://github.com/Dao-AILab/flash-attention.git && cd flash-attention && python setup.py install",
+    "pip install https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.7.2/flash_attn-2.8.3+cu128torch2.8-cp312-cp312-linux_x86_64.whl --no-build-isolation",
+    # "git clone https://github.com/Dao-AILab/flash-attention.git && cd flash-attention && python setup.py install",
 ])
 
 # Model download tasks (will be done at runtime)
