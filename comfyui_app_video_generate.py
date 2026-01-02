@@ -90,6 +90,8 @@ for repo, flags in [
     ("yolain/ComfyUI-Easy-Use", {'install_reqs': True}),
     ("jamesWalker55/comfyui-various", {}),
     ("543872524/ComfyUI_crdong", {'install_reqs': True}),
+    ("Fannovel16/comfyui_controlnet_aux", {'install_reqs': True}),
+    ("chyy-ai/ComfyUI-SoundFlow", {'install_reqs': True}),
     ("kijai/ComfyUI-WanVideoWrapper", {'install_reqs': True}),
     ("kijai/ComfyUI-KJNodes", {'install_reqs': True}),
     ("kijai/ComfyUI-MelBandRoFormer", {'install_reqs': True}),
