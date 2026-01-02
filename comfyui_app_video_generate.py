@@ -145,7 +145,7 @@ model_tasks = [
     ("Kijai/WanVideo_comfy", "Wan_2_1_T2V_14B_480p_rCM_lora_average_rank_83_bf16.safetensors", "loras", "LoRAs/rCM"),
     ("Kijai/WanVideo_comfy", "lightx2v_I2V_14B_480p_cfg_step_distill_rank256_bf16.safetensors", "loras", "Lightx2v"),
     ("lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v", "Wan21_I2V_14B_lightx2v_cfg_step_distill_lora_rank64.safetensors", "loras", "loras"),
-    ("IbarakiDouji/ani-Wan2.1", "aniWan2114BFp8E4m3fn_i2v480pNew.safetensors", "loras", None),
+    ("IbarakiDouji/ani-Wan2.1", "aniWan2114BFp8E4m3fn_i2v480pNew.safetensors", "diffusion_models", None),
     # ("Kijai/WanVideo_comfy", "UniAnimate-Wan2.1-14B-Lora-12000-fp16.safetensors", "loras", None),
     ("Kijai/MelBandRoFormer_comfy", "MelBandRoformer_fp16.safetensors", "diffusion_models", None),
     ("Kijai/wav2vec2_safetensors", "wav2vec2-chinese-base_fp16.safetensors", "wav2vec2", None),
