@@ -144,6 +144,7 @@ model_tasks = [
     ("Kijai/WanVideo_comfy", "Wan2_1-InfiniTetalk-Single_fp16.safetensors", "diffusion_models", "InfiniteTalk"),
     ("Kijai/WanVideo_comfy", "Wan_2_1_T2V_14B_480p_rCM_lora_average_rank_83_bf16.safetensors", "loras", "LoRAs/rCM"),
     ("Kijai/WanVideo_comfy", "lightx2v_I2V_14B_480p_cfg_step_distill_rank256_bf16.safetensors", "loras", "Lightx2v"),
+    ("IbarakiDouji/ani-Wan2.1", "aniWan2114BFp8E4m3fn_i2v480pNew.safetensors", "loras", None),
     ("Kijai/WanVideo_comfy", "UniAnimate-Wan2.1-14B-Lora-12000-fp16.safetensors", "loras", None),
     ("Kijai/MelBandRoFormer_comfy", "MelBandRoformer_fp16.safetensors", "diffusion_models", None),
     ("Kijai/wav2vec2_safetensors", "wav2vec2-chinese-base_fp16.safetensors", "wav2vec2", None),
