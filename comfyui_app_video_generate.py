@@ -126,7 +126,7 @@ image = image.run_commands([
 
 # Model download tasks (will be done at runtime)
 model_tasks = [
-    ("city96/Wan2.1-I2V-14B-480P-gguf", "wan2.1-i2v-14b-480p-Q4_0.gguf", "diffusion_models", None),
+    ("city96/Wan2.1-I2V-14B-480P-gguf", "wan2.1-i2v-14b-480p-Q8_0.gguf", "diffusion_models", None),
     ("Kijai/LongCat-Video_comfy", "LongCat-Avatar_comfy_bf16.safetensors", "diffusion_models", "Avatar"),
     ("Kijai/LongCat-Video_comfy", "LongCat-Avatar-single_fp8_e4m3fn_scaled_mixed_KJ.safetensors", "diffusion_models", "Avatar"),
     ("Kijai/WanVideo_comfy", "umt5-xxl-enc-bf16.safetensors", "text_encoders", None),
@@ -134,7 +134,7 @@ model_tasks = [
     # ("Comfy-Org/Wan_2.2_ComfyUI_Repackaged", "wan_2.1_vae.safetensors", "vae", "split_files/vae"),
     ("Kijai/LongCat-Video_comfy", "LongCat_distill_lora_alpha64_bf16.safetensors", "loras", None),
     ("Kijai/WanVideo_comfy", "Wan2_1-InfiniTetalk-Single_fp16.safetensors", "diffusion_models", "InfiniteTalk"),
-    ("Kijai/WanVideo_comfy", "Wan_2_1_T2V_14B_rCM_lora_average_rank_83_bf16.safetensors", "loras", "LoRAs/rCM"),
+    ("Kijai/WanVideo_comfy", "Wan_2_1_T2V_14B_480p_rCM_lora_average_rank_83_bf16.safetensors", "loras", "LoRAs/rCM"),
     ("lightx2v/Wan2.1-I2V-14B-480P-StepDistill-CfgDistill-Lightx2v", "Wan21_I2V_14B_lightx2v_cfg_step_distill_lora_rank64.safetensors", "loras", "loras"),
     ("Kijai/MelBandRoFormer_comfy", "MelBandRoformer_fp16.safetensors", "diffusion_models", None),
     ("Kijai/wav2vec2_safetensors", "wav2vec2-chinese-base_fp16.safetensors", "wav2vec2", None),
