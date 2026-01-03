@@ -133,8 +133,9 @@ image = image.run_commands([
 
 # Model download tasks (will be done at runtime)
 model_tasks = [
-    ("city96/Wan2.1-I2V-14B-480P-gguf", "wan2.1-i2v-14b-480p-Q8_0.gguf", "diffusion_models", None),
-    ("Comfy-Org/Wan_2.1_ComfyUI_repackaged", "wan2.1_i2v_480p_14B_bf16.safetensors", "diffusion_models", "split_files/diffusion_models"),
+    # ("city96/Wan2.1-I2V-14B-480P-gguf", "wan2.1-i2v-14b-480p-Q8_0.gguf", "diffusion_models", None),
+    # ("Comfy-Org/Wan_2.1_ComfyUI_repackaged", "wan2.1_i2v_480p_14B_bf16.safetensors", "diffusion_models", "split_files/diffusion_models"),
+    ("Comfy-Org/Wan_2.1_ComfyUI_repackaged", "wan2.1_i2v_720p_14B_fp16.safetensors", "diffusion_models", "split_files/diffusion_models"),
     # ("Kijai/LongCat-Video_comfy", "LongCat-Avatar_comfy_bf16.safetensors", "diffusion_models", "Avatar"),
     # ("Kijai/LongCat-Video_comfy", "LongCat-Avatar-single_fp8_e4m3fn_scaled_mixed_KJ.safetensors", "diffusion_models", "Avatar"),
     ("Kijai/WanVideo_comfy", "umt5-xxl-enc-bf16.safetensors", "text_encoders", None),
