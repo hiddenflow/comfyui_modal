@@ -113,8 +113,11 @@ for repo, flags in [
 ]:
     image = image.run_commands([git_clone_cmd(repo, **flags)])
 
+civit_api_key = os.environ.get('civit_api_key')
+
 # pip install
 image = image.run_commands([
+    "civitconfig default --api-key {civit_api_key}",
     "civitdl 1722558 {MODELS_DIR}/text_encoders",
     "pip install faster-whisper",
     "pip install librosa",
