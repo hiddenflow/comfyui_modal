@@ -100,7 +100,7 @@ for repo, flags in [
     ("Long-form-AI-video-generation/ComfyUI_vaceFramepack", {}),
     ("Fannovel16/ComfyUI-Frame-Interpolation", {}),
     ("numz/ComfyUI-SeedVR2_VideoUpscaler", {'install_reqs': True}),
-    ("lihaoyun6/ComfyUI-FlashVSR_Ultra_Fast", {'install_reqs': True}),
+    # ("lihaoyun6/ComfyUI-FlashVSR_Ultra_Fast", {'install_reqs': True}),
     ("kijai/ComfyUI-GIMM-VFI", {'install_reqs': True}),
     ("aining2022/ComfyUI_Swwan", {'install_reqs': True}),
     ("LeonQ8/ComfyUI-Dynamic-Lora-Scheduler", {'install_reqs': True}),
@@ -167,10 +167,10 @@ model_tasks = [
     ("numz/SeedVR2_comfyUI", "seedvr2_ema_3b_fp8_e4m3fn.safetensors", "SEEDVR2", None),
     ("numz/SeedVR2_comfyUI", "seedvr2_ema_7b_fp8_e4m3fn.safetensors", "SEEDVR2", None),
     ("numz/SeedVR2_comfyUI", "seedvr2_ema_7b_sharp_fp8_e4m3fn.safetensors", "SEEDVR2", None),
-    ("JunhaoZhuang/FlashVSR-v1.1", "LQ_proj_in.ckpt", "FlashVSR", None),
-    ("JunhaoZhuang/FlashVSR-v1.1", "TCDecoder.ckpt", "FlashVSR", None),
-    ("JunhaoZhuang/FlashVSR-v1.1", "Wan2.1_VAE.pth", "FlashVSR", None),
-    ("JunhaoZhuang/FlashVSR-v1.1", "diffusion_pytorch_model_streaming_dmd.safetensors", "FlashVSR", None),
+    # ("JunhaoZhuang/FlashVSR-v1.1", "LQ_proj_in.ckpt", "FlashVSR", None),
+    # ("JunhaoZhuang/FlashVSR-v1.1", "TCDecoder.ckpt", "FlashVSR", None),
+    # ("JunhaoZhuang/FlashVSR-v1.1", "Wan2.1_VAE.pth", "FlashVSR", None),
+    # ("JunhaoZhuang/FlashVSR-v1.1", "diffusion_pytorch_model_streaming_dmd.safetensors", "FlashVSR", None),
 ]
 
 extra_cmds = [
