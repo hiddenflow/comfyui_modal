@@ -118,7 +118,6 @@ civit_api_key = os.environ.get('civit_api_key')
 # pip install
 image = image.run_commands([
     f"civitconfig default --api-key {civit_api_key}",
-    f"civitdl 1722558 {MODELS_DIR}/text_encoders",
     "pip install faster-whisper",
     "pip install librosa",
     "pip install torch==2.8.0+cu128 torchvision==0.23.0+cu128 torchaudio==2.8.0+cu128 xformers==0.0.32.post2 triton==3.4.0 --index-url https://download.pytorch.org/whl/cu128 --force-reinstall",
@@ -177,6 +176,7 @@ model_tasks = [
 ]
 
 extra_cmds = [
+    f"civitdl 1722558 {MODELS_DIR}/text_encoders",
     f"wget https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth -P {MODELS_DIR}/upscale_models",
     f"wget https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.1/RealESRGAN_x2plus.pth -P {MODELS_DIR}/upscale_models",
     f"wget https://github.com/Phhofm/models/releases/download/4xBHI_dat2_real/4xBHI_dat2_real.pth -P {MODELS_DIR}/upscale_models",
@@ -243,6 +243,16 @@ def ui():
     except Exception as e:
         print(f"Unexpected error during backend update: {e}")
 
+    # Configure ComfyUI-Manager: Disable auto-fetch, set weak security, and disable file logging
+    manager_config_dir = os.path.join(DATA_BASE, "user", "__manager")
+    manager_config_path = os.path.join(manager_config_dir, "config.ini")
+    print("Configuring ComfyUI-Manager: Disabling auto-fetch, setting security_level to weak, and disabling file logging...")
+    os.makedirs(manager_config_dir, exist_ok=True)
+    config_content = "[default]\nnetwork_mode = personal_cloud\nsecurity_level = weak\nlog_to_file = false\n"
+    with open(manager_config_path, "w") as f:
+        f.write(config_content)
+    print(f"Updated {manager_config_path} with security_level=weak, log_to_file=false")
+
     manager_dir = os.path.join(CUSTOM_NODES_DIR, "ComfyUI-Manager")
     if os.path.exists(manager_dir):
         print("Updating ComfyUI-Manager to the latest version...")
@@ -264,16 +274,6 @@ def ui():
             print("ComfyUI-Manager installed successfully")
         except subprocess.CalledProcessError as e:
             print(f"Error installing ComfyUI-Manager: {e.stderr}")
-
-    # Configure ComfyUI-Manager: Disable auto-fetch, set weak security, and disable file logging
-    manager_config_dir = os.path.join(DATA_BASE, "user", "__manager")
-    manager_config_path = os.path.join(manager_config_dir, "config.ini")
-    print("Configuring ComfyUI-Manager: Disabling auto-fetch, setting security_level to weak, and disabling file logging...")
-    os.makedirs(manager_config_dir, exist_ok=True)
-    config_content = "[default]\nnetwork_mode = private\nsecurity_level = weak\nlog_to_file = false\n"
-    with open(manager_config_path, "w") as f:
-        f.write(config_content)
-    print(f"Updated {manager_config_path} with security_level=weak, log_to_file=false")
 
     # Upgrade pip at runtime
     print("Upgrading pip at runtime...")
