@@ -176,7 +176,7 @@ model_tasks = [
 ]
 
 extra_cmds = [
-    f"civitdl 1722558 {MODELS_DIR}/text_encoders",
+    f"civitdl 1722558 -P {MODELS_DIR}/text_encoders",
     f"wget https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth -P {MODELS_DIR}/upscale_models",
     f"wget https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.1/RealESRGAN_x2plus.pth -P {MODELS_DIR}/upscale_models",
     f"wget https://github.com/Phhofm/models/releases/download/4xBHI_dat2_real/4xBHI_dat2_real.pth -P {MODELS_DIR}/upscale_models",
