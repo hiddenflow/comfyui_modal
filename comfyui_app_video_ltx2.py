@@ -132,6 +132,7 @@ image = image.run_commands([
 # Model download tasks (will be done at runtime)
 model_tasks = [
     ("Lightricks/LTX-2", "ltx-2-19b-distilled-fp8.safetensors", "checkpoints", None),
+    ("Lightricks/LTX-2", "ltx-2-spatial-upscaler-x2-1.0.safetensors", "latent_upscale_models", None),
     ("Comfy-Org/ltx-2", "gemma_3_12B_it.safetensors", "text_encoders", "split_files/text_encoders"),
     ("numz/SeedVR2_comfyUI", "ema_vae_fp16.safetensors", "SEEDVR2", None),
     ("numz/SeedVR2_comfyUI", "seedvr2_ema_3b_fp8_e4m3fn.safetensors", "SEEDVR2", None),
