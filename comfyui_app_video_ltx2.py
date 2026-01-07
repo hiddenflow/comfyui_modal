@@ -140,13 +140,13 @@ model_tasks = [
 ]
 
 extra_cmds = [
-    f"civitdl 1722558 {MODELS_DIR}/text_encoders",
+    # f"civitdl 1722558 {MODELS_DIR}/text_encoders",
     f"wget https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth -P {MODELS_DIR}/upscale_models",
     f"wget https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.1/RealESRGAN_x2plus.pth -P {MODELS_DIR}/upscale_models",
     f"wget https://github.com/Phhofm/models/releases/download/4xBHI_dat2_real/4xBHI_dat2_real.pth -P {MODELS_DIR}/upscale_models",
     f"wget https://github.com/Phhofm/models/releases/download/1xgaterv3_r_sharpen/1xgaterv3_r_sharpen_fp32_op17_onnxslim.onnx -P {MODELS_DIR}/upscale_models",
     f"wget https://github.com/Phhofm/models/releases/download/2xPublic_realplksr_dysample_layernorm_real_nn/2xPublic_realplksr_dysample_layernorm_real_nn.pth -P {MODELS_DIR}/upscale_models",
- #   f"wget https://github.com/Phhofm/models/releases/download/2xParagonSR_Nano_gan/2xParagonSR_Nano_gan_op18_fp16.onnx -P {MODELS_DIR}/upscale_models",
+    # f"wget https://github.com/Phhofm/models/releases/download/2xParagonSR_Nano_gan/2xParagonSR_Nano_gan_op18_fp16.onnx -P {MODELS_DIR}/upscale_models",
     f"wget https://huggingface.co/crj/dl-ws/resolve/main/yoloface_8n.onnx -P {MODELS_DIR}/faceless/face_detector",
     f"wget https://huggingface.co/crj/dl-ws/resolve/main/2dfan4.onnx -P {MODELS_DIR}/faceless/face_landmarker",
     f"wget https://huggingface.co/crj/dl-ws/resolve/eb6e7e673da4c13994012ab57d71e94ba16f6a5a/face_landmarker_68_5.onnx -P {MODELS_DIR}/faceless/face_landmarker",
