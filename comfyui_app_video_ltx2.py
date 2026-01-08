@@ -143,6 +143,8 @@ model_tasks = [
     ("numz/SeedVR2_comfyUI", "seedvr2_ema_3b_fp8_e4m3fn.safetensors", "SEEDVR2", None),
     ("numz/SeedVR2_comfyUI", "seedvr2_ema_7b_fp8_e4m3fn.safetensors", "SEEDVR2", None),
     ("numz/SeedVR2_comfyUI", "seedvr2_ema_7b_sharp_fp8_e4m3fn.safetensors", "SEEDVR2", None),
+    ("Kijai/LTXV2_comfy", "LTX2_audio_vae_bf16.safetensors", "vae", "VAE"),
+    ("Kijai/LTXV2_comfy", "LTX2_video_vae_bf16.safetensors", "vae", "VAE"),
 ]
 
 extra_cmds = [
