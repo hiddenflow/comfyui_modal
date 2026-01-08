@@ -105,8 +105,7 @@ for repo, flags in [
     ("Gourieff/ComfyUI-ReActor", {'install_reqs': True}),
     ("ClownsharkBatwing/RES4LYF", {'install_reqs': True}),
     ("Lightricks/ComfyUI-LTXVideo", {'install_reqs': True}),
-    ("kambara/ComfyUI-PromptPalette", {}),
-    ("silveroxides/ComfyUI_bnb_nf4_fp4_Loaders", {'install_reqs': True}),
+    ("kambara/ComfyUI-PromptPalette", {})
 ]:
     image = image.run_commands([git_clone_cmd(repo, **flags)])
 
