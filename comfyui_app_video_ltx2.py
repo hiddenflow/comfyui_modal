@@ -81,7 +81,7 @@ image = image.run_commands([
 
 # Git-based nodes baked into image at default ComfyUI location
 for repo, flags in [
-    ("vantagewithai/Vantage-GGUF", {'install_reqs': True}),
+    ("hiddenflow/ComfyUI-GGUF", {'install_reqs': True}),
     ("ssitu/ComfyUI_UltimateSDUpscale", {}),
     ("welltop-cn/ComfyUI-TeaCache", {'install_reqs': True}),
     ("nkchocoai/ComfyUI-SaveImageWithMetaData", {}),
