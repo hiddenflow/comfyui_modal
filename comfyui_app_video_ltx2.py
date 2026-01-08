@@ -55,6 +55,7 @@ image = (
         # Install ComfyUI to default location
         "comfy --skip-prompt install --nvidia",
         "pip install civitdl",
+        f"civitconfig default --api-key {civit_api_key}",
     ])
     .env({
         "HF_HUB_ENABLE_HF_TRANSFER": "1",
@@ -113,7 +114,7 @@ civit_api_key = os.environ.get('civit_api_key')
 
 # pip install
 image = image.run_commands([
-    f"civitconfig default --api-key {civit_api_key}",
+    "pip install ftfy"
     "pip install faster-whisper",
     "pip install librosa",
     "pip install torch==2.8.0+cu128 torchvision==0.23.0+cu128 torchaudio==2.8.0+cu128 xformers==0.0.32.post2 triton==3.4.0 --index-url https://download.pytorch.org/whl/cu128 --force-reinstall",
