@@ -137,6 +137,8 @@ model_tasks = [
     ("Lightricks/LTX-2", "ltx-2-19b-dev-fp8.safetensors", "checkpoints", None),
     ("Lightricks/LTX-2", "ltx-2-spatial-upscaler-x2-1.0.safetensors", "latent_upscale_models", None),
     ("Lightricks/LTX-2", "ltx-2-temporal-upscaler-x2-1.0.safetensors", "latent_upscale_models", None),
+    ("Lightricks/LTX-2-19b-IC-LoRA-Detailer", "ltx-2-19b-ic-lora-detailer.safetensors", "loras", None),
+    ("Lightricks/LTX-2-19b-LoRA-Camera-Control-Static", "ltx-2-19b-lora-camera-control-static.safetensors", "loras", None),
     ("Comfy-Org/ltx-2", "gemma_3_12B_it.safetensors", "text_encoders", "split_files/text_encoders"),
     ("unsloth/gemma-3-12b-it-qat-GGUF", "gemma-3-12b-it-qat-Q8_0.gguf", "text_encoders", None),
     ("numz/SeedVR2_comfyUI", "ema_vae_fp16.safetensors", "SEEDVR2", None),
@@ -247,11 +249,11 @@ def ui():
         except subprocess.CalledProcessError as e:
             print(f"Error installing ComfyUI-Manager: {e.stderr}")
 
-    file_path = os.path.join("ComfyUI", "comfy", "ldm", "lightricks", "embeddings_connector.py")
+    # file_path = os.path.join("ComfyUI", "comfy", "ldm", "lightricks", "embeddings_connector.py")
 
-    # low VRAM
-    old_code = "hidden_states = torch.cat((hidden_states, learnable_registers[hidden_states.shape[1]:].unsqueeze(0).repeat(hidden_states.shape[0], 1, 1)), dim=1)"
-    new_code = "hidden_states = torch.cat((hidden_states, learnable_registers[hidden_states.shape[1]:].unsqueeze(0).repeat(hidden_states.shape[0], 1, 1).to(hidden_states.device)), dim=1)"
+    # # low VRAM
+    # old_code = "hidden_states = torch.cat((hidden_states, learnable_registers[hidden_states.shape[1]:].unsqueeze(0).repeat(hidden_states.shape[0], 1, 1)), dim=1)"
+    # new_code = "hidden_states = torch.cat((hidden_states, learnable_registers[hidden_states.shape[1]:].unsqueeze(0).repeat(hidden_states.shape[0], 1, 1).to(hidden_states.device)), dim=1)"
 
     if os.path.exists(file_path):
         with open(file_path, 'r', encoding='utf-8') as f:
