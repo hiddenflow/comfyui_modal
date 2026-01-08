@@ -113,7 +113,7 @@ for repo, flags in [
 
 # pip install
 image = image.run_commands([
-    "pip install ftfy"
+    "pip install ftfy",
     "pip install faster-whisper",
     "pip install librosa",
     "pip install torch==2.8.0+cu128 torchvision==0.23.0+cu128 torchaudio==2.8.0+cu128 xformers==0.0.32.post2 triton==3.4.0 --index-url https://download.pytorch.org/whl/cu128 --force-reinstall",
