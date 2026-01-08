@@ -264,21 +264,21 @@ def ui():
     # old_code = "hidden_states = torch.cat((hidden_states, learnable_registers[hidden_states.shape[1]:].unsqueeze(0).repeat(hidden_states.shape[0], 1, 1)), dim=1)"
     # new_code = "hidden_states = torch.cat((hidden_states, learnable_registers[hidden_states.shape[1]:].unsqueeze(0).repeat(hidden_states.shape[0], 1, 1).to(hidden_states.device)), dim=1)"
 
-    if os.path.exists(file_path):
-        with open(file_path, 'r', encoding='utf-8') as f:
-            content = f.read()
+    # if os.path.exists(file_path):
+    #     with open(file_path, 'r', encoding='utf-8') as f:
+    #         content = f.read()
 
-        # Melakukan penggantian teks
-        if old_code in content:
-            new_content = content.replace(old_code, new_code)
+    #     # Melakukan penggantian teks
+    #     if old_code in content:
+    #         new_content = content.replace(old_code, new_code)
             
-            with open(file_path, 'w', encoding='utf-8') as f:
-                f.write(new_content)
-            print(f"Code updated: {file_path}")
-        else:
-            print("Code not found.")
-    else:
-        print(f"File not found: {file_path}")
+    #         with open(file_path, 'w', encoding='utf-8') as f:
+    #             f.write(new_content)
+    #         print(f"Code updated: {file_path}")
+    #     else:
+    #         print("Code not found.")
+    # else:
+    #     print(f"File not found: {file_path}")
 
     # Upgrade pip at runtime
     print("Upgrading pip at runtime...")
