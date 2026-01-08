@@ -38,6 +38,7 @@ cuda_version = "12.8.1"  # should be no greater than host CUDA version
 flavor = "cudnn-devel"  # includes full CUDA toolkit
 operating_sys = "ubuntu24.04"
 tag = f"{cuda_version}-{flavor}-{operating_sys}"
+civit_api_key = os.environ.get('civit_api_key')
 
 # Build image with ComfyUI installed to default location /root/comfy/ComfyUI
 image = (
@@ -109,8 +110,6 @@ for repo, flags in [
     ("kambara/ComfyUI-PromptPalette", {})
 ]:
     image = image.run_commands([git_clone_cmd(repo, **flags)])
-
-civit_api_key = os.environ.get('civit_api_key')
 
 # pip install
 image = image.run_commands([
