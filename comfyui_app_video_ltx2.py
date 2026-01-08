@@ -82,6 +82,7 @@ image = image.run_commands([
 # Git-based nodes baked into image at default ComfyUI location
 for repo, flags in [
     ("hiddenflow/ComfyUI-GGUF", {'install_reqs': True}),
+    ("evanspearman/ComfyMath", {'install_reqs': True}),
     ("ssitu/ComfyUI_UltimateSDUpscale", {}),
     ("welltop-cn/ComfyUI-TeaCache", {'install_reqs': True}),
     ("nkchocoai/ComfyUI-SaveImageWithMetaData", {}),
@@ -104,6 +105,8 @@ for repo, flags in [
     ("Gourieff/ComfyUI-ReActor", {'install_reqs': True}),
     ("ClownsharkBatwing/RES4LYF", {'install_reqs': True}),
     ("Lightricks/ComfyUI-LTXVideo", {'install_reqs': True}),
+    ("kambara/ComfyUI-PromptPalette", {}),
+    ("silveroxides/ComfyUI_bnb_nf4_fp4_Loaders", {'install_reqs': True}),
 ]:
     image = image.run_commands([git_clone_cmd(repo, **flags)])
 
@@ -140,6 +143,7 @@ model_tasks = [
     ("Lightricks/LTX-2-19b-IC-LoRA-Detailer", "ltx-2-19b-ic-lora-detailer.safetensors", "loras", None),
     ("Lightricks/LTX-2-19b-LoRA-Camera-Control-Static", "ltx-2-19b-lora-camera-control-static.safetensors", "loras", None),
     ("Comfy-Org/ltx-2", "gemma_3_12B_it.safetensors", "text_encoders", "split_files/text_encoders"),
+    ("GitMylo/LTX-2-comfy_gemma_fp8_e4m3fn", "gemma_3_12B_it_fp8_e4m3fn.safetensors", "clip", None),
     ("unsloth/gemma-3-12b-it-qat-GGUF", "gemma-3-12b-it-qat-Q8_0.gguf", "text_encoders", None),
     ("numz/SeedVR2_comfyUI", "ema_vae_fp16.safetensors", "SEEDVR2", None),
     ("numz/SeedVR2_comfyUI", "seedvr2_ema_3b_fp8_e4m3fn.safetensors", "SEEDVR2", None),
@@ -147,6 +151,11 @@ model_tasks = [
     ("numz/SeedVR2_comfyUI", "seedvr2_ema_7b_sharp_fp8_e4m3fn.safetensors", "SEEDVR2", None),
     ("Kijai/LTXV2_comfy", "LTX2_audio_vae_bf16.safetensors", "vae", "VAE"),
     ("Kijai/LTXV2_comfy", "LTX2_video_vae_bf16.safetensors", "vae", "VAE"),
+    ("1038lab/Qwen-Image-Edit-2511-FP8", "Qwen-Image-Edit-2511-FP8_e4m3fn.safetensors", "diffusion_models", None),
+    ("Comfy-Org/Qwen-Image_ComfyUI", "qwen_2.5_vl_7b_fp8_scaled.safetensors", "text_encoders", "split_files/text_encoders"),
+    ("Comfy-Org/Qwen-Image_ComfyUI", "qwen_image_vae.safetensors", "vae", "split_files/vae"),
+    ("lightx2v/Qwen-Image-Edit-2511-Lightning", "Qwen-Image-Edit-2511-Lightning-8steps-V1.0-bf16.safetensors", "loras", None),
+    ("fal/Qwen-Image-Edit-2511-Multiple-Angles-LoRA", "qwen-image-edit-2511-multiple-angles-lora.safetensors", "loras", None),
 ]
 
 extra_cmds = [
