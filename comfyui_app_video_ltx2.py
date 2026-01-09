@@ -135,19 +135,19 @@ image = image.run_commands([
 
 # Model download tasks (will be done at runtime)
 model_tasks = [
-    ("Lightricks/LTX-2", "ltx-2-19b-distilled-fp8.safetensors", "checkpoints", None),
-    ("Lightricks/LTX-2", "ltx-2-19b-dev-fp8.safetensors", "checkpoints", None),
     ("Lightricks/LTX-2", "ltx-2-spatial-upscaler-x2-1.0.safetensors", "latent_upscale_models", None),
     ("Lightricks/LTX-2", "ltx-2-temporal-upscaler-x2-1.0.safetensors", "latent_upscale_models", None),
     ("Lightricks/LTX-2-19b-IC-LoRA-Detailer", "ltx-2-19b-ic-lora-detailer.safetensors", "loras", None),
     ("Lightricks/LTX-2-19b-LoRA-Camera-Control-Static", "ltx-2-19b-lora-camera-control-static.safetensors", "loras", None),
-    ("Comfy-Org/ltx-2", "gemma_3_12B_it.safetensors", "text_encoders", "split_files/text_encoders"),
+    ("GitMylo/LTX-2-comfy_gemma_fp8_e4m3fn", "gemma_3_12B_it_fp8_e4m3fn.safetensors", "text_encoders", None),
     ("GitMylo/LTX-2-comfy_gemma_fp8_e4m3fn", "gemma_3_12B_it_fp8_e4m3fn.safetensors", "clip", None),
     ("unsloth/gemma-3-12b-it-qat-GGUF", "gemma-3-12b-it-qat-Q8_0.gguf", "clip", None),
     ("numz/SeedVR2_comfyUI", "ema_vae_fp16.safetensors", "SEEDVR2", None),
     ("numz/SeedVR2_comfyUI", "seedvr2_ema_3b_fp8_e4m3fn.safetensors", "SEEDVR2", None),
     ("numz/SeedVR2_comfyUI", "seedvr2_ema_7b_fp8_e4m3fn.safetensors", "SEEDVR2", None),
     ("numz/SeedVR2_comfyUI", "seedvr2_ema_7b_sharp_fp8_e4m3fn.safetensors", "SEEDVR2", None),
+    ("Kijai/LTXV2_comfy", "ltx-2-19b-distilled-fp8_transformer_only.safetensors", "diffusion_models", "diffusion_models"),
+    ("Kijai/LTXV2_comfy", "ltx-2-19b-embeddings_connector_bf16.safetensors", "text_encoders", "text_encoders"),
     ("Kijai/LTXV2_comfy", "LTX2_audio_vae_bf16.safetensors", "vae", "VAE"),
     ("Kijai/LTXV2_comfy", "LTX2_video_vae_bf16.safetensors", "vae", "VAE"),
     ("1038lab/Qwen-Image-Edit-2511-FP8", "Qwen-Image-Edit-2511-FP8_e4m3fn.safetensors", "diffusion_models", None),
