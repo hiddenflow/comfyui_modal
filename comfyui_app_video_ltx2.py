@@ -147,6 +147,7 @@ model_tasks = [
     ("numz/SeedVR2_comfyUI", "seedvr2_ema_7b_fp8_e4m3fn.safetensors", "SEEDVR2", None),
     ("numz/SeedVR2_comfyUI", "seedvr2_ema_7b_sharp_fp8_e4m3fn.safetensors", "SEEDVR2", None),
     ("Kijai/LTXV2_comfy", "ltx-2-19b-distilled-fp8_transformer_only.safetensors", "diffusion_models", "diffusion_models"),
+    ("Kijai/LTXV2_comfy", "ltx-2-19b-embeddings_connector_bf16.safetensors", "clip", "text_encoders"),
     ("Kijai/LTXV2_comfy", "ltx-2-19b-embeddings_connector_bf16.safetensors", "text_encoders", "text_encoders"),
     ("Kijai/LTXV2_comfy", "LTX2_audio_vae_bf16.safetensors", "vae", "VAE"),
     ("Kijai/LTXV2_comfy", "LTX2_video_vae_bf16.safetensors", "vae", "VAE"),
