@@ -137,6 +137,7 @@ image = image.run_commands([
 model_tasks = [
     ("Lightricks/LTX-2", "ltx-2-spatial-upscaler-x2-1.0.safetensors", "latent_upscale_models", None),
     ("Lightricks/LTX-2", "ltx-2-temporal-upscaler-x2-1.0.safetensors", "latent_upscale_models", None),
+    ("Lightricks/LTX-2", "ltx-2-19b-distilled-lora-384.safetensors", "loras", None),
     ("Lightricks/LTX-2-19b-IC-LoRA-Detailer", "ltx-2-19b-ic-lora-detailer.safetensors", "loras", None),
     ("Lightricks/LTX-2-19b-LoRA-Camera-Control-Static", "ltx-2-19b-lora-camera-control-static.safetensors", "loras", None),
     ("GitMylo/LTX-2-comfy_gemma_fp8_e4m3fn", "gemma_3_12B_it_fp8_e4m3fn.safetensors", "text_encoders", None),
