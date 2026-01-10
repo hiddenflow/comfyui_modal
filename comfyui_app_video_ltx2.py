@@ -143,6 +143,7 @@ model_tasks = [
     ("GitMylo/LTX-2-comfy_gemma_fp8_e4m3fn", "gemma_3_12B_it_fp8_e4m3fn.safetensors", "text_encoders", None),
     ("GitMylo/LTX-2-comfy_gemma_fp8_e4m3fn", "gemma_3_12B_it_fp8_e4m3fn.safetensors", "clip", None),
     ("unsloth/gemma-3-12b-it-qat-GGUF", "gemma-3-12b-it-qat-Q8_0.gguf", "clip", None),
+    ("unsloth/gemma-3-12b-it", "tokenizer.model", "clip", None),
     ("numz/SeedVR2_comfyUI", "ema_vae_fp16.safetensors", "SEEDVR2", None),
     ("numz/SeedVR2_comfyUI", "seedvr2_ema_3b_fp8_e4m3fn.safetensors", "SEEDVR2", None),
     ("numz/SeedVR2_comfyUI", "seedvr2_ema_7b_fp8_e4m3fn.safetensors", "SEEDVR2", None),
@@ -374,7 +375,7 @@ def ui():
     print(f"Starting ComfyUI from {DATA_BASE}...")
     
     # Start ComfyUI server with correct syntax and latest frontend
-    cmd = ["comfy", "launch", "--", "--listen", "0.0.0.0", "--port", "8000", "--reserve-vram", "6", "--disable-smart-memory", "--front-end-version", "Comfy-Org/ComfyUI_frontend@latest", "--enable-manager"]
+    cmd = ["comfy", "launch", "--", "--listen", "0.0.0.0", "--port", "8000", "--reserve-vram", "6", "--cache-ram", "--front-end-version", "Comfy-Org/ComfyUI_frontend@latest", "--enable-manager"]
     print(f"Executing: {' '.join(cmd)}")
     
     process = subprocess.Popen(
