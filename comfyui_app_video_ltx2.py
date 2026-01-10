@@ -262,7 +262,7 @@ def ui():
         except subprocess.CalledProcessError as e:
             print(f"Error installing ComfyUI-Manager: {e.stderr}")
 
-    file_path = os.path.join("ComfyUI", "comfy", "ldm", "lightricks", "embeddings_connector.py")
+    file_path = os.path.join(DATA_BASE, "comfy", "ldm", "lightricks", "embeddings_connector.py")
 
     # low VRAM
     old_code = "hidden_states = torch.cat((hidden_states, learnable_registers[hidden_states.shape[1]:].unsqueeze(0).repeat(hidden_states.shape[0], 1, 1)), dim=1)"
