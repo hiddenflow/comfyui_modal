@@ -152,6 +152,7 @@ model_tasks = [
     # ("Kijai/LTXV2_comfy", "ltx-2-19b-distilled-fp8_transformer_only.safetensors", "diffusion_models", "diffusion_models"),
     ("Kijai/LTXV2_comfy", "ltx-2-19b-dev_Q8_0.gguf", "diffusion_models", "diffusion_models"),
     ("Kijai/LTXV2_comfy", "ltx-2-19b-distilled_Q8_0.gguf", "diffusion_models", "diffusion_models"),
+    ("Kijai/LTXV2_comfy", "ltx-2-19b-distilled-lora-resized_dynamic_fro095_avg_rank_242_bf16.safetensors", "loras", "loras"),
     ("Kijai/LTXV2_comfy", "ltx-2-19b-distilled-lora_resized_dynamic_fro09_avg_rank_175_fp8.safetensors", "loras", "loras"),
     ("Kijai/LTXV2_comfy", "ltx-2-19b-embeddings_connector_dev_bf16.safetensors", "text_encoders", "text_encoders"),
     ("Kijai/LTXV2_comfy", "ltx-2-19b-embeddings_connector_distill_bf16.safetensors", "text_encoders", "text_encoders"),
