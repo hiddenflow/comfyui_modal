@@ -128,7 +128,8 @@ image = image.run_commands([
     "pip install 'pillow>=9.2.0,<12.0'",
     "export CC=gcc++-13",
     "export CXX=g++-13",
-    "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && git checkout eb615cf6cf4d221338033340ee2de1c37fbdba4a && python setup.py install",
+    # "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && git checkout eb615cf6cf4d221338033340ee2de1c37fbdba4a && python setup.py install",
+    "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && python setup.py install",
     "pip install https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.7.2/flash_attn-2.8.3+cu128torch2.8-cp312-cp312-linux_x86_64.whl --no-build-isolation",
     # "git clone https://github.com/Dao-AILab/flash-attention.git && cd flash-attention && python setup.py install",
 ])
@@ -192,7 +193,7 @@ app = modal.App(name="comfyui", image=image)
     max_containers=1,
     scaledown_window=600,
     timeout=1800,
-    gpu=os.environ.get('MODAL_GPU_TYPE', 'L40S'),
+    gpu=os.environ.get('MODAL_GPU_TYPE', 'H100'),
     volumes={DATA_ROOT: vol},
 )
 @modal.concurrent(max_inputs=10)
