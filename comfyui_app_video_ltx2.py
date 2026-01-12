@@ -293,7 +293,7 @@ def ui():
 
     try:
         subprocess.run(av_command, shell=True, check=True, capture_output=True, text=True)
-        print(f"Berhasil mengganti file: {output_path}")
+        print(f"Berhasil mengganti file: {output_av}")
     except subprocess.CalledProcessError as e:
         print(f"Gagal mendownload file: {e}")
 
