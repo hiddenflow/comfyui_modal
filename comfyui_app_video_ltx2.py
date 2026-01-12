@@ -390,7 +390,7 @@ def ui():
     print(f"Starting ComfyUI from {DATA_BASE}...")
     
     # Start ComfyUI server with correct syntax and latest frontend
-    cmd = ["comfy", "launch", "--", "--listen", "0.0.0.0", "--port", "8000", "--reserve-vram", "6", "--cache-ram", "--front-end-version", "Comfy-Org/ComfyUI_frontend@latest", "--enable-manager"]
+    cmd = ["comfy", "launch", "--", "--listen", "0.0.0.0", "--port", "8000", "--highvram", "--use-sage-attention", "--fast", "--disable-smart-memory", "--cache-ram", "--front-end-version", "Comfy-Org/ComfyUI_frontend@latest", "--enable-manager"]
     print(f"Executing: {' '.join(cmd)}")
     
     process = subprocess.Popen(
