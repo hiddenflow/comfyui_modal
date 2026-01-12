@@ -83,7 +83,7 @@ image = image.run_commands([
 
 # Git-based nodes baked into image at default ComfyUI location
 for repo, flags in [
-    ("jarz76/ComfyUI-GGUF/tree/gemma3-support", {'install_reqs': True}),
+    ("city96/ComfyUI-GGUF", {'install_reqs': True}),
     ("evanspearman/ComfyMath", {'install_reqs': True}),
     ("ssitu/ComfyUI_UltimateSDUpscale", {}),
     ("welltop-cn/ComfyUI-TeaCache", {'install_reqs': True}),
