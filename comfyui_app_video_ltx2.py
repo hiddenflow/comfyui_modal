@@ -29,13 +29,13 @@ def git_clone_cmd(node_repo: str, recursive: bool = False, install_reqs: bool = 
 def hf_download(repo_id: str, filename: str, subdir: str, subfolder: Optional[str] = None):
     if repo_id == 'unsloth/gemma-3-12b-it-qat':
         for file in files:
-        print(f"Downloading {file}...")
-        hf_hub_download(
-            repo_id=repo_id,
-            filename=file,
-            subfolder=subfolder,
-            local_dir=TMP_DL
-        )
+            print(f"Downloading {file}...")
+            hf_hub_download(
+                repo_id=repo_id,
+                filename=file,
+                subfolder=subfolder,
+                local_dir=TMP_DL
+            )
     else:
         out = hf_hub_download(repo_id=repo_id, filename=filename, subfolder=subfolder, local_dir=TMP_DL)
         target = os.path.join(MODELS_DIR, subdir)
