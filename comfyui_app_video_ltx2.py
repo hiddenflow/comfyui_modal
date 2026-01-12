@@ -289,9 +289,10 @@ def ui():
 
     url_av = "https://raw.githubusercontent.com/kijai/ComfyUI/refs/heads/ltx2_memory/comfy/ldm/lightricks/av_model.py"
     output_av = "comfy/ldm/lightricks/av_model.py"
+    av_command = f"wget -q {url_av} -O {output_av}"
 
     try:
-        subprocess.run(["wget", "-q", url_av, "-O", output_av], shell=True, check=True, capture_output=True, text=True)
+        subprocess.run(av_command, shell=True, check=True, capture_output=True, text=True)
         print(f"Berhasil mengganti file: {output_path}")
     except subprocess.CalledProcessError as e:
         print(f"Gagal mendownload file: {e}")
