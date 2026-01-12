@@ -27,10 +27,20 @@ def git_clone_cmd(node_repo: str, recursive: bool = False, install_reqs: bool = 
     return cmd
     
 def hf_download(repo_id: str, filename: str, subdir: str, subfolder: Optional[str] = None):
-    out = hf_hub_download(repo_id=repo_id, filename=filename, subfolder=subfolder, local_dir=TMP_DL)
-    target = os.path.join(MODELS_DIR, subdir)
-    os.makedirs(target, exist_ok=True)
-    shutil.move(out, os.path.join(target, filename))
+    if repo_id == 'unsloth/gemma-3-12b-it-qat':
+        for file in files:
+        print(f"Downloading {file}...")
+        hf_hub_download(
+            repo_id=repo_id,
+            filename=file,
+            subfolder=subfolder,
+            local_dir=TMP_DL
+        )
+    else:
+        out = hf_hub_download(repo_id=repo_id, filename=filename, subfolder=subfolder, local_dir=TMP_DL)
+        target = os.path.join(MODELS_DIR, subdir)
+        os.makedirs(target, exist_ok=True)
+        shutil.move(out, os.path.join(target, filename))
 
 import modal
 
@@ -142,8 +152,7 @@ model_tasks = [
     ("Lightricks/LTX-2", "ltx-2-19b-distilled-lora-384.safetensors", "loras", None),
     ("Lightricks/LTX-2-19b-IC-LoRA-Detailer", "ltx-2-19b-ic-lora-detailer.safetensors", "loras", None),
     ("Lightricks/LTX-2-19b-LoRA-Camera-Control-Static", "ltx-2-19b-lora-camera-control-static.safetensors", "loras", None),
-    ("GitMylo/LTX-2-comfy_gemma_fp8_e4m3fn", "gemma_3_12B_it_fp8_e4m3fn.safetensors", "text_encoders", None),
-    ("GitMylo/LTX-2-comfy_gemma_fp8_e4m3fn", "gemma_3_12B_it_fp8_e4m3fn.safetensors", "clip", None),
+    ("unsloth/gemma-3-12b-it-qat", "", "text_encoders/gemma-3-12b-it-qat", "unsloth"),
     ("unsloth/gemma-3-12b-it-GGUF", "gemma-3-12b-it-Q8_0.gguf", "text_encoders", None),
     ("unsloth/gemma-3-4b-it", "tokenizer.model", "text_encoders", None),
     ("numz/SeedVR2_comfyUI", "ema_vae_fp16.safetensors", "SEEDVR2", None),
