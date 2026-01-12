@@ -83,7 +83,7 @@ image = image.run_commands([
 
 # Git-based nodes baked into image at default ComfyUI location
 for repo, flags in [
-    ("muljanis45/ComfyUI-GGUF", {'install_reqs': True}),
+    ("jarz76/ComfyUI-GGUF", {'install_reqs': True}),
     ("evanspearman/ComfyMath", {'install_reqs': True}),
     ("ssitu/ComfyUI_UltimateSDUpscale", {}),
     ("welltop-cn/ComfyUI-TeaCache", {'install_reqs': True}),
@@ -152,6 +152,7 @@ model_tasks = [
     # ("Kijai/LTXV2_comfy", "ltx-2-19b-distilled-fp8_transformer_only.safetensors", "diffusion_models", "diffusion_models"),
     ("Kijai/LTXV2_comfy", "ltx-2-19b-dev_Q8_0.gguf", "diffusion_models", "diffusion_models"),
     ("Kijai/LTXV2_comfy", "ltx-2-19b-distilled_Q8_0.gguf", "diffusion_models", "diffusion_models"),
+    ("Kijai/LTXV2_comfy", "ltx-2-19b-distilled-lora_resized_dynamic_fro09_avg_rank_175_fp8.safetensors", "loras", "loras"),
     ("Kijai/LTXV2_comfy", "ltx-2-19b-embeddings_connector_dev_bf16.safetensors", "text_encoders", "text_encoders"),
     ("Kijai/LTXV2_comfy", "ltx-2-19b-embeddings_connector_distill_bf16.safetensors", "text_encoders", "text_encoders"),
     ("Kijai/LTXV2_comfy", "LTX2_audio_vae_bf16.safetensors", "vae", "VAE"),
