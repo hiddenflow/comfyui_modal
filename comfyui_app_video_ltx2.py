@@ -364,7 +364,7 @@ def ui():
             shutil.rmtree(TMP_GEMMA_DL)
 
         print(f"Downloading gemma-3-12b-it-qat...")
-        out = snapshot_download(
+        snapshot_download(
             repo_id="unsloth/gemma-3-12b-it-qat",
             local_dir=TMP_GEMMA_DL,
             local_dir_use_symlinks=False
