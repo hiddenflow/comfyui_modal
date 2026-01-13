@@ -66,8 +66,8 @@ image = (
         "CUDA_HOME": "/usr/local/cuda-12.8",
         "FORCE_CUDA": "1",
         "TORCH_CUDA_ARCH_LIST": "9.0",
-        "EXT_PARALLEL": "8",
-        "NVCC_APPEND_FLAGS": "--threads 4",
+        "EXT_PARALLEL": "16",
+        "NVCC_APPEND_FLAGS": "--threads 8",
         "MAX_JOBS": "16",
         "USE_NINJA": "1",
         "CC": "gcc-13",  # Compiler yang lebih baru
