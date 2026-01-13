@@ -375,6 +375,7 @@ def ui():
             shutil.rmtree(gemma_target)
 
         shutil.move(TMP_GEMMA_DL, gemma_target)
+        print(f"Successfully downloaded {gemma_target}")
     else:
         print(f"Model already exists, skipping download")
 
