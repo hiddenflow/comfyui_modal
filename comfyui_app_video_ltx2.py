@@ -10,6 +10,7 @@ DATA_BASE = os.path.join(DATA_ROOT, "ComfyUI")
 CUSTOM_NODES_DIR = os.path.join(DATA_BASE, "custom_nodes")
 MODELS_DIR = os.path.join(DATA_BASE, "models")
 TMP_DL = "/tmp/download"
+TMP_GEMMA_DL = "/tmp/gemma_download"
 
 # ComfyUI default install location
 DEFAULT_COMFY_DIR = "/root/comfy/ComfyUI"
@@ -27,20 +28,10 @@ def git_clone_cmd(node_repo: str, recursive: bool = False, install_reqs: bool = 
     return cmd
     
 def hf_download(repo_id: str, filename: str, subdir: str, subfolder: Optional[str] = None):
-    if repo_id == 'unsloth/gemma-3-12b-it-qat':
-        for file in files:
-            print(f"Downloading {file}...")
-            hf_hub_download(
-                repo_id=repo_id,
-                filename=file,
-                subfolder=subfolder,
-                local_dir=TMP_DL
-            )
-    else:
-        out = hf_hub_download(repo_id=repo_id, filename=filename, subfolder=subfolder, local_dir=TMP_DL)
-        target = os.path.join(MODELS_DIR, subdir)
-        os.makedirs(target, exist_ok=True)
-        shutil.move(out, os.path.join(target, filename))
+    out = hf_hub_download(repo_id=repo_id, filename=filename, subfolder=subfolder, local_dir=TMP_DL)
+    target = os.path.join(MODELS_DIR, subdir)
+    os.makedirs(target, exist_ok=True)
+    shutil.move(out, os.path.join(target, filename))
 
 import modal
 
@@ -152,7 +143,6 @@ model_tasks = [
     ("Lightricks/LTX-2", "ltx-2-19b-distilled-lora-384.safetensors", "loras", None),
     ("Lightricks/LTX-2-19b-IC-LoRA-Detailer", "ltx-2-19b-ic-lora-detailer.safetensors", "loras", None),
     ("Lightricks/LTX-2-19b-LoRA-Camera-Control-Static", "ltx-2-19b-lora-camera-control-static.safetensors", "loras", None),
-    ("unsloth/gemma-3-12b-it-qat", "", "text_encoders/gemma-3-12b-it-qat", "unsloth"),
     ("GitMylo/LTX-2-comfy_gemma_fp8_e4m3fn", "gemma_3_12B_it_fp8_e4m3fn.safetensors", "text_encoders", None),
     ("unsloth/gemma-3-12b-it-GGUF", "gemma-3-12b-it-Q8_0.gguf", "text_encoders", None),
     ("unsloth/gemma-3-4b-it", "tokenizer.model", "text_encoders", None),
@@ -364,8 +354,29 @@ def ui():
         print(f"Warning: {manager_req_path} not found, skipping new Manager dependencies installation")
 
     # Ensure all required directories exist
-    for d in [CUSTOM_NODES_DIR, MODELS_DIR, TMP_DL]:
+    for d in [CUSTOM_NODES_DIR, MODELS_DIR, TMP_DL, TMP_GEMMA_DL]:
         os.makedirs(d, exist_ok=True)
+
+    gemma_dir = "text_encoders/gemma-3-12b-it-qat"
+    gemma_target = os.path.join(MODELS_DIR, gemma_dir)
+    if not os.path.exists(gemma_target):
+        if os.path.exists(TMP_GEMMA_DL):
+            shutil.rmtree(TMP_GEMMA_DL)
+
+        print(f"Downloading gemma-3-12b-it-qat...")
+        out = snapshot_download(
+            repo_id="unsloth/gemma-3-12b-it-qat",
+            local_dir=TMP_GEMMA_DL,
+            local_dir_use_symlinks=False
+        )
+
+        os.makedirs(os.path.dirname(gemma_target), exist_ok=True)
+        if os.path.exists(gemma_target):
+            shutil.rmtree(gemma_target)
+
+        shutil.move(TMP_GEMMA_DL, gemma_target)
+    else:
+        print(f"Model already exists, skipping download")
 
     # Download models at runtime (only if missing)
     print("Checking and downloading missing models...")
