@@ -366,8 +366,7 @@ def ui():
         print(f"Downloading gemma-3-12b-it-qat...")
         snapshot_download(
             repo_id="unsloth/gemma-3-12b-it-qat",
-            local_dir=TMP_GEMMA_DL,
-            local_dir_use_symlinks=False
+            local_dir=TMP_GEMMA_DL
         )
 
         os.makedirs(os.path.dirname(gemma_target), exist_ok=True)
