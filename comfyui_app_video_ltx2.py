@@ -137,7 +137,7 @@ image = image.run_commands([
 
 # Model download tasks (will be done at runtime)
 model_tasks = [
-    ("Lightricks/LTX-2", "ltx-2-19b-distilled-fp8.safetensors", "checkpoints", None),
+    # ("Lightricks/LTX-2", "ltx-2-19b-distilled-fp8.safetensors", "checkpoints", None),
     ("Lightricks/LTX-2", "ltx-2-spatial-upscaler-x2-1.0.safetensors", "latent_upscale_models", None),
     ("Lightricks/LTX-2", "ltx-2-temporal-upscaler-x2-1.0.safetensors", "latent_upscale_models", None),
     ("Lightricks/LTX-2", "ltx-2-19b-distilled-lora-384.safetensors", "loras", None),
@@ -151,6 +151,7 @@ model_tasks = [
     # ("numz/SeedVR2_comfyUI", "seedvr2_ema_7b_fp8_e4m3fn.safetensors", "SEEDVR2", None),
     # ("numz/SeedVR2_comfyUI", "seedvr2_ema_7b_sharp_fp8_e4m3fn.safetensors", "SEEDVR2", None),
     # ("Kijai/LTXV2_comfy", "ltx-2-19b-distilled-fp8_transformer_only.safetensors", "diffusion_models", "diffusion_models"),
+    ("Kijai/LTXV2_comfy", "ltx-2-19b-distilled-fp8_transformer_only.safetensors", "diffusion_models", "diffusion_models"),
     ("Kijai/LTXV2_comfy", "ltx-2-19b-dev_Q8_0.gguf", "diffusion_models", "diffusion_models"),
     ("Kijai/LTXV2_comfy", "ltx-2-19b-distilled_Q8_0.gguf", "diffusion_models", "diffusion_models"),
     ("Kijai/LTXV2_comfy", "ltx-2-19b-distilled-lora-resized_dynamic_fro095_avg_rank_242_bf16.safetensors", "loras", "loras"),
