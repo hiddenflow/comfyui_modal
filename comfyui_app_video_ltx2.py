@@ -2,7 +2,7 @@ import os
 import shutil
 import subprocess
 from typing import Optional
-from huggingface_hub import hf_hub_download
+from huggingface_hub import hf_hub_download, snapshot_download
 
 # Paths
 DATA_ROOT = "/data/comfy"
