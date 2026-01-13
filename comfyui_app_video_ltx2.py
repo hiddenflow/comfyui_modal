@@ -145,7 +145,7 @@ model_tasks = [
     ("Lightricks/LTX-2-19b-LoRA-Camera-Control-Static", "ltx-2-19b-lora-camera-control-static.safetensors", "loras", None),
     ("GitMylo/LTX-2-comfy_gemma_fp8_e4m3fn", "gemma_3_12B_it_fp8_e4m3fn.safetensors", "text_encoders", None),
     ("unsloth/gemma-3-12b-it-GGUF", "gemma-3-12b-it-Q8_0.gguf", "text_encoders", None),
-    ("unsloth/gemma-3-12b-it", "tokenizer.model", "text_encoders", None),
+    # ("unsloth/gemma-3-12b-it", "tokenizer.model", "text_encoders", None),
     # ("numz/SeedVR2_comfyUI", "ema_vae_fp16.safetensors", "SEEDVR2", None),
     # ("numz/SeedVR2_comfyUI", "seedvr2_ema_3b_fp8_e4m3fn.safetensors", "SEEDVR2", None),
     # ("numz/SeedVR2_comfyUI", "seedvr2_ema_7b_fp8_e4m3fn.safetensors", "SEEDVR2", None),
