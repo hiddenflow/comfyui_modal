@@ -64,7 +64,7 @@ image = (
         "HF_HUB_ENABLE_HF_TRANSFER": "1",
         "PATH": "/usr/local/cuda-13.0/bin:$PATH",
         "LD_LIBRARY_PATH": "/usr/local/cuda-13.0/lib64:$LD_LIBRARY_PATH",
-        "CUDA_HOME": "/usr/local/cuda-13.08",
+        "CUDA_HOME": "/usr/local/cuda-13.0",
         "FORCE_CUDA": "1",
         "TORCH_CUDA_ARCH_LIST": "9.0",
         "EXT_PARALLEL": "16",
