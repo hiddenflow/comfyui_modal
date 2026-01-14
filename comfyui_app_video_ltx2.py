@@ -50,14 +50,14 @@ image = (
     .apt_install("git", "wget", "libgl1", "libglib2.0-0", "ffmpeg", "pciutils")
     .apt_install("ninja-build", "build-essential", "python3-dev", "cmake", "libgmp-dev", "libmpfr-dev", "libmpc-dev", "flex", "bison", "xz-utils")
     .run_commands(
-        "cd /tmp && wget https://gcc.gnu.org/pub/gcc/snapshots/LATEST-15/gcc-15-20260110.tar.xz",
-        "cd /tmp && tar -xJf gcc-15-20260110.tar.xz",
-        "cd /tmp/gcc-15-* && ./contrib/download_prerequisites",
-        "cd /tmp/gcc-15-* && mkdir build && cd build && "
+        "cd /tmp && wget https://ftp.fu-berlin.de/unix/languages/gcc/releases/gcc-15.2.0/gcc-15.2.0.tar.gz",
+        "cd /tmp && tar -xzf gcc-15.2.0.tar.gz",
+        "cd /tmp/gcc-15.2.0 && ./contrib/download_prerequisites",
+        "cd /tmp/gcc-15.2.0 && mkdir build && cd build && "
         "../configure --prefix=/opt/gcc-15 --enable-languages=c,c++ --disable-multilib --disable-bootstrap",
-        "cd /tmp/gcc-15-*/build && make -j$(nproc)",
-        "cd /tmp/gcc-15-*/build && make install",
-        "rm -rf /tmp/gcc-15-*",
+        "cd /tmp/gcc-15.2.0/build && make -j$(nproc)",
+        "cd /tmp/gcc-15.2.0/build && make install",
+        "rm -rf /tmp/gcc-15*",
     )
     .run_commands(
         "cd /tmp && git clone --depth 1 --branch release/20.x https://github.com/llvm/llvm-project.git",
