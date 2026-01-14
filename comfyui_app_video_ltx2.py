@@ -48,7 +48,7 @@ image = (
     modal.Image.from_registry(f"nvidia/cuda:{tag}", add_python="3.12")
     .entrypoint([])
     .apt_install("git", "wget", "libgl1", "libglib2.0-0", "ffmpeg", "pciutils")
-    .apt_install("ninja-build", "build-essential", "python3-dev", "cmake")
+    .apt_install("ninja-build", "build-essential", "python3-dev", "cmake", "software-properties-common")
     .run_commands([
         "add-apt-repository ppa:ubuntu-toolchain-r/test",
         "apt update",
