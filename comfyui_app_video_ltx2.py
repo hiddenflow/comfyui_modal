@@ -63,8 +63,11 @@ image = (
         "cd /tmp && git clone --depth 1 --branch release/20.x https://github.com/llvm/llvm-project.git",
         "cd /tmp/llvm-project && mkdir build && cd build && "
         "cmake -G Ninja -DCMAKE_BUILD_TYPE=Release "
-        "-DLLVM_ENABLE_PROJECTS='clang;clang-tools-extra' "
-        "-DCMAKE_INSTALL_PREFIX=/opt/clang-20 ../llvm",
+        "-DLLVM_ENABLE_PROJECTS='clang;clang-tools-extra;lld;compiler-rt' "
+        "-DLLVM_ENABLE_RUNTIMES='libcxx;libcxxabi' "
+        "-DCMAKE_INSTALL_PREFIX=/opt/clang-20 "
+        "-DLLVM_TARGETS_TO_BUILD='X86;NVPTX' "
+        "-DLLVM_OPTIMIZED_TABLEGEN=ON ../llvm",
         "cd /tmp/llvm-project/build && ninja -j$(nproc)",
         "cd /tmp/llvm-project/build && ninja install",
         "rm -rf /tmp/llvm-project",
