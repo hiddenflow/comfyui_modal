@@ -197,7 +197,7 @@ app = modal.App(name="comfyui", image=image)
     max_containers=1,
     scaledown_window=600,
     timeout=1800,
-    gpu=os.environ.get('MODAL_GPU_TYPE', 'H200'),
+    gpu=os.environ.get('MODAL_GPU_TYPE', 'H100'),
     volumes={DATA_ROOT: vol},
 )
 @modal.concurrent(max_inputs=10)
