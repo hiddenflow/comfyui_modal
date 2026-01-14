@@ -51,6 +51,7 @@ image = (
     .apt_install("ninja-build", "build-essential", "python3-dev", "cmake", "libgmp-dev", "libmpfr-dev", "libmpc-dev", "flex", "bison")
     .run_commands(
         "cd /tmp && wget https://gcc.gnu.org/pub/gcc/snapshots/LATEST-15/gcc-15-20260110.tar.xz",
+        "ls",
         "cd /tmp && tar -xzf gcc-15-20260110.tar.gz",
         "cd /tmp/gcc-15-* && mkdir build && cd build && "
         "../configure --prefix=/opt/gcc-15 --enable-languages=c,c++ --disable-multilib --disable-bootstrap",
