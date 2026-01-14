@@ -79,8 +79,8 @@ image = (
 
 # Install nodes to default ComfyUI location during build
 image = image.run_commands([
-    "comfy node registry-install rgthree-comfy",
-    "comfy node install comfyui-impact-pack comfyui-impact-subpack ComfyUI-YOLO comfyui-inspire-pack comfyui_ipadapter_plus wlsh_nodes ComfyUI_Comfyroll_CustomNodes comfyui_essentials"
+    # "comfy node registry-install rgthree-comfy",
+    "comfy node install rgthree-comfy comfyui-impact-pack comfyui-impact-subpack ComfyUI-YOLO comfyui-inspire-pack comfyui_ipadapter_plus wlsh_nodes ComfyUI_Comfyroll_CustomNodes comfyui_essentials"
 ])
 
 # Git-based nodes baked into image at default ComfyUI location
