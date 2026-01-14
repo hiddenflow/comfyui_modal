@@ -48,11 +48,11 @@ image = (
     modal.Image.from_registry(f"nvidia/cuda:{tag}", add_python="3.12")
     .entrypoint([])
     .apt_install("git", "wget", "libgl1", "libglib2.0-0", "ffmpeg", "pciutils")
-    .apt_install("ninja-build", "build-essential", "python3-dev", "cmake", "libgmp-dev", "libmpfr-dev", "libmpc-dev", "flex", "bison")
+    .apt_install("ninja-build", "build-essential", "python3-dev", "cmake", "libgmp-dev", "libmpfr-dev", "libmpc-dev", "flex", "bison", "xz-utils")
     .run_commands(
         "cd /tmp && wget https://gcc.gnu.org/pub/gcc/snapshots/LATEST-15/gcc-15-20260110.tar.xz",
-        "ls",
-        "cd /tmp && tar -xzf gcc-15-20260110.tar.gz",
+        "cd /tmp && tar -xzf gcc-15-20260110.tar.xz",
+        "cd /tmp/gcc-15-* && ./contrib/download_prerequisites",
         "cd /tmp/gcc-15-* && mkdir build && cd build && "
         "../configure --prefix=/opt/gcc-15 --enable-languages=c,c++ --disable-multilib --disable-bootstrap",
         "cd /tmp/gcc-15-*/build && make -j$(nproc)",
