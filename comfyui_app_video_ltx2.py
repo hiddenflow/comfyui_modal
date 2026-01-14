@@ -48,19 +48,27 @@ image = (
     modal.Image.from_registry(f"nvidia/cuda:{tag}", add_python="3.12")
     .entrypoint([])
     .apt_install("git", "wget", "libgl1", "libglib2.0-0", "ffmpeg", "pciutils")
-    .apt_install("ninja-build", "build-essential", "python3-dev", "cmake", "software-properties-common")
+    .apt_install("ninja-build", "build-essential", "python3-dev", "cmake", "libgmp-dev", "libmpfr-dev", "libmpc-dev", "flex", "bison")
+    .run_commands(
+        "cd /tmp && wget https://gcc.gnu.org/pub/gcc/snapshots/LATEST-15/gcc-15-20260110.tar.xz",
+        "cd /tmp && tar -xzf gcc-15-20260110.tar.gz",
+        "cd /tmp/gcc-15-* && mkdir build && cd build && "
+        "../configure --prefix=/opt/gcc-15 --enable-languages=c,c++ --disable-multilib --disable-bootstrap",
+        "cd /tmp/gcc-15-*/build && make -j$(nproc)",
+        "cd /tmp/gcc-15-*/build && make install",
+        "rm -rf /tmp/gcc-15-*",
+    )
+    .run_commands(
+        "cd /tmp && git clone --depth 1 --branch release/20.x https://github.com/llvm/llvm-project.git",
+        "cd /tmp/llvm-project && mkdir build && cd build && "
+        "cmake -G Ninja -DCMAKE_BUILD_TYPE=Release "
+        "-DLLVM_ENABLE_PROJECTS='clang;clang-tools-extra' "
+        "-DCMAKE_INSTALL_PREFIX=/opt/clang-20 ../llvm",
+        "cd /tmp/llvm-project/build && ninja -j$(nproc)",
+        "cd /tmp/llvm-project/build && ninja install",
+        "rm -rf /tmp/llvm-project",
+    )
     .run_commands([
-        "add-apt-repository ppa:ubuntu-toolchain-r/test",
-        "apt update",
-        "apt install gcc-15 g++-15",
-        "update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-15 15",
-        "update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-15 15",
-        "wget https://apt.llvm.org/llvm.sh",
-        "chmod +x llvm.sh",
-        "sudo ./llvm.sh 20",
-        "apt install clang-20 clang++-20 clang-tools-20",
-        "update-alternatives --install /usr/bin/clang clang /usr/bin/clang-20 20",
-        "update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-20 20",
         "wget http://archive.ubuntu.com/ubuntu/pool/universe/m/mesa/libgl1-mesa-glx_23.0.4-0ubuntu1~22.04.1_amd64.deb",
         "apt-get install ./libgl1-mesa-glx_23.0.4-0ubuntu1~22.04.1_amd64.deb",
         "pip install --upgrade pip",
@@ -73,17 +81,18 @@ image = (
     ])
     .env({
         "HF_HUB_ENABLE_HF_TRANSFER": "1",
-        "PATH": "/usr/local/cuda-13.0/bin:$PATH",
-        "LD_LIBRARY_PATH": "/usr/local/cuda-13.0/lib64:$LD_LIBRARY_PATH",
+        "PATH": "/opt/gcc-15/bin:/opt/clang-20/bin:/usr/local/cuda-13.0/bin:$PATH",
+        "LD_LIBRARY_PATH": "/opt/gcc-15/lib64:/usr/local/cuda-13.0/lib64:$LD_LIBRARY_PATH",
         "CUDA_HOME": "/usr/local/cuda-13.0",
+        "CUDAHOSTCXX": "/opt/gcc-15/bin/g++",
         "FORCE_CUDA": "1",
         "TORCH_CUDA_ARCH_LIST": "9.0",
         "EXT_PARALLEL": "16",
         "NVCC_APPEND_FLAGS": "-arch=sm_90 --threads 8",
         "MAX_JOBS": "16",
         "USE_NINJA": "1",
-        "CC": "gcc-15",  # Compiler yang lebih baru
-        "CXX": "g++-15",
+        "CC": "/opt/gcc-15/bin/gcc",
+        "CXX": "/opt/gcc-15/bin/g++",
         "USE_SYSTEM_LIBS": "1"
     })
 )
@@ -141,8 +150,8 @@ image = image.run_commands([
     "pip install soxr==0.5.0.post1 --force-reinstall",
     "pip install numpy==1.26.4 --force-reinstall",
     "pip install 'pillow>=9.2.0,<12.0'",
-    "export CC=gcc++-15",
-    "export CXX=g++-15",
+    # "export CC=gcc++-15",
+    # "export CXX=g++-15",
     # "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && git checkout eb615cf6cf4d221338033340ee2de1c37fbdba4a && python setup.py install",
     "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && python setup.py install",
     "pip install https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.7.0/flash_attn-2.7.4+cu130torch2.9-cp312-cp312-linux_x86_64.whl --no-build-isolation",
