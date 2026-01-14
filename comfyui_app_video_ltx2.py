@@ -106,7 +106,7 @@ for repo, flags in [
     ("christian-byrne/audio-separation-nodes-comfyui", {'install_reqs': True}),
     ("Kosinkadink/ComfyUI-VideoHelperSuite", {'install_reqs': True}),
     ("Chaoses-Ib/ComfyUI_Ib_CustomNodes", {'install_reqs': True}),
-    ("Gourieff/ComfyUI-ReActor", {'install_reqs': True}),
+    # ("Gourieff/ComfyUI-ReActor", {'install_reqs': True}),
     ("ClownsharkBatwing/RES4LYF", {'install_reqs': True}),
     ("Lightricks/ComfyUI-LTXVideo", {'install_reqs': True}),
     ("kambara/ComfyUI-PromptPalette", {})
