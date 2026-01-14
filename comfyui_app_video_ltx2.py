@@ -67,7 +67,7 @@ image = (
         "CUDA_HOME": "/usr/local/cuda-13.0",
         "FORCE_CUDA": "1",
         "TORCH_CUDA_ARCH_LIST": "8.9",
-        "EXT_PARALLEL": "8",
+        "EXT_PARALLEL": "16",
         "NVCC_APPEND_FLAGS": "-arch=sm_89 --threads 8",
         "MAX_JOBS": "16",
         "USE_NINJA": "1",
