@@ -35,8 +35,8 @@ def hf_download(repo_id: str, filename: str, subdir: str, subfolder: Optional[st
 
 import modal
 
-# cuda_version = "12.8.1"
-cuda_version = "13.0.2"  # should be no greater than host CUDA version
+cuda_version = "12.8.1"
+# cuda_version = "13.0.2"  # should be no greater than host CUDA version
 flavor = "cudnn-devel"  # includes full CUDA toolkit
 operating_sys = "ubuntu24.04"
 tag = f"{cuda_version}-{flavor}-{operating_sys}"
@@ -62,9 +62,9 @@ image = (
     ])
     .env({
         "HF_HUB_ENABLE_HF_TRANSFER": "1",
-        "PATH": "/usr/local/cuda-13.0/bin:$PATH",
-        "LD_LIBRARY_PATH": "/usr/local/cuda-13.0/lib64:$LD_LIBRARY_PATH",
-        "CUDA_HOME": "/usr/local/cuda-13.0",
+        "PATH": "/usr/local/cuda-12.0/bin:$PATH",8
+        "LD_LIBRARY_PATH": "/usr/local/cuda-12.8/lib64:$LD_LIBRARY_PATH",
+        "CUDA_HOME": "/usr/local/cuda-12.8",
         "FORCE_CUDA": "1",
         "TORCH_CUDA_ARCH_LIST": "8.9",
         "EXT_PARALLEL": "16",
@@ -119,8 +119,8 @@ image = image.run_commands([
     "pip install ftfy",
     "pip install faster-whisper",
     "pip install librosa",
-    # "pip install torch==2.8.0+cu128 torchvision==0.23.0+cu128 torchaudio==2.8.0+cu128 xformers==0.0.32.post2 triton==3.4.0 --index-url https://download.pytorch.org/whl/cu128 --force-reinstall",
-    "pip install torch==2.9.1+cu130 torchvision==0.24.1+cu130 torchaudio==2.9.1+cu130 xformers==0.0.33.post2 triton==3.5.1 --index-url https://download.pytorch.org/whl/cu130 --force-reinstall",
+    "pip install torch==2.8.0+cu128 torchvision==0.23.0+cu128 torchaudio==2.8.0+cu128 xformers==0.0.32.post2 triton==3.4.0 --index-url https://download.pytorch.org/whl/cu128 --force-reinstall",
+    # "pip install torch==2.9.1+cu130 torchvision==0.24.1+cu130 torchaudio==2.9.1+cu130 xformers==0.0.33.post2 triton==3.5.1 --index-url https://download.pytorch.org/whl/cu130 --force-reinstall",
     "pip install onnxruntime-gpu",
     "pip install -U setuptools wheel",
     "pip install misaki[en]",
@@ -134,7 +134,8 @@ image = image.run_commands([
     "export CXX=g++-13",
     # "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && git checkout eb615cf6cf4d221338033340ee2de1c37fbdba4a && python setup.py install",
     "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && python setup.py install",
-    "pip install https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.7.0/flash_attn-2.7.4+cu130torch2.9-cp312-cp312-linux_x86_64.whl --no-build-isolation",
+    # "pip install https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.7.0/flash_attn-2.7.4+cu130torch2.9-cp312-cp312-linux_x86_64.whl --no-build-isolation",
+    "pip install https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.7.2/flash_attn-2.8.3+cu128torch2.8-cp312-cp312-linux_x86_64.whl --no-build-isolation",
     # "git clone https://github.com/Dao-AILab/flash-attention.git && cd flash-attention && python setup.py install",
 ])
 
