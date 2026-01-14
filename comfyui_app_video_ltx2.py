@@ -35,8 +35,8 @@ def hf_download(repo_id: str, filename: str, subdir: str, subfolder: Optional[st
 
 import modal
 
-cuda_version = "12.8.1"
-# cuda_version = "13.0.2"  # should be no greater than host CUDA version
+# cuda_version = "12.8.1"
+cuda_version = "13.0.2"  # should be no greater than host CUDA version
 flavor = "cudnn-devel"  # includes full CUDA toolkit
 operating_sys = "ubuntu24.04"
 tag = f"{cuda_version}-{flavor}-{operating_sys}"
@@ -48,8 +48,19 @@ image = (
     modal.Image.from_registry(f"nvidia/cuda:{tag}", add_python="3.12")
     .entrypoint([])
     .apt_install("git", "wget", "libgl1", "libglib2.0-0", "ffmpeg", "pciutils")
-    .apt_install("ninja-build", "build-essential", "python3-dev", "cmake", "clang")
+    .apt_install("ninja-build", "build-essential", "python3-dev", "cmake")
     .run_commands([
+        "add-apt-repository ppa:ubuntu-toolchain-r/test",
+        "apt update",
+        "apt install gcc-15 g++-15",
+        "update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-15 15",
+        "update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-15 15",
+        "wget https://apt.llvm.org/llvm.sh",
+        "chmod +x llvm.sh",
+        "sudo ./llvm.sh 20",
+        "apt install clang-20 clang++-20 clang-tools-20",
+        "update-alternatives --install /usr/bin/clang clang /usr/bin/clang-20 20",
+        "update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-20 20",
         "wget http://archive.ubuntu.com/ubuntu/pool/universe/m/mesa/libgl1-mesa-glx_23.0.4-0ubuntu1~22.04.1_amd64.deb",
         "apt-get install ./libgl1-mesa-glx_23.0.4-0ubuntu1~22.04.1_amd64.deb",
         "pip install --upgrade pip",
@@ -62,17 +73,17 @@ image = (
     ])
     .env({
         "HF_HUB_ENABLE_HF_TRANSFER": "1",
-        "PATH": "/usr/local/cuda-12.8/bin:$PATH",
-        "LD_LIBRARY_PATH": "/usr/local/cuda-12.8/lib64:$LD_LIBRARY_PATH",
-        "CUDA_HOME": "/usr/local/cuda-12.8",
+        "PATH": "/usr/local/cuda-13.0/bin:$PATH",
+        "LD_LIBRARY_PATH": "/usr/local/cuda-13.0/lib64:$LD_LIBRARY_PATH",
+        "CUDA_HOME": "/usr/local/cuda-13.0",
         "FORCE_CUDA": "1",
-        "TORCH_CUDA_ARCH_LIST": "8.9",
+        "TORCH_CUDA_ARCH_LIST": "9.0",
         "EXT_PARALLEL": "16",
-        "NVCC_APPEND_FLAGS": "-arch=sm_89 --threads 8",
+        "NVCC_APPEND_FLAGS": "-arch=sm_90 --threads 8",
         "MAX_JOBS": "16",
         "USE_NINJA": "1",
-        "CC": "gcc-13",  # Compiler yang lebih baru
-        "CXX": "g++-13",
+        "CC": "gcc-15",  # Compiler yang lebih baru
+        "CXX": "g++-15",
         "USE_SYSTEM_LIBS": "1"
     })
 )
@@ -130,8 +141,8 @@ image = image.run_commands([
     "pip install soxr==0.5.0.post1 --force-reinstall",
     "pip install numpy==1.26.4 --force-reinstall",
     "pip install 'pillow>=9.2.0,<12.0'",
-    "export CC=gcc++-13",
-    "export CXX=g++-13",
+    "export CC=gcc++-15",
+    "export CXX=g++-15",
     # "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && git checkout eb615cf6cf4d221338033340ee2de1c37fbdba4a && python setup.py install",
     "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && python setup.py install",
     # "pip install https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.7.0/flash_attn-2.7.4+cu130torch2.9-cp312-cp312-linux_x86_64.whl --no-build-isolation",
