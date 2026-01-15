@@ -156,7 +156,7 @@ model_tasks = [
     # ("numz/SeedVR2_comfyUI", "seedvr2_ema_7b_fp8_e4m3fn.safetensors", "SEEDVR2", None),
     # ("numz/SeedVR2_comfyUI", "seedvr2_ema_7b_sharp_fp8_e4m3fn.safetensors", "SEEDVR2", None),
     # ("Kijai/LTXV2_comfy", "ltx-2-19b-distilled-fp8_transformer_only.safetensors", "diffusion_models", "diffusion_models"),
-    ("MihaiPopa-1/LTX-2-Lite-2.4B", "ltx-2-2.4b-pruned.safetensors", "diffusion_models", "diffusion_models"),
+    ("MihaiPopa-1/LTX-2-Lite-2.4B", "ltx-2-2.4b-pruned.safetensors", "diffusion_models", None),
     ("Kijai/LTXV2_comfy", "ltx-2-19b-distilled-fp8_transformer_only.safetensors", "diffusion_models", "diffusion_models"),
     ("Kijai/LTXV2_comfy", "ltx-2-19b-dev_Q8_0.gguf", "diffusion_models", "diffusion_models"),
     ("Kijai/LTXV2_comfy", "ltx-2-19b-distilled_Q4_K_M.gguf", "diffusion_models", "diffusion_models"),
