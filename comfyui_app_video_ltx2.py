@@ -44,34 +44,11 @@ civit_api_key = os.environ.get('civit_api_key')
 
 # Build image with ComfyUI installed to default location /root/comfy/ComfyUI
 image = (
-#    modal.Image.debian_slim(python_version="3.12")
-    modal.Image.from_registry(f"nvidia/cuda:{tag}", add_python="3.12")
+#    modal.Image.debian_slim(python_version="3.13")
+    modal.Image.from_registry(f"nvidia/cuda:{tag}", add_python="3.13")
     .entrypoint([])
     .apt_install("git", "wget", "libgl1", "libglib2.0-0", "ffmpeg", "pciutils")
-    .apt_install("ninja-build", "build-essential", "python3-dev", "cmake", "libgmp-dev", "libmpfr-dev", "libmpc-dev", "flex", "bison", "xz-utils")
-    .run_commands(
-        "cd /tmp && wget https://ftp.fu-berlin.de/unix/languages/gcc/releases/gcc-15.2.0/gcc-15.2.0.tar.gz",
-        "cd /tmp && tar -xzf gcc-15.2.0.tar.gz",
-        "cd /tmp/gcc-15.2.0 && ./contrib/download_prerequisites",
-        "cd /tmp/gcc-15.2.0 && mkdir build && cd build && "
-        "../configure --prefix=/opt/gcc-15 --enable-languages=c,c++ --disable-multilib --disable-bootstrap",
-        "cd /tmp/gcc-15.2.0/build && make -j$(nproc)",
-        "cd /tmp/gcc-15.2.0/build && make install",
-        "rm -rf /tmp/gcc-15*",
-    )
-    .run_commands(
-        "cd /tmp && git clone --depth 1 --branch release/20.x https://github.com/llvm/llvm-project.git",
-        "cd /tmp/llvm-project && mkdir build && cd build && "
-        "cmake -G Ninja -DCMAKE_BUILD_TYPE=Release "
-        "-DLLVM_ENABLE_PROJECTS='clang;clang-tools-extra;lld;compiler-rt' "
-        "-DLLVM_ENABLE_RUNTIMES='libcxx;libcxxabi' "
-        "-DCMAKE_INSTALL_PREFIX=/opt/clang-20 "
-        "-DLLVM_TARGETS_TO_BUILD='X86;NVPTX' "
-        "-DLLVM_OPTIMIZED_TABLEGEN=ON ../llvm",
-        "cd /tmp/llvm-project/build && ninja -j$(nproc)",
-        "cd /tmp/llvm-project/build && ninja install",
-        "rm -rf /tmp/llvm-project",
-    )
+    .apt_install("ninja-build", "build-essential", "python3-dev", "cmake", "clang")
     .run_commands([
         "wget http://archive.ubuntu.com/ubuntu/pool/universe/m/mesa/libgl1-mesa-glx_23.0.4-0ubuntu1~22.04.1_amd64.deb",
         "apt-get install ./libgl1-mesa-glx_23.0.4-0ubuntu1~22.04.1_amd64.deb",
@@ -85,18 +62,18 @@ image = (
     ])
     .env({
         "HF_HUB_ENABLE_HF_TRANSFER": "1",
-        "PATH": "/opt/gcc-15/bin:/opt/clang-20/bin:/usr/local/cuda-13.0/bin:$PATH",
-        "LD_LIBRARY_PATH": "/opt/gcc-15/lib64:/usr/local/cuda-13.0/lib64:$LD_LIBRARY_PATH",
+        "PATH": "/usr/local/cuda-13.0/bin:$PATH",
+        "LD_LIBRARY_PATH": "/usr/local/cuda-13.0/lib64:$LD_LIBRARY_PATH",
         "CUDA_HOME": "/usr/local/cuda-13.0",
-        "CUDAHOSTCXX": "/opt/gcc-15/bin/g++",
         "FORCE_CUDA": "1",
         "TORCH_CUDA_ARCH_LIST": "9.0",
         "EXT_PARALLEL": "16",
         "NVCC_APPEND_FLAGS": "-arch=sm_90 --threads 8",
         "MAX_JOBS": "16",
         "USE_NINJA": "1",
-        "CC": "/opt/gcc-15/bin/gcc",
-        "CXX": "/opt/gcc-15/bin/g++",
+        "CC": "gcc-13",
+        "CXX": "g++-13",
+        "CUDAHOSTCXX": "g++-13"
         "USE_SYSTEM_LIBS": "1"
     })
 )
@@ -157,8 +134,8 @@ image = image.run_commands([
     # "export CC=gcc++-15",
     # "export CXX=g++-15",
     # "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && git checkout eb615cf6cf4d221338033340ee2de1c37fbdba4a && python setup.py install",
-    "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && python setup.py install",
-    "pip install https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.7.0/flash_attn-2.7.4+cu130torch2.9-cp312-cp312-linux_x86_64.whl --no-build-isolation",
+    "pip install https://github.com/loscrossos/lib_compileguides/releases/download/2025.11/sageattention-2.2.0+cu130torch2.9.0-cp313-cp313-linux_x86_64.whl",
+    "pip install https://github.com/loscrossos/lib_compileguides/releases/download/2025.11/flash_attn-2.8.2+cu130torch2.9.0-cp313-cp313-linux_x86_64.whl",
     # "pip install https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.7.2/flash_attn-2.8.3+cu128torch2.8-cp312-cp312-linux_x86_64.whl --no-build-isolation",
     # "git clone https://github.com/Dao-AILab/flash-attention.git && cd flash-attention && python setup.py install",
 ])
@@ -433,7 +410,7 @@ def ui():
     print(f"Starting ComfyUI from {DATA_BASE}...")
     
     # Start ComfyUI server with correct syntax and latest frontend
-    cmd = ["comfy", "launch", "--", "--listen", "0.0.0.0", "--port", "8000", "--highvram", "--fast", "--disable-smart-memory", "--front-end-version", "Comfy-Org/ComfyUI_frontend@latest", "--enable-manager"]
+    cmd = ["comfy", "launch", "--", "--listen", "0.0.0.0", "--port", "8000", "--highvram", "--fast", "--front-end-version", "Comfy-Org/ComfyUI_frontend@latest", "--enable-manager"]
     print(f"Executing: {' '.join(cmd)}")
     
     process = subprocess.Popen(
