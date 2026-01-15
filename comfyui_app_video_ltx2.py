@@ -73,7 +73,7 @@ image = (
         "USE_NINJA": "1",
         "CC": "gcc-13",
         "CXX": "g++-13",
-        "CUDAHOSTCXX": "g++-13"
+        "CUDAHOSTCXX": "g++-13",
         "USE_SYSTEM_LIBS": "1",
     })
 )
