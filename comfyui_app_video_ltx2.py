@@ -74,7 +74,7 @@ image = (
         "CC": "gcc-13",
         "CXX": "g++-13",
         "CUDAHOSTCXX": "g++-13"
-        "USE_SYSTEM_LIBS": "1"
+        "USE_SYSTEM_LIBS": "1",
     })
 )
 
