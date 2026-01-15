@@ -121,7 +121,7 @@ image = image.run_commands([
     "pip install faster-whisper",
     "pip install librosa",
     # "pip install torch==2.8.0+cu128 torchvision==0.23.0+cu128 torchaudio==2.8.0+cu128 xformers==0.0.32.post2 triton==3.4.0 --index-url https://download.pytorch.org/whl/cu128 --force-reinstall",
-    "pip install torch==2.9.0+cu130 torchvision==0.24.0+cu130 torchaudio==2.9.0+cu130 xformers==0.0.33.post2 triton==3.5.1 --index-url https://download.pytorch.org/whl/cu130 --force-reinstall",
+    "pip install torch==2.9.1+cu130 torchvision==0.24.1+cu130 torchaudio==2.9.1+cu130 xformers==0.0.33.post2 triton==3.5.1 --index-url https://download.pytorch.org/whl/cu130 --force-reinstall",
     "pip install onnxruntime-gpu",
     "pip install -U setuptools wheel",
     "pip install misaki[en]",
