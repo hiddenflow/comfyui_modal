@@ -22,7 +22,8 @@ def git_clone_cmd(node_repo: str, recursive: bool = False, install_reqs: bool = 
     if recursive:
         cmd += " --recursive"
     if install_reqs:
-        cmd += f" && pip install -r {dest}/requirements.txt"
+        # cmd += f" && pip install -r {dest}/requirements.txt"
+        cmd += f"grep -vE '^(torch|torchvision|torchaudio|xformers|triton)' {dest}/requirements.txt | pip install -r /dev/stdin"
     if "ComfyUI-Frame-Interpolation" in node_repo:
         cmd += "install.py"
     return cmd
