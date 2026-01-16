@@ -46,7 +46,7 @@ civit_api_key = os.environ.get('civit_api_key')
 # Build image with ComfyUI installed to default location /root/comfy/ComfyUI
 image = (
 #    modal.Image.debian_slim(python_version="3.12")
-    modal.Image.from_registry("pytorch/pytorch:2.7.1-cuda12.8-cudnn9-devel", add_python="3.12")
+    modal.Image.from_registry("pytorch/pytorch:2.7.1-cuda12.8-cudnn9-devel")
     # modal.Image.from_registry(f"nvidia/cuda:{tag}", add_python="3.12")
     .entrypoint([])
     .apt_install("git", "wget", "libgl1", "libglib2.0-0", "ffmpeg", "pciutils")
@@ -140,7 +140,7 @@ image = image.run_commands([
     # "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && git checkout eb615cf6cf4d221338033340ee2de1c37fbdba4a && python setup.py install",
     "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && python setup.py install",
     # "pip install https://github.com/loscrossos/lib_compileguides/releases/download/2025.11/sageattention-2.2.0+cu130torch2.9.0-cp313-cp313-linux_x86_64.whl",
-    "pip install https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.7.2/flash_attn-2.8.3+cu128torch2.7-cp312-cp312-linux_x86_64.whl",
+    "pip install https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.7.2/flash_attn-2.8.3+cu128torch2.7-cp311-cp311-linux_x86_64.whl",
     # "pip install https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.7.2/flash_attn-2.8.3+cu128torch2.8-cp312-cp312-linux_x86_64.whl --no-build-isolation",
     # "git clone https://github.com/Dao-AILab/flash-attention.git && cd flash-attention && python setup.py install",
 ])
