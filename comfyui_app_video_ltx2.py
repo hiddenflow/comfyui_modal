@@ -46,7 +46,7 @@ civit_api_key = os.environ.get('civit_api_key')
 # Build image with ComfyUI installed to default location /root/comfy/ComfyUI
 image = (
 #    modal.Image.debian_slim(python_version="3.12")
-    modal.Image.from_registry("2.7.1-cuda12.8-cudnn9-devel", add_python="3.12")
+    modal.Image.from_registry("pytorch/pytorch:2.7.1-cuda12.8-cudnn9-devel", add_python="3.12")
     # modal.Image.from_registry(f"nvidia/cuda:{tag}", add_python="3.12")
     .entrypoint([])
     .apt_install("git", "wget", "libgl1", "libglib2.0-0", "ffmpeg", "pciutils")
