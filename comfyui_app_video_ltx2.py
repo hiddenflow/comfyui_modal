@@ -45,7 +45,8 @@ civit_api_key = os.environ.get('civit_api_key')
 # Build image with ComfyUI installed to default location /root/comfy/ComfyUI
 image = (
 #    modal.Image.debian_slim(python_version="3.12")
-    modal.Image.from_registry(f"nvidia/cuda:{tag}", add_python="3.12")
+    modal.image.from_registry("2.7.1-cuda12.8-cudnn9-devel", add_python="3.12")
+    # modal.Image.from_registry(f"nvidia/cuda:{tag}", add_python="3.12")
     .entrypoint([])
     .apt_install("git", "wget", "libgl1", "libglib2.0-0", "ffmpeg", "pciutils")
     .apt_install("ninja-build", "build-essential", "python3-dev", "cmake", "clang")
@@ -62,18 +63,19 @@ image = (
     ])
     .env({
         "HF_HUB_ENABLE_HF_TRANSFER": "1",
-        "PATH": "/usr/local/cuda-12.8/bin:$PATH",
-        "LD_LIBRARY_PATH": "/usr/local/cuda-12.8/lib64:$LD_LIBRARY_PATH",
-        "CUDA_HOME": "/usr/local/cuda-12.8",
+        # "PATH": "/usr/local/cuda-12.8/bin:$PATH",
+        # "LD_LIBRARY_PATH": "/usr/local/cuda-12.8/lib64:$LD_LIBRARY_PATH",
+        # "CUDA_HOME": "/usr/local/cuda-12.8",
+        "CUDA_HOME": "/usr/local/cuda",
         "FORCE_CUDA": "1",
         "TORCH_CUDA_ARCH_LIST": "9.0",
         "EXT_PARALLEL": "16",
         "NVCC_APPEND_FLAGS": "-arch=sm_90 --threads 8",
         "MAX_JOBS": "16",
         "USE_NINJA": "1",
-        "CC": "gcc-13",
-        "CXX": "g++-13",
-        "CUDAHOSTCXX": "g++-13",
+        # "CC": "gcc-13",
+        # "CXX": "g++-13",
+        # "CUDAHOSTCXX": "g++-13",
         "USE_SYSTEM_LIBS": "1",
     })
 )
@@ -120,7 +122,7 @@ image = image.run_commands([
     "pip install ftfy",
     "pip install faster-whisper",
     "pip install librosa",
-    "pip install torch==2.7.1+cu128 torchvision==0.22.1+cu128 torchaudio==2.7.1+cu128 xformers==0.0.31.post1 triton==3.3.1 --index-url https://download.pytorch.org/whl/cu128 --force-reinstall",
+    # "pip install torch==2.7.1+cu128 torchvision==0.22.1+cu128 torchaudio==2.7.1+cu128 xformers==0.0.31.post1 triton==3.3.1 --index-url https://download.pytorch.org/whl/cu128 --force-reinstall",
     # "pip install torch==2.8.0+cu128 torchvision==0.23.0+cu128 torchaudio==2.8.0+cu128 xformers==0.0.32.post2 triton==3.4.0 --index-url https://download.pytorch.org/whl/cu128 --force-reinstall",
     # "pip install torch==2.9.0+cu130 torchvision==0.24.0+cu130 torchaudio==2.9.0+cu130 xformers==0.0.33.post1 triton==3.5.0 --index-url https://download.pytorch.org/whl/cu130 --force-reinstall",
     "pip install onnxruntime-gpu",
@@ -151,6 +153,7 @@ model_tasks = [
     ("Lightricks/LTX-2-19b-IC-LoRA-Detailer", "ltx-2-19b-ic-lora-detailer.safetensors", "loras", None),
     ("Lightricks/LTX-2-19b-LoRA-Camera-Control-Static", "ltx-2-19b-lora-camera-control-static.safetensors", "loras", None),
     ("Comfy-Org/ltx-2", "gemma_3_12B_it_fpmixed.safetensors", "text_encoders", "split_files/text_encoders"),
+    ("Comfy-Org/ltx-2", "gemma_3_12B_it_fp8_scaled.safetensors", "text_encoders", "split_files/text_encoders"),
     ("unsloth/gemma-3-12b-it-qat-GGUF", "gemma-3-12b-it-qat-Q4_K_M.gguf", "text_encoders", None),
     ("unsloth/gemma-3-12b-it", "tokenizer.model", "text_encoders", None),
     # ("numz/SeedVR2_comfyUI", "ema_vae_fp16.safetensors", "SEEDVR2", None),
