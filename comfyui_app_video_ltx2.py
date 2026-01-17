@@ -89,6 +89,7 @@ image = image.run_commands([
 
 # Git-based nodes baked into image at default ComfyUI location
 for repo, flags in [
+    ("pythongosssss/ComfyUI-Custom-Scripts", {'install_reqs': True}),
     ("r-vage/ComfyUI-RvTools_v2", {'install_reqs': True}),
     ("city96/ComfyUI-GGUF", {'install_reqs': True}),
     ("evanspearman/ComfyMath", {'install_reqs': True}),
