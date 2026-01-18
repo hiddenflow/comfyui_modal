@@ -152,6 +152,8 @@ model_tasks = [
     ("Lightricks/LTX-2", "ltx-2-spatial-upscaler-x2-1.0.safetensors", "latent_upscale_models", None),
     ("Lightricks/LTX-2", "ltx-2-temporal-upscaler-x2-1.0.safetensors", "latent_upscale_models", None),
     ("Lightricks/LTX-2", "ltx-2-19b-distilled-lora-384.safetensors", "loras", None),
+    ("Lightricks/LTX-2", "ltx-2-19b-distilled-fp8.safetensors", "loras", None),
+    ("Lightricks/LTX-2", "ltx-2-19b-dev-fp8.safetensors", "loras", None),
     ("Lightricks/LTX-2-19b-IC-LoRA-Detailer", "ltx-2-19b-ic-lora-detailer.safetensors", "loras", None),
     ("Lightricks/LTX-2-19b-LoRA-Camera-Control-Static", "ltx-2-19b-lora-camera-control-static.safetensors", "loras", None),
     ("Comfy-Org/ltx-2", "gemma_3_12B_it_fpmixed.safetensors", "text_encoders", "split_files/text_encoders"),
@@ -417,7 +419,7 @@ def ui():
     print(f"Starting ComfyUI from {DATA_BASE}...")
     
     # Start ComfyUI server with correct syntax and latest frontend
-    cmd = ["comfy", "launch", "--", "--listen", "0.0.0.0", "--port", "8000", "--highvram", "--fast", "--front-end-version", "Comfy-Org/ComfyUI_frontend@latest", "--enable-manager"]
+    cmd = ["comfy", "launch", "--", "--listen", "0.0.0.0", "--port", "8000", "--highvram", "--fast", "--use-sage-attention", "--front-end-version", "Comfy-Org/ComfyUI_frontend@latest", "--enable-manager"]
     print(f"Executing: {' '.join(cmd)}")
     
     process = subprocess.Popen(
