@@ -141,9 +141,11 @@ image = image.run_commands([
     # "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && git checkout eb615cf6cf4d221338033340ee2de1c37fbdba4a && python setup.py install",
     "git clone https://github.com/thu-ml/SageAttention.git && cd SageAttention && python setup.py install",
     # "pip install https://github.com/loscrossos/lib_compileguides/releases/download/2025.11/sageattention-2.2.0+cu130torch2.9.0-cp313-cp313-linux_x86_64.whl",
-    "pip install https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.7.2/flash_attn-2.8.3+cu128torch2.7-cp311-cp311-linux_x86_64.whl",
+    # "pip install https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.7.2/flash_attn-2.8.3+cu128torch2.7-cp311-cp311-linux_x86_64.whl",
     # "pip install https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.7.2/flash_attn-2.8.3+cu128torch2.8-cp312-cp312-linux_x86_64.whl --no-build-isolation",
     # "git clone https://github.com/Dao-AILab/flash-attention.git && cd flash-attention && python setup.py install",
+    'python -c "from huggingface_hub import snapshot_download; snapshot_download(\'kernels-community/flash-attn3\', allow_patterns=\'build/torch27-cxx11-cu128-x86_64-linux/flash_attn3/**\', local_dir=\'/tmp/fa3\')"',
+    "cp -r /tmp/fa3/build/torch27-cxx11-cu128-x86_64-linux/flash_attn3 /opt/conda/lib/python3.*/site-packages/",
 ])
 
 # Model download tasks (will be done at runtime)
