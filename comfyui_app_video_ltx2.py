@@ -419,8 +419,9 @@ def ui():
     # Launch ComfyUI from volume location
     print(f"Starting ComfyUI from {DATA_BASE}...")
     
-    # Start ComfyUI server with correct syntax and latest frontend
-    cmd = ["comfy", "launch", "--", "--listen", "0.0.0.0", "--port", "8000", "--highvram", "--fast", "--use-flash-attention", "--front-end-version", "Comfy-Org/ComfyUI_frontend@latest", "--enable-manager"]
+    # Start ComfyUI server
+    # cmd = ["comfy", "launch", "--", "--listen", "0.0.0.0", "--port", "8000", "--highvram", "--fast", "--use-flash-attention", "--front-end-version", "Comfy-Org/ComfyUI_frontend@latest", "--enable-manager"]
+    cmd = ["comfy", "launch", "--", "--listen", "0.0.0.0", "--port", "8000", "--highvram", "--fast", "--use-flash-attention", "--enable-manager"]
     print(f"Executing: {' '.join(cmd)}")
     
     process = subprocess.Popen(
