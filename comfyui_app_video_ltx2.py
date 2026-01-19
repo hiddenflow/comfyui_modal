@@ -145,7 +145,7 @@ image = image.run_commands([
     # "pip install https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.7.2/flash_attn-2.8.3+cu128torch2.8-cp312-cp312-linux_x86_64.whl --no-build-isolation",
     # "git clone https://github.com/Dao-AILab/flash-attention.git && cd flash-attention && python setup.py install",
     'python -c "from huggingface_hub import snapshot_download; snapshot_download(\'kernels-community/flash-attn3\', allow_patterns=\'build/torch27-cxx11-cu128-x86_64-linux/flash_attn3/**\', local_dir=\'/tmp/fa3\')"',
-    "cp -r /tmp/fa3/build/torch27-cxx11-cu128-x86_64-linux/flash_attn3 /opt/conda/lib/python3.*/site-packages/",
+    "cp -r /tmp/fa3/build/torch27-cxx11-cu128-x86_64-linux/flash_attn3 /opt/conda/lib/python3.11/site-packages/",
 ])
 
 # Model download tasks (will be done at runtime)
